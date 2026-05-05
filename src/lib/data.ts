@@ -61,7 +61,7 @@ export const ABOUT_SECTIONS = [
       '想聊聊产品、设计、AI 协作或者只是说一声 hi——任何渠道都欢迎，我会回复每一封像样的来信。',
     ],
   },
-];
+] as const;
 
 export const PORTFOLIO_TAGS = ['全部', 'GitHub', '设计', '摄影'] as const;
 
