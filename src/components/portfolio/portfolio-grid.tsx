@@ -22,14 +22,16 @@ export function PortfolioGrid() {
       {/* Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
         {filtered.map((item) => {
-          const href = 'href' in item ? (item as { href: string }).href : '#';
-          const isExternal = href.startsWith('http');
+          const rawHref = 'href' in item ? (item as { href: string }).href : undefined;
+          const href = rawHref === '#' ? undefined : rawHref;
+          const isExternal = !!href && href.startsWith('http');
           const cover = 'cover' in item ? (item as { cover: string }).cover : null;
           return (
             <Card
               key={item.id}
               href={href}
               target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
               style={{ position: 'relative', overflow: 'hidden', color: 'inherit', textDecoration: 'none' }}
             >
               {cover && (
