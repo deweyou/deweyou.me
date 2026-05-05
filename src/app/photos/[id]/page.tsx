@@ -17,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const series = (PHOTO_SERIES as PhotoSeries[]).find((s) => s.id === id);
+  const series = PHOTO_SERIES.find((s) => s.id === id);
   if (!series) return {};
   return {
     title: `${series.title} — Dewey Ou`,
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PhotoSeriesPage({ params }: Props) {
   const { id } = await params;
-  const series = (PHOTO_SERIES as PhotoSeries[]).find((s) => s.id === id);
+  const series = PHOTO_SERIES.find((s) => s.id === id);
   if (!series) notFound();
 
   const meta: string[] = [
@@ -53,8 +53,8 @@ export default async function PhotoSeriesPage({ params }: Props) {
             <p className={styles.subtitle}>{series.subtitle}</p>
           )}
           <div className={styles.metaRow}>
-            {meta.map((m) => (
-              <span key={m} className={styles.metaItem}>{m}</span>
+            {meta.map((m, i) => (
+              <span key={i} className={styles.metaItem}>{m}</span>
             ))}
           </div>
           <p className={styles.desc}>{series.desc}</p>
