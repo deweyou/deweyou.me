@@ -3,9 +3,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { Logo } from '##/components/logo';
+import { Separator } from '@deweyou-design/react';
+import { Logo, LogoBlack } from '##/components/logo';
 import { SocialIcon } from '##/components/social-icon';
-import { PROFILE } from '##/lib/data';
+import { PROFILE } from '##/content/common';
+import { HOME } from '##/content/home';
 import { useTheme } from '##/components/theme-provider';
 import styles from './hero.module.css';
 
@@ -55,7 +57,7 @@ export function Hero() {
         opacity: theme === 'dark' ? 0.04 : 0.05,
         pointerEvents: 'none', whiteSpace: 'nowrap', userSelect: 'none',
       }}>
-        <Logo height={420} />
+        <LogoBlack height={420} />
       </div>
 
       <section className={styles.hero}>
@@ -64,7 +66,7 @@ export function Hero() {
           <div>
             <div className={styles.timeRow}>
               <span className={styles.timeDot} />
-              <span className={styles.timeText}>SHENZHEN — {time} CST</span>
+              <span className={styles.timeText}>{HOME.hero.location} — {time} {HOME.hero.timezone}</span>
             </div>
 
             <div className={styles.avatarWrap}>
@@ -96,51 +98,54 @@ export function Hero() {
                 <span className={`${styles.cornerBracket} ${styles.bl}`} />
                 <span className={`${styles.cornerBracket} ${styles.br}`} />
                 <div className={styles.figLabel}>
-                  <span>FIG. 01</span>
+                  <span>{HOME.hero.figLabel}</span>
                   <span style={{ width: 16, height: 1, background: 'var(--ui-color-canvas)', opacity: 0.5 }} />
-                  <span>SELF</span>
+                  <span>{HOME.hero.selfLabel}</span>
                 </div>
               </div>
-              <span className={styles.avatarAnnotation}>ŌU · /oʊ/</span>
+              <span className={styles.avatarAnnotation}>{HOME.hero.pronunciation}</span>
             </div>
 
             <div className={styles.nameRow}>
-              <span className={styles.nameEn}>Dewey Ou</span>
-              <span className={styles.nameSep}>·</span>
-              欧怼怼
+              <span className={styles.nameEn}>{HOME.hero.nameEn}</span>
+              <span className={styles.nameSep}>{HOME.hero.nameSep}</span>
+              {HOME.hero.nameZh}
             </div>
           </div>
 
           <div className={styles.estRow}>
-            <hr className="dy-rule" />
-            <span className={styles.estText}>EST · 2018</span>
+            <Separator style={{ width: 44 }} />
+            <span className={styles.estText}>{HOME.hero.estLabel}</span>
           </div>
         </div>
 
         {/* RIGHT */}
         <div className={styles.right}>
           <div className={styles.headline}>
-            做
+            {HOME.hero.headlinePre}
             <span className={styles.highlight}>
-              <span className={styles.highlightText}>有意思</span>
+              <span className={styles.highlightText}>{HOME.hero.headlineHighlight}</span>
               <span className={styles.highlightBg} aria-hidden="true" />
             </span>
-            的产品<br />
-            <span style={{ color: 'var(--ui-color-text-muted)' }}>—— 也，过有意思的生活。</span>
+            {HOME.hero.headlinePost}<br />
+            <span style={{ color: 'var(--ui-color-text-muted)' }}>{HOME.hero.subline}</span>
           </div>
 
           <p className={styles.bio}>
-            字节跳动的<span className={styles.bioUnderline}>前端工程师</span>，住在深圳。
-            喜欢有设计感、人性化、新颖的东西，也想成为做这类产品的人。
-            最近在和{' '}
-            <span className={styles.aiChip}>AI</span>
-            {' '}交朋友，让它陪我学习、做有意思的产品。
-            工作之余，看书、玩魔方、变魔术、拍照。
+            {HOME.hero.bio.map((seg, i) =>
+              'variant' in seg && seg.variant === 'underline' ? (
+                <span key={i} className={styles.bioUnderline}>{seg.text}</span>
+              ) : 'variant' in seg && seg.variant === 'chip' ? (
+                <span key={i} className={styles.aiChip}>{seg.text}</span>
+              ) : (
+                <span key={i}>{seg.text}</span>
+              )
+            )}
           </p>
 
           <div className={styles.ctaRow}>
             <Link href="/blog" className={styles.cta}>
-              <span>读我写的文章</span>
+              <span>{HOME.hero.cta}</span>
               <i className={`ti ti-arrow-up-right ${styles.ctaArrow}`} />
             </Link>
             <span className={styles.divider} />
