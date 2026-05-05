@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Card } from '@deweyou-design/react/card';
-import { PORTFOLIO_ITEMS, PORTFOLIO_TAGS } from '##/content/portfolio';
+import { PORTFOLIO_ITEMS, PORTFOLIO_TAGS, type PortfolioItem } from '##/content/portfolio';
 
 export function PortfolioGrid() {
   const [activeTag, setActiveTag] = useState<string>('全部');
@@ -21,11 +21,10 @@ export function PortfolioGrid() {
 
       {/* Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 20 }}>
-        {filtered.map((item) => {
-          const rawHref = 'href' in item ? (item as { href: string }).href : undefined;
-          const href = rawHref === '#' ? undefined : rawHref;
+        {filtered.map((item: PortfolioItem) => {
+          const href = item.href === '#' ? undefined : item.href;
           const isExternal = !!href && href.startsWith('http');
-          const cover = 'cover' in item ? (item as { cover: string }).cover : null;
+          const cover = item.cover ?? null;
           return (
             <Card
               key={item.id}
@@ -52,9 +51,9 @@ export function PortfolioGrid() {
                   <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 2 }}>{item.title}</div>
                   <div style={{ fontSize: 13, color: 'var(--ui-color-text-muted)' }}>{item.subtitle}</div>
                 </div>
-                {'year' in item && (
+                {item.year && (
                   <span style={{ fontFamily: 'var(--ui-font-mono)', fontSize: 11, color: 'var(--ui-color-text-muted)' }}>
-                    {(item as { year: string }).year}
+                    {item.year}
                   </span>
                 )}
               </div>
@@ -65,9 +64,9 @@ export function PortfolioGrid() {
                 <span style={{ fontFamily: 'var(--ui-font-mono)', fontSize: 11, color: 'var(--ui-color-text-muted)' }}>
                   {item.meta}
                 </span>
-                {'stars' in item && !!(item as { stars?: number }).stars && (
+                {item.stars && (
                   <span style={{ fontFamily: 'var(--ui-font-mono)', fontSize: 11, color: 'var(--ui-color-text-muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
-                    ★ {String((item as { stars: number }).stars)}
+                    ★ {String(item.stars)}
                   </span>
                 )}
               </div>

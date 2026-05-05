@@ -1,12 +1,26 @@
+export interface PortfolioItem {
+  id: string;
+  tag: string;
+  title: string;
+  subtitle: string;
+  year?: string;
+  desc: string;
+  meta: string;
+  accent: 'mint' | 'plain';
+  href?: string;
+  cover?: string;
+  stars?: number;
+}
+
 export const PORTFOLIO = {
   eyebrow: 'PORTFOLIO',
   heading: '作品集',
   description: 'GitHub 项目、设计稿、摄影作品。',
 } as const;
 
-export const PORTFOLIO_TAGS = ['全部', 'GitHub', '设计', '摄影'] as const;
+export const PORTFOLIO_TAGS = ['全部', 'GitHub', '设计', '摄影'];
 
-export const PORTFOLIO_ITEMS = [
+export const PORTFOLIO_ITEMS: PortfolioItem[] = [
   { id: 'gh-deweyou-design', tag: 'GitHub',  title: 'Deweyou Design',    subtitle: '我的个人设计系统',      year: '2026', desc: '一套写给自己的 React 组件库 + 设计 token。强调宋体、留白与 mint 高亮三件套。',         meta: 'TypeScript · React · CSS', stars: 128, accent: 'mint',  href: 'https://github.com/deweyou/design' },
   { id: 'gh-claude-coder',   tag: 'GitHub',  title: 'claude-coder',      subtitle: 'AI 协作的命令行工具',   year: '2025', desc: '一个把 Claude 接入本地代码库的 CLI——支持上下文索引、任务拆分、增量 diff review。',    meta: 'TypeScript · Node',        stars: 412, accent: 'plain', href: '#' },
   { id: 'gh-cube-timer',     tag: 'GitHub',  title: 'cube-timer',        subtitle: '魔方计时器（PWA）',     year: '2024', desc: '为速拧爱好者写的极简计时器，支持 Stackmat 协议、平均值统计、CSV 导出。',              meta: 'TypeScript · PWA',         stars: 56,  accent: 'plain', href: '#' },
