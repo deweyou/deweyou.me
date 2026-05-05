@@ -25,7 +25,7 @@ export function getAllPosts(): PostMeta[] {
       const slug = file.replace(/\.mdx$/, '');
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf8');
       const { data } = matter(raw);
-      return { slug, ...data } as PostMeta;
+      return { slug, ...data, date: String(data.date).slice(0, 10) } as PostMeta;
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
@@ -34,7 +34,7 @@ export function getPost(slug: string): Post {
   const file = path.join(POSTS_DIR, `${slug}.mdx`);
   const raw = fs.readFileSync(file, 'utf8');
   const { data, content } = matter(raw);
-  return { slug, ...data, content } as Post;
+  return { slug, ...data, date: String(data.date).slice(0, 10), content } as Post;
 }
 
 export function getAllSlugs(): string[] {
