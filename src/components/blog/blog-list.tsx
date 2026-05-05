@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { PostMeta } from '##/lib/posts';
-import { TAGS } from '##/lib/data';
+import { BLOG, TAGS } from '##/content/blog';
 
 function normalizeDate(date: string | Date): string {
   if (typeof date === 'string') return date;
@@ -26,7 +26,7 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
   const years = Object.keys(byYear).sort().reverse();
 
   return (
-    <div className="page" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+    <div className="page" style={{ position: 'relative' }}>
       <div aria-hidden="true" style={{
         position: 'absolute', inset: 0,
         backgroundImage: 'linear-gradient(to right, color-mix(in srgb, var(--ui-color-text) 4%, transparent) 1px, transparent 1px)',
@@ -34,16 +34,16 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
         pointerEvents: 'none',
       }} />
 
-      <section style={{ padding: '120px 64px 48px', maxWidth: 920, margin: '0 auto', position: 'relative', zIndex: 2 }}>
+      <section className="container" style={{ paddingTop: 120, paddingBottom: 48, position: 'relative', zIndex: 2 }}>
         <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 10 }}>
           <span style={{ width: 24, height: 1, background: 'currentColor' }} />
-          INDEX · {posts.length} ENTRIES
+          {BLOG.eyebrow} · {posts.length} {BLOG.entriesLabel}
         </div>
         <h1 style={{ fontSize: '4rem', fontWeight: 700, lineHeight: 1.05, marginBottom: 24, letterSpacing: '-0.015em' }}>
-          文章
+          {BLOG.heading}
         </h1>
         <p style={{ fontSize: 17, color: 'var(--ui-color-text-muted)', maxWidth: 540, lineHeight: 1.7 }}>
-          关于前端、设计、AI、产品和生活的一些思考。慢慢写。
+          {BLOG.description}
         </p>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 44 }}>
           {TAGS.map((t) => {
@@ -57,12 +57,12 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
         </div>
       </section>
 
-      <div style={{ maxWidth: 920, margin: '0 auto', padding: '0 64px 100px', position: 'relative', zIndex: 2 }}>
+      <div className="container" style={{ paddingBottom: 100, position: 'relative', zIndex: 2 }}>
         {years.map((year) => (
           <div key={year} style={{ marginBottom: 60 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 24, paddingBottom: 12, borderBottom: '1px solid var(--ui-color-border)' }}>
               <span style={{ fontFamily: 'var(--ui-font-mono)', fontSize: 12, color: 'var(--ui-color-text-muted)', letterSpacing: '0.1em' }}>{year}</span>
-              <span style={{ fontSize: 12, color: 'var(--ui-color-text-muted)' }}>{byYear[year].length} 篇</span>
+              <span style={{ fontSize: 12, color: 'var(--ui-color-text-muted)' }}>{byYear[year].length} {BLOG.postsPerYearSuffix}</span>
             </div>
             {byYear[year].map((post) => <PostRow key={post.slug} post={post} />)}
           </div>
