@@ -5,14 +5,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Logo, LogoAnimated } from './logo';
 import { useTheme } from './theme-provider';
+import { NAV_LINKS } from '##/content/common';
 import styles from './nav.module.css';
-
-const LINKS = [
-  { href: '/',           label: '主页' },
-  { href: '/blog',       label: '文章' },
-  { href: '/portfolio',  label: '作品集' },
-  { href: '/about',      label: '关于' },
-];
 
 interface NavProps {
   compact?: boolean;
@@ -30,10 +24,10 @@ export function Nav({ compact = false }: NavProps) {
           <Logo height={16} />
         </Link>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <button className="icon-btn" aria-label="Toggle theme" onClick={toggleTheme}>
+          <button type="button" className="icon-btn-ghost" aria-label="Toggle theme" onClick={toggleTheme}>
             <i className={`ti ${theme === 'dark' ? 'ti-sun' : 'ti-moon'}`} />
           </button>
-          <button className="icon-btn" aria-label="Menu" onClick={() => setMenuOpen((o) => !o)}>
+          <button type="button" className="icon-btn-ghost" aria-label="Menu" onClick={() => setMenuOpen((o) => !o)}>
             <i className={`ti ${menuOpen ? 'ti-x' : 'ti-menu-2'}`} />
           </button>
         </div>
@@ -42,10 +36,10 @@ export function Nav({ compact = false }: NavProps) {
           <div className={styles.overlay} onClick={() => setMenuOpen(false)}>
             <div className={styles.overlayTop}>
               <Logo height={16} />
-              <span className={styles.overlayCount}>MENU · {LINKS.length.toString().padStart(2, '0')}</span>
+              <span className={styles.overlayCount}>MENU · {NAV_LINKS.length.toString().padStart(2, '0')}</span>
             </div>
             <ul className={styles.overlayList} onClick={(e) => e.stopPropagation()}>
-              {LINKS.map((l, i) => {
+              {NAV_LINKS.map((l, i) => {
                 const isActive = pathname === l.href;
                 return (
                   <li key={l.href} className={styles.overlayItem}
@@ -92,7 +86,7 @@ export function Nav({ compact = false }: NavProps) {
         <LogoAnimated height={18} />
       </Link>
       <div className={styles.links}>
-        {LINKS.map((l) => (
+        {NAV_LINKS.map((l) => (
           <Link
             key={l.href}
             href={l.href}
@@ -104,7 +98,7 @@ export function Nav({ compact = false }: NavProps) {
         ))}
       </div>
       <div className={styles.meta}>
-        <button className="icon-btn" aria-label="Toggle theme" onClick={toggleTheme}>
+        <button type="button" className="icon-btn-ghost" aria-label="Toggle theme" onClick={toggleTheme}>
           <i className={`ti ${theme === 'dark' ? 'ti-sun' : 'ti-moon'}`} />
         </button>
       </div>
