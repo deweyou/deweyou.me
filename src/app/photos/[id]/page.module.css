@@ -1,0 +1,41 @@
+.hero { margin-bottom: 64px; }
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.05;
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
+}
+
+@media (max-width: 768px) {
+  .title { font-size: 2.2rem; }
+  .hero { margin-bottom: 40px; }
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--ui-color-text-muted);
+  margin-bottom: 20px;
+}
+
+.metaRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.metaItem {
+  font-family: var(--ui-font-mono);
+  font-size: 12px;
+  color: var(--ui-color-text-muted);
+  letter-spacing: 0.06em;
+}
+
+.desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ui-color-text-muted);
+  max-width: 600px;
+}
