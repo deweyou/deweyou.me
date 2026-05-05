@@ -19,7 +19,7 @@ export interface PhotoSeries {
   photos: PhotoItem[];
 }
 
-export const PHOTO_SERIES: PhotoSeries[] = [
+export const PHOTO_SERIES = [
   {
     id: 'shenzhen-night',
     title: '深圳夜',
