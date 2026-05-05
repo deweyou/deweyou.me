@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { PORTFOLIO_ITEMS, PORTFOLIO_TAGS } from '##/lib/data';
+import { PORTFOLIO_ITEMS, PORTFOLIO_TAGS } from '##/content/portfolio';
 
 export function PortfolioGrid() {
   const [activeTag, setActiveTag] = useState<string>('全部');
