@@ -1,32 +1,33 @@
 import { Nav } from '##/components/nav';
 import { Footer } from '##/components/footer';
-import { ABOUT_SECTIONS, PROFILE } from '##/lib/data';
+import { PROFILE } from '##/content/common';
+import { ABOUT, ABOUT_SECTIONS } from '##/content/about';
 import { SocialIcon } from '##/components/social-icon';
 
 export default function AboutPage() {
   return (
-    <div className="page" style={{ minHeight: '100vh' }}>
+    <div className="page">
       <Nav />
 
-      <header style={{ padding: '80px 64px 40px', maxWidth: 920, margin: '0 auto' }}>
+      <header className="container" style={{ paddingTop: 80, paddingBottom: 40 }}>
         <div className="eyebrow" style={{ marginBottom: 18 }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             <span style={{ width: 12, height: 1, background: 'currentColor' }} />
-            ABOUT · 关于
+            {ABOUT.eyebrow}
           </span>
         </div>
         <h1 style={{ fontFamily: 'var(--ui-font-display)', fontSize: '3rem', fontWeight: 600,
           lineHeight: 1.15, margin: 0, letterSpacing: '-0.01em' }}>
-          一份不那么严肃的<br />
-          <em style={{ fontStyle: 'italic', fontWeight: 500, color: 'var(--ui-color-text-muted)' }}>「自我说明」</em>。
+          {ABOUT.headingLine1}<br />
+          <em style={{ fontStyle: 'italic', fontWeight: 500, color: 'var(--ui-color-text-muted)' }}>{ABOUT.headingLine2}</em>。
         </h1>
       </header>
 
-      <div style={{ maxWidth: 920, margin: '0 auto', padding: '0 64px 100px',
+      <div className="container" style={{ paddingBottom: 100,
         display: 'grid', gridTemplateColumns: '160px 1fr', gap: 56 }}>
         {/* Sticky TOC */}
         <aside style={{ position: 'sticky', top: 80, alignSelf: 'start' }}>
-          <div className="eyebrow" style={{ marginBottom: 14 }}>目录</div>
+          <div className="eyebrow" style={{ marginBottom: 14 }}>{ABOUT.tocLabel}</div>
           <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
             {ABOUT_SECTIONS.map((s, i) => (
               <li key={s.id}>
