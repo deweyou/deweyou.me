@@ -7,3 +7,18 @@
 
 /* Prevent FOUC on theme toggle */
 html { color-scheme: light dark; }
+
+/* Sticky footer */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hide scrollbar without losing scroll */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}

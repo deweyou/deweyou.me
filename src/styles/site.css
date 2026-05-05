@@ -89,12 +89,38 @@
   margin: 0;
 }
 
+/* ── Content containers ─────────────────────────────────────── */
+:root {
+  --container-sm: 720px;
+  --container-md: 960px;
+  --container-lg: 1280px;
+  --container-xl: 1600px;
+  --container-padding: 64px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-md);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+.container-sm { max-width: var(--container-sm); }
+.container-md { max-width: var(--container-md); }
+.container-lg { max-width: var(--container-lg); }
+.container-xl { max-width: var(--container-xl); }
+
+@media (max-width: 768px) {
+  :root { --container-padding: 24px; }
+}
+
 /* ── Page container ────────────────────────────────────────── */
 .page {
   background: var(--ui-color-canvas);
   color: var(--ui-color-text);
-  min-height: 100vh;
   font-family: var(--ui-font-body);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Nav ───────────────────────────────────────────────────── */
@@ -137,6 +163,25 @@
   color: var(--ui-color-text);
   border-color: var(--ui-color-border-strong);
   background: color-mix(in srgb, var(--ui-color-text) 4%, transparent);
+}
+
+/* ── Icon button (no border) ───────────────────────────────── */
+.icon-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: var(--ui-radius-float);
+  color: var(--ui-color-text-muted);
+  cursor: pointer;
+  transition: color 140ms ease, background 140ms ease;
+  font-size: 18px;
+}
+.icon-btn-ghost:hover {
+  color: var(--ui-color-text);
+  background: color-mix(in srgb, var(--ui-color-text) 6%, transparent);
 }
 
 /* ── Reading progress bar ──────────────────────────────────── */

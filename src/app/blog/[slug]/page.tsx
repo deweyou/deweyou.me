@@ -24,7 +24,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
     <>
       <ReadingProgress />
       <Nav />
-      <article style={{ maxWidth: 720, margin: '0 auto', padding: '80px 64px 120px' }}>
+      <article className="container container-sm" style={{ paddingTop: 80, paddingBottom: 120 }}>
         {/* Header */}
         <header style={{ marginBottom: 56 }}>
           <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 8 }}>

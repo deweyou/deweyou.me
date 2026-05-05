@@ -9,26 +9,32 @@ const ThemeContext = createContext<{
   toggleTheme: () => void;
 }>({ theme: 'light', toggleTheme: () => {} });
 
+function setDocTheme(t: Theme) {
+  document.documentElement.setAttribute('data-theme', t);
+  try { localStorage.setItem('theme', t); } catch { /* ignore */ }
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light');
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme') as Theme | null;
-    const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-    const initial = stored ?? preferred;
-    setTheme(initial);
-    document.documentElement.setAttribute('data-theme', initial);
+    let t: Theme = 'light';
+    try {
+      const stored = localStorage.getItem('theme') as Theme | null;
+      if (stored === 'light' || stored === 'dark') {
+        t = stored;
+      } else {
+        t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+    } catch { /* ignore */ }
+    setTheme(t);
+    document.documentElement.setAttribute('data-theme', t);
   }, []);
 
   const toggleTheme = () => {
-    setTheme((prev) => {
-      const next: Theme = prev === 'light' ? 'dark' : 'light';
-      localStorage.setItem('theme', next);
-      document.documentElement.setAttribute('data-theme', next);
-      return next;
-    });
+    const next: Theme = theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+    setDocTheme(next);
   };
 
   return (

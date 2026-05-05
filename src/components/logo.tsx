@@ -1,63 +1,33 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
-import styles from './logo.module.css';
-
 interface LogoProps {
   height?: number;
-  color?: boolean;
 }
 
-export function Logo({ height = 18, color = false }: LogoProps) {
+export function Logo({ height = 18 }: LogoProps) {
   return (
-    <span
-      className={color ? styles.wordmarkColor : styles.wordmark}
-      style={{ height: `${height}px` }}
-      aria-label="Dewey Ou"
-      role="img"
+    <img
+      src="/logo-static.svg"
+      alt="Dewey Ou"
+      style={{ height: `${height}px`, width: 'auto', display: 'block' }}
     />
   );
 }
 
-interface LogoAnimatedProps {
-  height?: number;
-  replayKey?: string;
+export function LogoBlack({ height = 18 }: LogoProps) {
+  return (
+    <img
+      src="/logo-static-black.svg"
+      alt="Dewey Ou"
+      style={{ height: `${height}px`, width: 'auto', display: 'block' }}
+    />
+  );
 }
 
-export function LogoAnimated({ height = 18, replayKey = 'home' }: LogoAnimatedProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [played, setPlayed] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    const sessionKey = `logo-anim-played-${replayKey}`;
-    if (sessionStorage.getItem(sessionKey)) {
-      setPlayed(true);
-      return;
-    }
-    fetch('/assets/logo-animated-black.svg')
-      .then((r) => r.text())
-      .then((svg) => {
-        if (cancelled || !ref.current) return;
-        ref.current.innerHTML = svg;
-        setTimeout(() => {
-          sessionStorage.setItem(sessionKey, '1');
-          if (!cancelled) setPlayed(true);
-        }, 2400);
-      })
-      .catch(() => setPlayed(true));
-    return () => { cancelled = true; };
-  }, [replayKey]);
-
-  if (played) return <Logo height={height} />;
-
+export function LogoAnimated({ height = 18 }: LogoProps) {
   return (
-    <span
-      ref={ref}
-      className={styles.animatedHost}
-      style={{ height: `${height}px`, display: 'inline-block', aspectRatio: '7648 / 2451' }}
-      aria-label="Dewey Ou"
-      role="img"
+    <img
+      src="/logo-animated.svg"
+      alt="Dewey Ou"
+      style={{ height: `${height}px`, width: 'auto', display: 'block' }}
     />
   );
 }
