@@ -7,8 +7,8 @@
   position: relative;
 }
 
-.navMobile {
-  padding: 18px 24px;
+@media (max-width: 768px) {
+  .nav { padding: 18px 24px; }
 }
 
 .brand {
@@ -42,6 +42,26 @@
 .link[data-active='true'],
 .link:hover {
   color: var(--ui-color-text);
+}
+
+.iconBtn {
+  --button-ghost-text-color: var(--ui-color-text-muted) !important;
+}
+.iconBtn:focus-visible {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.logoDesktop { display: flex; }
+.logoMobile  { display: none; }
+
+.menuBtn { display: none; }
+
+@media (max-width: 768px) {
+  .logoDesktop { display: none; }
+  .logoMobile  { display: flex; }
+  .links { display: none; }
+  .menuBtn { display: inline-flex; }
 }
 
 .meta {

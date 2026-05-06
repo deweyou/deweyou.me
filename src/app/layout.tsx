@@ -3,15 +3,16 @@ import localFont from 'next/font/local';
 import { IBM_Plex_Mono } from 'next/font/google';
 import { ThemeProvider } from '##/components/theme-provider';
 import '@deweyou-design/styles/theme.css';
+import '@deweyou-design/react/style.css';
 import './globals.css';
 import '##/styles/site.css';
 
 const sourceHanSerif = localFont({
   src: [
-    { path: './fonts/SourceHanSerifCN-Regular.otf',  weight: '400', style: 'normal' },
-    { path: './fonts/SourceHanSerifCN-Medium.otf',   weight: '500', style: 'normal' },
-    { path: './fonts/SourceHanSerifCN-SemiBold.otf', weight: '600', style: 'normal' },
-    { path: './fonts/SourceHanSerifCN-Bold.otf',     weight: '700', style: 'normal' },
+    { path: './fonts/SourceHanSerifCN-Regular.woff2',  weight: '400', style: 'normal' },
+    { path: './fonts/SourceHanSerifCN-Medium.woff2',   weight: '500', style: 'normal' },
+    { path: './fonts/SourceHanSerifCN-SemiBold.woff2', weight: '600', style: 'normal' },
+    { path: './fonts/SourceHanSerifCN-Bold.woff2',     weight: '700', style: 'normal' },
   ],
   variable: '--font-source-han-serif',
   display: 'swap',

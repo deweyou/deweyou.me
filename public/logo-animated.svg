@@ -167,8 +167,8 @@
       attributeName="opacity"
       dur="9.975s"
       repeatCount="indefinite"
-      values="0;0;1;1"
-      keyTimes="0;0.446951;0.451963;1"
+      values="0;0;1;1;0"
+      keyTimes="0;0.446951;0.451963;0.999;1"
     />
     <animate
       attributeName="d"
@@ -194,8 +194,8 @@
       attributeName="opacity"
       dur="9.975s"
       repeatCount="indefinite"
-      values="0;0;1;1"
-      keyTimes="0;0.446951;0.451963;1"
+      values="0;0;1;1;0"
+      keyTimes="0;0.446951;0.451963;0.999;1"
     />
     <animate
       attributeName="d"

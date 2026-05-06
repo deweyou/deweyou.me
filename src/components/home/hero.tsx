@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Separator } from '@deweyou-design/react';
-import { Logo, LogoBlack } from '##/components/logo';
+import { LogoBlack } from '##/components/logo';
 import { SocialIcon } from '##/components/social-icon';
 import { PROFILE } from '##/content/common';
 import { HOME } from '##/content/home';

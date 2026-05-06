@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# photo uploads (local only, images go to Qiniu CDN)
+/photos-upload/*
+!/photos-upload/.gitkeep
+
 # debug
 npm-debug.log*
 yarn-debug.log*

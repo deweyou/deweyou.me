@@ -67,7 +67,7 @@
 
 .avatarImage {
   object-fit: cover;
-  object-position: center top;
+  object-position: left bottom;
 }
 
 .cornerBracket {

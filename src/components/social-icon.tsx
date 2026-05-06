@@ -16,6 +16,8 @@ export function SocialIcon({ s }: { s: Social }) {
       <Tooltip.Trigger>
         <a
           href={s.href}
+          target={s.href.startsWith('mailto:') || s.href === '#' ? undefined : '_blank'}
+          rel="noopener noreferrer"
           aria-label={s.label}
           style={{
             display: 'inline-flex',
@@ -46,7 +48,7 @@ export function SocialIcon({ s }: { s: Social }) {
           )}
         </a>
       </Tooltip.Trigger>
-      <Tooltip.Content>{s.handle}</Tooltip.Content>
+      <Tooltip.Content style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}>{s.handle}</Tooltip.Content>
     </Tooltip.Root>
   );
 }
