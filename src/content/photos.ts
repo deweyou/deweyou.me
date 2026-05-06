@@ -1,3 +1,8 @@
+/** Append Qiniu imageView2 thumbnail params to a CDN URL. */
+export function qiniuThumb(url: string, width: number, quality = 85) {
+  return `${url}?imageView2/2/w/${width}/q/${quality}`;
+}
+
 export interface PhotoItem {
   src: string;
   alt: string;

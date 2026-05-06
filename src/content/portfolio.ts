@@ -1,4 +1,4 @@
-import { PHOTO_SERIES, type PhotoSeries } from './photos';
+import { PHOTO_SERIES, qiniuThumb, type PhotoSeries } from './photos';
 
 export interface PortfolioItem {
   id: string;
@@ -42,8 +42,7 @@ const PHOTO_ITEMS: PortfolioItem[] = (PHOTO_SERIES as readonly PhotoSeries[]).ma
   meta: [s.camera, `${s.photos.length} 张`].filter(Boolean).join(' · '),
   accent: 'plain' as const,
   href: `/photos/${s.id}`,
-  // Qiniu thumbnail: 600px wide, 85% quality
-  cover: `${s.cover}?imageView2/2/w/600/q/85`,
+  cover: qiniuThumb(s.cover, 600),
 }));
 
 export const PORTFOLIO_ITEMS: PortfolioItem[] = [...STATIC_ITEMS, ...PHOTO_ITEMS];

@@ -3,8 +3,7 @@ import type { Metadata } from 'next';
 import { Nav } from '##/components/nav';
 import { Footer } from '##/components/footer';
 import { MasonryGrid } from '##/components/photos/masonry-grid';
-import { PHOTO_SERIES } from '##/content/photos';
-import type { PhotoSeries } from '##/content/photos';
+import { PHOTO_SERIES, qiniuThumb, type PhotoSeries } from '##/content/photos';
 import styles from './page.module.css';
 
 interface Props {
@@ -60,7 +59,7 @@ export default async function PhotoSeriesPage({ params }: Props) {
           </div>
           <p className={styles.desc}>{series.desc}</p>
         </div>
-        <MasonryGrid photos={series.photos} />
+        <MasonryGrid photos={series.photos.map((p) => ({ ...p, src: qiniuThumb(p.src, 1200) }))} />
       </section>
       <Footer />
     </div>
