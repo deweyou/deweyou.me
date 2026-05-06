@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { Card } from '@deweyou-design/react/card';
-import { PORTFOLIO_ITEMS, PORTFOLIO_TAGS, type PortfolioItem } from '##/content/portfolio';
+import { PORTFOLIO_ITEMS, type PortfolioItem } from '##/content/portfolio';
+
+const ALL_TAGS = ['全部', ...Array.from(new Set(PORTFOLIO_ITEMS.map((i) => i.tag)))];
 
 export function PortfolioGrid() {
   const [activeTag, setActiveTag] = useState<string>('全部');
@@ -12,7 +14,7 @@ export function PortfolioGrid() {
     <div>
       {/* Tag filter */}
       <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 48 }}>
-        {PORTFOLIO_TAGS.map((t) => (
+        {ALL_TAGS.map((t) => (
           <button key={t} className="dy-tag" data-active={activeTag === t ? 'true' : 'false'} onClick={() => setActiveTag(t)}>
             {t}
           </button>
@@ -57,9 +59,11 @@ export function PortfolioGrid() {
                   </span>
                 )}
               </div>
-              <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ui-color-text-muted)', margin: '0 0 16px' }}>
-                {item.desc}
-              </p>
+              {item.desc && (
+                <p style={{ fontSize: 14, lineHeight: 1.7, color: 'var(--ui-color-text-muted)', margin: '0 0 16px' }}>
+                  {item.desc}
+                </p>
+              )}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontFamily: 'var(--ui-font-mono)', fontSize: 11, color: 'var(--ui-color-text-muted)' }}>
                   {item.meta}

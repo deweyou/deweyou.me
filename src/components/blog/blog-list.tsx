@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import type { PostMeta } from '##/lib/posts';
-import { BLOG, TAGS } from '##/content/blog';
+import { BLOG } from '##/content/blog';
 
 function normalizeDate(date: string | Date): string {
   if (typeof date === 'string') return date;
@@ -11,6 +11,7 @@ function normalizeDate(date: string | Date): string {
 }
 
 export function BlogList({ posts }: { posts: PostMeta[] }) {
+  const tags = ['全部', ...Array.from(new Set(posts.map((p) => p.tag).filter(Boolean)))];
   const [activeTag, setActiveTag] = useState<string>('全部');
 
   const normalizedPosts = posts.map((p) => ({ ...p, date: normalizeDate(p.date as string | Date) }));
@@ -46,7 +47,7 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
           {BLOG.description}
         </p>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 44 }}>
-          {TAGS.map((t) => {
+          {tags.map((t) => {
             const count = t === '全部' ? posts.length : posts.filter((p) => p.tag === t).length;
             return (
               <button key={t} className="dy-tag" data-active={activeTag === t ? 'true' : 'false'} onClick={() => setActiveTag(t)}>

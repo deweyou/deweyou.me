@@ -19,7 +19,7 @@ export interface PhotoSeries {
   camera?: string;
   lens?: string;
   film?: string;
-  desc: string;
+  desc?: string;
   cover: string;
   photos: PhotoItem[];
 }

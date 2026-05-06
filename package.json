@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "upload-photos": "for dir in photos-upload/*/; do node scripts/upload-photos.mjs \"$dir\"; done"
+    "upload-photos": "for dir in photos-upload/*/; do node scripts/upload-photos.mjs \"$dir\"; done",
+    "resize-uploaded": "node scripts/resize-uploaded-photos.mjs"
   },
   "dependencies": {
     "@deweyou-design/react": "0.0.6",

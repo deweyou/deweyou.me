@@ -57,7 +57,6 @@ export default async function PhotoSeriesPage({ params }: Props) {
               <span key={i} className={styles.metaItem}>{m}</span>
             ))}
           </div>
-          <p className={styles.desc}>{series.desc}</p>
         </div>
         <MasonryGrid photos={series.photos.map((p) => ({ ...p, src: qiniuThumb(p.src, 1200) }))} />
       </section>

@@ -148,7 +148,6 @@ function updatePhotosTs(series) {
     title: '${series.title}',${subtitleLine}
     year: ${series.year},
     location: '${series.location}',${cameraLine}${lensLine}
-    desc: '${series.title}。',
     cover: '${series.cover}',
     photos: [
 ${photosLines}
