@@ -180,7 +180,7 @@ function updatePortfolioTs(series) {
   const newEntry = `  { id: 'ph-${series.id}', tag: '摄影', title: '${series.title}', subtitle: '', year: '${series.year}', desc: '${series.title}。', meta: '${meta}', accent: 'plain', href: '/photos/${series.id}', cover: '${series.cover}' },`;
 
   content = content.replace(
-    /(\] as const;?\s*$)/m,
+    /(\];\s*$)/m,
     `${newEntry}\n$1`
   );
 
