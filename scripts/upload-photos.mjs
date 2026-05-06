@@ -25,11 +25,15 @@
  */
 
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { imageSize } from 'image-size';
 import exifr from 'exifr';
 import qiniu from 'qiniu';
+import sharp from 'sharp';
+
+const MAX_WIDTH = 2400; // px — keeps files well under Qiniu's sync processing limit
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(__dirname, '..');
@@ -54,20 +58,31 @@ const mac = new qiniu.auth.digest.Mac(ACCESS_KEY, SECRET_KEY);
 const config = new qiniu.conf.Config();
 config.zone = qiniu.zone.Zone_as0; // 亚太-新加坡
 
-async function uploadFile(localPath, key) {
-  const putPolicy = new qiniu.rs.PutPolicy({ scope: `${BUCKET}:${key}` });
-  const token = putPolicy.uploadToken(mac);
-  const formUploader = new qiniu.form_up.FormUploader(config);
-  const putExtra = new qiniu.form_up.PutExtra();
-  return new Promise((resolve, reject) => {
-    formUploader.putFile(token, key, localPath, putExtra, (err, body, info) => {
-      if (err || info.statusCode !== 200) {
-        reject(err || new Error(`Upload failed: ${JSON.stringify(body)}`));
-      } else {
-        resolve(`${CDN}/${key}`);
-      }
+async function resizeAndUpload(localPath, key) {
+  // Resize to MAX_WIDTH if larger, convert to JPEG for consistent output
+  const tmpPath = path.join(os.tmpdir(), `qiniu-upload-${Date.now()}-${path.basename(localPath)}`);
+  await sharp(localPath)
+    .resize({ width: MAX_WIDTH, withoutEnlargement: true })
+    .jpeg({ quality: 90, progressive: true })
+    .toFile(tmpPath);
+
+  try {
+    const putPolicy = new qiniu.rs.PutPolicy({ scope: `${BUCKET}:${key}` });
+    const token = putPolicy.uploadToken(mac);
+    const formUploader = new qiniu.form_up.FormUploader(config);
+    const putExtra = new qiniu.form_up.PutExtra();
+    return await new Promise((resolve, reject) => {
+      formUploader.putFile(token, key, tmpPath, putExtra, (err, body, info) => {
+        if (err || info.statusCode !== 200) {
+          reject(err || new Error(`Upload failed: ${JSON.stringify(body)}`));
+        } else {
+          resolve(`${CDN}/${key}`);
+        }
+      });
     });
-  });
+  } finally {
+    fs.unlinkSync(tmpPath);
+  }
 }
 
 // ── Parse directory name ─────────────────────────────────────────────────────
@@ -233,7 +248,7 @@ async function main() {
   const coverExt = path.extname(coverName);
   const coverKey = `${folder}/cover${coverExt}`;
   process.stdout.write('Uploading cover... ');
-  const coverUrl = await uploadFile(path.join(seriesDir, coverName), coverKey);
+  const coverUrl = await resizeAndUpload(path.join(seriesDir, coverName), coverKey);
   console.log('✓');
 
   // Upload photos
@@ -241,7 +256,8 @@ async function main() {
   for (const file of photoFiles) {
     const key = `${folder}/${file}`;
     process.stdout.write(`Uploading ${file}... `);
-    const url = await uploadFile(path.join(seriesDir, file), key);
+    const url = await resizeAndUpload(path.join(seriesDir, file), key);
+    // Read dimensions after resize (sharp resizes proportionally)
     const { width, height } = imageSize(fs.readFileSync(path.join(seriesDir, file)));
     const stem = path.parse(file).name;
     photos.push({ src: url, alt: `${title} ${stem}`, width, height });
