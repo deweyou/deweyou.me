@@ -1,4 +1,5 @@
 import type { MDXComponents } from 'mdx/types';
+import { Text } from '@deweyou-design/react/text';
 
 export const mdxComponents: MDXComponents = {
   a: ({ href, children }) => (
@@ -12,22 +13,22 @@ export const mdxComponents: MDXComponents = {
     </a>
   ),
   h2: ({ children }) => (
-    <h2 style={{ fontFamily: 'var(--ui-font-display)', fontSize: '1.85rem', fontWeight: 600,
-      lineHeight: 1.14, margin: '2.5rem 0 1rem', letterSpacing: '-0.01em' }}>
+    <Text variant="h2" style={{ margin: '2.5rem 0 1rem', letterSpacing: '-0.01em' }}>
       {children}
-    </h2>
+    </Text>
   ),
   h3: ({ children }) => (
-    <h3 style={{ fontFamily: 'var(--ui-font-display)', fontSize: '1.45rem', fontWeight: 600,
-      lineHeight: 1.22, margin: '2rem 0 0.75rem' }}>
+    <Text variant="h3" style={{ margin: '2rem 0 0.75rem' }}>
       {children}
-    </h3>
+    </Text>
   ),
   p: ({ children }) => (
-    <p style={{ fontSize: 17, lineHeight: 1.85, margin: '0 0 1.4rem', textWrap: 'pretty' } as React.CSSProperties}>
+    <Text variant="body" style={{ fontSize: 17, lineHeight: 1.85, margin: '0 0 1.4rem', textWrap: 'pretty' } as React.CSSProperties}>
       {children}
-    </p>
+    </Text>
   ),
+  strong: ({ children }) => <Text bold>{children}</Text>,
+  em: ({ children }) => <Text italic>{children}</Text>,
   blockquote: ({ children }) => (
     <blockquote style={{ borderLeft: '3px solid var(--ui-color-brand-bg)', paddingLeft: '1.25rem',
       margin: '2rem 0', color: 'var(--ui-color-text-muted)', fontStyle: 'italic' }}>
