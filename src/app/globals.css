@@ -8,11 +8,15 @@
 /* Prevent FOUC on theme toggle */
 html { color-scheme: light dark; }
 
+/* Blog article content should remain selectable */
+article { user-select: text; }
+
 /* Sticky footer */
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  user-select: none;
 }
 
 /* Hide scrollbar without losing scroll */
