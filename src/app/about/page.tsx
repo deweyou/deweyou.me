@@ -1,5 +1,3 @@
-import { Nav } from '##/components/nav';
-import { Footer } from '##/components/footer';
 import { PROFILE } from '##/content/common';
 import { ABOUT, ABOUT_SECTIONS } from '##/content/about';
 import { SocialIcon } from '##/components/social-icon';
@@ -7,8 +5,6 @@ import { SocialIcon } from '##/components/social-icon';
 export default function AboutPage() {
   return (
     <div className="page">
-      <Nav />
-
       <header className="container" style={{ paddingTop: 80, paddingBottom: 40 }}>
         <div className="eyebrow" style={{ marginBottom: 18 }}>
           <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
@@ -110,8 +106,6 @@ export default function AboutPage() {
           ))}
         </main>
       </div>
-
-      <Footer />
     </div>
   );
 }

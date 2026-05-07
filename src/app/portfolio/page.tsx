@@ -1,12 +1,9 @@
-import { Nav } from '##/components/nav';
-import { Footer } from '##/components/footer';
 import { PortfolioGrid } from '##/components/portfolio/portfolio-grid';
 import { PORTFOLIO } from '##/content/portfolio';
 
 export default function PortfolioPage() {
   return (
     <div className="page">
-      <Nav />
       <section className="container container-lg" style={{ paddingTop: 80, paddingBottom: 40 }}>
         <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 10 }}>
           <span style={{ width: 24, height: 1, background: 'currentColor' }} />
@@ -20,7 +17,6 @@ export default function PortfolioPage() {
         </p>
         <PortfolioGrid />
       </section>
-      <Footer />
     </div>
   );
 }

@@ -1,8 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Nav } from '##/components/nav';
-import { Footer } from '##/components/footer';
 import { ReadingProgress } from '##/components/blog/reading-progress';
 import { TocSidebar } from '##/components/blog/toc-sidebar';
 import { mdxComponents } from '##/components/blog/mdx-components';
@@ -26,7 +24,6 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   return (
     <>
       <ReadingProgress />
-      <Nav />
       <div className="container" style={{ paddingTop: 80, paddingBottom: 120 }}>
         <div style={{
           display: 'flex',
@@ -68,7 +65,6 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

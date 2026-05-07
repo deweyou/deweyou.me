@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { IBM_Plex_Mono } from 'next/font/google';
 import { ThemeProvider } from '##/components/theme-provider';
+import { Nav } from '##/components/nav';
+import { Footer } from '##/components/footer';
 import '@deweyou-design/styles/theme.css';
 import '@deweyou-design/react/style.css';
 import './globals.css';
@@ -51,7 +53,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Nav />
+          <main id="page-content">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

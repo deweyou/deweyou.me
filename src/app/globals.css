@@ -11,18 +11,19 @@ html { color-scheme: light dark; }
 /* Blog article content should remain selectable */
 article { user-select: text; }
 
-/* Sticky footer */
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   user-select: none;
 }
 
-/* Hide scrollbar without losing scroll */
-html {
+/* Scrollable content area between nav and footer */
+body > * { flex-shrink: 0; }
+#page-content {
+  flex: 1;
+  overflow-y: auto;
   scrollbar-width: none;
 }
-html::-webkit-scrollbar {
-  display: none;
-}
+#page-content::-webkit-scrollbar { display: none; }

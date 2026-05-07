@@ -1,7 +1,5 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { Nav } from '##/components/nav';
-import { Footer } from '##/components/footer';
 import { MasonryGrid } from '##/components/photos/masonry-grid';
 import { PHOTO_SERIES, qiniuThumb, type PhotoSeries } from '##/content/photos';
 import styles from './page.module.css';
@@ -41,7 +39,6 @@ export default async function PhotoSeriesPage({ params }: Props) {
 
   return (
     <div className="page">
-      <Nav />
       <section className="container container-lg" style={{ paddingTop: 80, paddingBottom: 80 }}>
         <div className={styles.hero}>
           <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 10 }}>
@@ -60,7 +57,6 @@ export default async function PhotoSeriesPage({ params }: Props) {
         </div>
         <MasonryGrid photos={series.photos.map((p) => ({ ...p, src: qiniuThumb(p.src, 1200) }))} />
       </section>
-      <Footer />
     </div>
   );
 }
