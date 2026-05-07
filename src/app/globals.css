@@ -14,16 +14,10 @@ article { user-select: text; }
 body {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
-  overflow: hidden;
+  min-height: 100dvh;
   user-select: none;
 }
 
-/* Scrollable content area between nav and footer */
-body > * { flex-shrink: 0; }
-#page-content {
-  flex: 1;
-  overflow-y: auto;
-  scrollbar-width: none;
-}
-#page-content::-webkit-scrollbar { display: none; }
+/* Hide scrollbar */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }

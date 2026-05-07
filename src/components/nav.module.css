@@ -4,7 +4,10 @@
   justify-content: space-between;
   padding: 28px 64px;
   border-bottom: 1px solid var(--ui-color-border);
-  position: relative;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--ui-color-canvas);
 }
 
 @media (max-width: 768px) {

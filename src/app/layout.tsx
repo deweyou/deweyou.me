@@ -55,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeProvider>
           <Nav />
-          <main id="page-content">{children}</main>
+          <main style={{ flex: 1 }}>{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
