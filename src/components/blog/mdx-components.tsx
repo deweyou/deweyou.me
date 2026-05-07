@@ -39,12 +39,10 @@ export const mdxComponents: MDXComponents = {
   code: ({ children }) => (
     <code style={{
       fontFamily: 'var(--ui-font-mono)',
-      fontSize: '0.82em',
-      padding: '2px 7px',
-      background: 'var(--ui-color-brand-bg)',
-      color: 'var(--ui-color-brand-text)',
+      fontSize: '0.85em',
+      padding: '2px 6px',
+      background: 'color-mix(in srgb, var(--ui-color-text) 6%, transparent)',
       borderRadius: 4,
-      whiteSpace: 'nowrap',
     }}>
       {children}
     </code>
