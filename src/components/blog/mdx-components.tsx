@@ -12,16 +12,32 @@ export const mdxComponents: MDXComponents = {
       {children}
     </a>
   ),
-  h2: ({ children }) => (
-    <Text variant="h2" style={{ margin: '3rem 0 1.25rem', lineHeight: 1.3, letterSpacing: '-0.01em' }}>
-      {children}
-    </Text>
-  ),
-  h3: ({ children }) => (
-    <Text variant="h3" style={{ margin: '2.5rem 0 1rem', lineHeight: 1.4 }}>
-      {children}
-    </Text>
-  ),
+  h2: ({ children }) => {
+    const id = String(children)
+      .toLowerCase()
+      .replace(/[\s\u4e00-\u9fff\u3400-\u4dbf`'"]+/g, '-')
+      .replace(/[^\w-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    return (
+      <Text variant="h2" id={id} style={{ margin: '3rem 0 1.25rem', lineHeight: 1.3, letterSpacing: '-0.01em', scrollMarginTop: 80 }}>
+        {children}
+      </Text>
+    );
+  },
+  h3: ({ children }) => {
+    const id = String(children)
+      .toLowerCase()
+      .replace(/[\s\u4e00-\u9fff\u3400-\u4dbf`'"]+/g, '-')
+      .replace(/[^\w-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '');
+    return (
+      <Text variant="h3" id={id} style={{ margin: '2.5rem 0 1rem', lineHeight: 1.4, scrollMarginTop: 80 }}>
+        {children}
+      </Text>
+    );
+  },
   p: ({ children }) => (
     <Text variant="body" style={{ fontSize: 17, lineHeight: 1.85, margin: '0 0 1.4rem', textWrap: 'pretty' } as React.CSSProperties}>
       {children}
