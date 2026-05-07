@@ -1,16 +1,15 @@
 import type { MDXComponents } from 'mdx/types';
-import { Button } from '@deweyou-design/react/button';
 
 export const mdxComponents: MDXComponents = {
   a: ({ href, children }) => (
-    <Button
-      variant="link"
+    <a
       href={href}
       target={href?.startsWith('http') ? '_blank' : undefined}
       rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+      style={{ color: 'var(--ui-color-brand-text)', textDecoration: 'underline', textUnderlineOffset: 3 }}
     >
       {children}
-    </Button>
+    </a>
   ),
   h2: ({ children }) => (
     <h2 style={{ fontFamily: 'var(--ui-font-display)', fontSize: '1.85rem', fontWeight: 600,
