@@ -13,12 +13,12 @@ export const mdxComponents: MDXComponents = {
     </a>
   ),
   h2: ({ children }) => (
-    <Text variant="h2" style={{ margin: '2.5rem 0 1rem', letterSpacing: '-0.01em' }}>
+    <Text variant="h2" style={{ margin: '3rem 0 1.25rem', lineHeight: 1.3, letterSpacing: '-0.01em' }}>
       {children}
     </Text>
   ),
   h3: ({ children }) => (
-    <Text variant="h3" style={{ margin: '2rem 0 0.75rem' }}>
+    <Text variant="h3" style={{ margin: '2.5rem 0 1rem', lineHeight: 1.4 }}>
       {children}
     </Text>
   ),
@@ -37,9 +37,15 @@ export const mdxComponents: MDXComponents = {
   ),
   pre: ({ children }) => <pre className="dy-code" style={{ margin: '1.5rem 0' }}>{children}</pre>,
   code: ({ children }) => (
-    <code style={{ fontFamily: 'var(--ui-font-mono)', fontSize: '0.875em',
-      padding: '1px 6px', background: 'var(--ui-color-surface)',
-      border: '1px solid var(--ui-color-border)', borderRadius: 3 }}>
+    <code style={{
+      fontFamily: 'var(--ui-font-mono)',
+      fontSize: '0.82em',
+      padding: '2px 7px',
+      background: 'var(--ui-color-brand-bg)',
+      color: 'var(--ui-color-brand-text)',
+      borderRadius: 4,
+      whiteSpace: 'nowrap',
+    }}>
       {children}
     </code>
   ),
