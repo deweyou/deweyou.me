@@ -1,8 +1,8 @@
 export const NAV_LINKS = [
-  { href: '/',          label: '主页' },
-  { href: '/blog',      label: '文章' },
-  { href: '/portfolio', label: '作品集' },
-  { href: '/about',     label: '关于' },
+  { href: '/',     label: '主页' },
+  { href: '/blog', label: '文章' },
+  // { href: '/portfolio', label: '作品集' },
+  // { href: '/about',     label: '关于' },
 ] as const;
 
 export const PROFILE = {
