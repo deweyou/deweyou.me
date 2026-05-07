@@ -135,8 +135,6 @@ export function Hero() {
             {HOME.hero.bio.map((seg, i) =>
               'variant' in seg && seg.variant === 'underline' ? (
                 <span key={i} className={styles.bioUnderline}>{seg.text}</span>
-              ) : 'variant' in seg && seg.variant === 'chip' ? (
-                <span key={i} className={styles.aiChip}>{seg.text}</span>
               ) : (
                 <span key={i}>{seg.text}</span>
               )
