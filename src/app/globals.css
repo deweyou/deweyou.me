@@ -1,0 +1,23 @@
+/* Override @deweyou-design font variables with next/font CSS vars */
+:root {
+  --ui-font-body: var(--font-source-han-serif), 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --ui-font-display: var(--font-source-han-serif), 'Noto Serif SC', 'Songti SC', 'STSong', 'SimSun', serif;
+  --ui-font-mono: var(--font-ibm-plex-mono), 'SFMono-Regular', ui-monospace, monospace;
+}
+
+/* Prevent FOUC on theme toggle */
+html { color-scheme: light dark; }
+
+/* Blog article content should remain selectable */
+article { user-select: text; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  user-select: none;
+}
+
+/* Hide scrollbar */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }

@@ -1,0 +1,256 @@
+/* Shared site styles — sourced from design handoff site.css */
+
+/* ── Eyebrow label ─────────────────────────────────────────── */
+.eyebrow {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ui-color-text-muted);
+}
+
+/* ── Animated underline link ───────────────────────────────── */
+.dy-link {
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.dy-link::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 260ms ease;
+}
+.dy-link:hover::after { clip-path: inset(0 0 0 0); }
+
+/* ── Static underline link ─────────────────────────────────── */
+.dy-link-static {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--ui-color-border-strong);
+  transition: border-color 140ms ease;
+}
+.dy-link-static:hover { border-bottom-color: var(--ui-color-text); }
+
+/* ── Tag / chip ────────────────────────────────────────────── */
+.dy-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-pill);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--ui-color-text-muted);
+  background: transparent;
+  transition: color 140ms ease, border-color 140ms ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.dy-tag:hover { color: var(--ui-color-text); border-color: var(--ui-color-border-strong); }
+.dy-tag[data-active="true"] {
+  color: var(--ui-color-text-on-brand);
+  background: var(--ui-color-brand-bg);
+  border-color: var(--ui-color-brand-bg);
+}
+
+/* ── Card ──────────────────────────────────────────────────── */
+.dy-card {
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-auto);
+  background: var(--ui-color-surface);
+  padding: 24px;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+.dy-card-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.dy-card-link:hover {
+  border-color: var(--ui-color-border-strong);
+  box-shadow: var(--ui-shadow-sm);
+}
+
+/* ── 44×2px brand rule ─────────────────────────────────────── */
+.dy-rule {
+  width: 44px;
+  height: 2px;
+  background: var(--ui-color-text);
+  border: 0;
+  margin: 0;
+}
+
+/* ── Content containers ─────────────────────────────────────── */
+:root {
+  --container-sm: 720px;
+  --container-md: 960px;
+  --container-lg: 1280px;
+  --container-xl: 1600px;
+  --container-padding: 64px;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-md);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+.container-sm { max-width: var(--container-sm); }
+.container-md { max-width: var(--container-md); }
+.container-lg { max-width: var(--container-lg); }
+.container-xl { max-width: var(--container-xl); }
+
+@media (max-width: 768px) {
+  :root { --container-padding: 24px; }
+}
+
+/* ── Page container ────────────────────────────────────────── */
+.page {
+  background: var(--ui-color-canvas);
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-body);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Nav ───────────────────────────────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 64px;
+  border-bottom: 1px solid var(--ui-color-border);
+}
+.nav-h5 { padding: 18px 24px; }
+
+/* ── Footer ────────────────────────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--ui-color-border);
+  padding: 48px 64px 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  font-size: 13px;
+  color: var(--ui-color-text-muted);
+}
+
+/* ── Icon button ───────────────────────────────────────────── */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-float);
+  background: transparent;
+  color: var(--ui-color-text-muted);
+  cursor: pointer;
+  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
+  font-size: 14px;
+}
+.icon-btn:hover {
+  color: var(--ui-color-text);
+  border-color: var(--ui-color-border-strong);
+  background: color-mix(in srgb, var(--ui-color-text) 4%, transparent);
+}
+
+/* ── Icon button (no border) ───────────────────────────────── */
+.icon-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px; height: 32px;
+  background: transparent;
+  border: none;
+  border-radius: var(--ui-radius-float);
+  color: var(--ui-color-text-muted);
+  cursor: pointer;
+  transition: color 140ms ease, background 140ms ease;
+  font-size: 18px;
+}
+.icon-btn-ghost:hover {
+  color: var(--ui-color-text);
+  background: color-mix(in srgb, var(--ui-color-text) 6%, transparent);
+}
+
+/* ── TOC fixed sidebar ─────────────────────────────────────── */
+.toc-fixed {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 32px;
+  width: 180px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  text-align: left;
+}
+
+@media (max-width: 1199px) {
+  .toc-fixed { display: none; }
+}
+
+/* ── Reading progress bar ──────────────────────────────────── */
+.read-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: var(--ui-color-brand-bg);
+  z-index: 50;
+  transition: width 80ms linear;
+}
+
+/* ── Dotted leader ─────────────────────────────────────────── */
+.leader {
+  flex: 1;
+  border-bottom: 1px dotted var(--ui-color-border-strong);
+  margin: 0 12px 6px;
+  min-width: 24px;
+}
+
+/* ── Placeholder block ─────────────────────────────────────── */
+.placeholder {
+  background:
+    repeating-linear-gradient(135deg, transparent, transparent 8px,
+      color-mix(in srgb, var(--ui-color-text) 5%, transparent) 8px,
+      color-mix(in srgb, var(--ui-color-text) 5%, transparent) 9px),
+    var(--ui-color-surface);
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-auto);
+}
+
+/* ── Code block ────────────────────────────────────────────── */
+.dy-code {
+  font-family: var(--ui-font-mono);
+  font-size: 13px;
+  background: var(--ui-color-surface);
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-auto);
+  padding: 16px 20px;
+  overflow-x: auto;
+  line-height: 1.65;
+  color: var(--ui-color-text);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--ui-color-border-strong); border-radius: 4px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* ── Reduced motion ────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
