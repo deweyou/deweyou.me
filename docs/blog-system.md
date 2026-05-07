@@ -77,6 +77,6 @@ Source Han Serif CN is subsetted for performance. After adding new posts, rebuil
 bash scripts/subset-fonts.sh
 ```
 
-The script scans `content/posts/*.mdx` and rebuilds `src/app/fonts/*.woff2`.
+The script scans `content/posts/*.mdx` and rebuilds `src/app/fonts/*.woff2`. Commit the updated woff2 files after running. **Do not add this to `prebuild`** — `pyftsubset` is not available on Vercel.
 
 *Last updated: 2026-05-07 | Reason: blog system built from scratch during redesign*
