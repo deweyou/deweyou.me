@@ -44,19 +44,27 @@ export interface TocItem {
 }
 
 export function extractToc(content: string): TocItem[] {
-  const re = /^(#{2,3})\s+(.+)$/gm;
+  const re = /^(#{1,3})\s+(.+)$/gm;
   const items: TocItem[] = [];
   let m;
   while ((m = re.exec(content)) !== null) {
     const depth = m[1].length;
     const label = m[2].trim();
-    const id = label
+    // Strip markdown inline syntax to match what mdx renders as plain text
+    const plainLabel = label
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/__([^_]+)__/g, '$1')
+      .replace(/\*([^*]+)\*/g, '$1')
+      .replace(/_([^_]+)_/g, '$1');
+    const id = plainLabel
       .toLowerCase()
-      .replace(/[\s\u4e00-\u9fff\u3400-\u4dbf`'"]+/g, '-')
-      .replace(/[^\w-]/g, '')
+      .replace(/[`'"]+/g, '')
+      .replace(/[\s\p{P}]+/gu, '-')
+      .replace(/[^\w\u4e00-\u9fff\u3400-\u4dbf-]/g, '')
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '');
-    items.push({ id, label, depth });
+    items.push({ id, label: plainLabel, depth });
   }
   return items;
 }

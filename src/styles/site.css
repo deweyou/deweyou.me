@@ -184,6 +184,22 @@
   background: color-mix(in srgb, var(--ui-color-text) 6%, transparent);
 }
 
+/* ── TOC fixed sidebar ─────────────────────────────────────── */
+.toc-fixed {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 32px;
+  width: 180px;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  text-align: left;
+}
+
+@media (max-width: 1199px) {
+  .toc-fixed { display: none; }
+}
+
 /* ── Reading progress bar ──────────────────────────────────── */
 .read-progress {
   position: fixed;

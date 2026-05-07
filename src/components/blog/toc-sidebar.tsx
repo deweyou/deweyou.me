@@ -8,23 +8,38 @@ export interface TocItem {
   depth: number;
 }
 
+const NAV_HEIGHT = 80;
+
+function scrollToId(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - NAV_HEIGHT - 8;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
 export function TocSidebar({ items }: { items: TocItem[] }) {
   const [activeId, setActiveId] = useState(items[0]?.id ?? '');
-  const [progress, setProgress] = useState(0);
+
+  // On mount: if URL has a hash, scroll to it
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      // Wait for layout before scrolling
+      requestAnimationFrame(() => scrollToId(hash));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
-      const scrollY = window.scrollY;
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docH > 0 ? Math.min(100, Math.round((scrollY / docH) * 100)) : 0);
-
       const headings = items
         .map(({ id }) => document.getElementById(id))
         .filter(Boolean) as HTMLElement[];
 
+      // Active = last heading that has crossed the nav threshold
       let current = headings[0]?.id ?? '';
       for (const h of headings) {
-        if (h.getBoundingClientRect().top <= 100) current = h.id;
+        if (h.getBoundingClientRect().top <= NAV_HEIGHT + 16) current = h.id;
       }
       setActiveId(current);
     };
@@ -37,53 +52,38 @@ export function TocSidebar({ items }: { items: TocItem[] }) {
   if (items.length === 0) return null;
 
   return (
-    <aside style={{
-      width: 220,
-      flexShrink: 0,
-      position: 'sticky',
-      top: 80,
-      alignSelf: 'flex-start',
-      maxHeight: 'calc(100vh - 120px)',
-      overflowY: 'auto',
-    }}>
-      <div className="eyebrow" style={{ marginBottom: 16 }}>目录 · CONTENTS</div>
-      <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+    <aside className="toc-fixed">
+      <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
         {items.map((t) => (
           <li key={t.id}>
             <a
               href={`#${t.id}`}
+              data-active={activeId === t.id}
               onClick={(e) => {
                 e.preventDefault();
-                document.getElementById(t.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                history.pushState(null, '', `#${t.id}`);
+                scrollToId(t.id);
               }}
               style={{
                 display: 'block',
-                padding: `3px 0 3px ${t.depth === 3 ? 20 : 12}px`,
-                borderLeft: `2px solid ${activeId === t.id ? 'var(--ui-color-brand-bg)' : 'var(--ui-color-border)'}`,
-                fontSize: 13,
-                color: activeId === t.id ? 'var(--ui-color-text)' : 'var(--ui-color-text-muted)',
+                paddingBlock: '3px',
+                paddingLeft: t.depth === 1 ? 0 : t.depth === 2 ? 10 : 20,
+                fontSize: 12,
+                fontFamily: 'var(--ui-font-mono)',
+                color: 'var(--ui-color-text)',
+                opacity: activeId === t.id ? 1 : 0.3,
                 textDecoration: 'none',
-                transition: 'color 140ms, border-color 140ms',
-                lineHeight: 1.5,
+                lineHeight: 1.6,
+                transition: 'opacity 140ms',
               }}
+              onMouseEnter={(e) => { if (activeId !== t.id) (e.currentTarget as HTMLElement).style.opacity = '0.65'; }}
+              onMouseLeave={(e) => { if (activeId !== t.id) (e.currentTarget as HTMLElement).style.opacity = '0.3'; }}
             >
               {t.label}
             </a>
           </li>
         ))}
       </ol>
-
-      <div style={{
-        marginTop: 24,
-        paddingTop: 16,
-        borderTop: '1px solid var(--ui-color-border)',
-        fontSize: 11,
-        color: 'var(--ui-color-text-muted)',
-        fontFamily: 'var(--ui-font-mono)',
-        letterSpacing: '0.05em',
-      }}>
-        进度 {progress}%
-      </div>
     </aside>
   );
 }

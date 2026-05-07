@@ -24,46 +24,32 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
   return (
     <>
       <ReadingProgress />
+      <TocSidebar items={toc} />
       <div className="container" style={{ paddingTop: 80, paddingBottom: 120 }}>
-        <div style={{
-          display: 'flex',
-          gap: 64,
-          alignItems: 'flex-start',
-          maxWidth: 1100,
-          margin: '0 auto',
-        }}>
-          {/* Main column */}
-          <article style={{ flex: 1, minWidth: 0, maxWidth: 720 }}>
-            {/* Header */}
-            <header style={{ marginBottom: 56 }}>
-              <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                <Link href="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>
-                  ← 文章
-                </Link>
-                <span>·</span>
-                <span>{post.tag}</span>
-              </div>
-              <h1 style={{ fontFamily: 'var(--ui-font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-                fontWeight: 700, lineHeight: 1.08, marginBottom: 24, letterSpacing: '-0.02em' }}>
-                {post.title}
-              </h1>
-              <div style={{ display: 'flex', gap: 20, fontFamily: 'var(--ui-font-mono)', fontSize: 12,
-                color: 'var(--ui-color-text-muted)', letterSpacing: '0.05em' }}>
-                <span>{post.date}</span>
-                <span>{post.readTime}</span>
-              </div>
-            </header>
+        <article style={{ maxWidth: 720, margin: '0 auto' }}>
+          {/* Header */}
+          <header style={{ marginBottom: 56 }}>
+            <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <Link href="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>
+                ← 文章
+              </Link>
+              <span>·</span>
+              <span>{post.tag}</span>
+            </div>
+            <h1 style={{ fontFamily: 'var(--ui-font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
+              fontWeight: 700, lineHeight: 1.08, marginBottom: 24, letterSpacing: '-0.02em' }}>
+              {post.title}
+            </h1>
+            <div style={{ display: 'flex', gap: 20, fontFamily: 'var(--ui-font-mono)', fontSize: 12,
+              color: 'var(--ui-color-text-muted)', letterSpacing: '0.05em' }}>
+              <span>{post.date}</span>
+              <span>{post.readTime}</span>
+            </div>
+          </header>
 
-            {/* Body */}
-            <MDXRemote source={post.content} components={mdxComponents} />
-          </article>
-
-          {/* TOC sidebar — hidden on mobile via media query */}
-          <div style={{ display: 'var(--toc-display, block)' }}>
-            <style>{`@media (max-width: 900px) { :root { --toc-display: none; } }`}</style>
-            <TocSidebar items={toc} />
-          </div>
-        </div>
+          {/* Body */}
+          <MDXRemote source={post.content} components={mdxComponents} />
+        </article>
       </div>
     </>
   );
