@@ -23,6 +23,7 @@
 # misc
 .DS_Store
 *.pem
+.superpowers/
 
 # photo uploads (local only, images go to Qiniu CDN)
 /photos-upload/*
