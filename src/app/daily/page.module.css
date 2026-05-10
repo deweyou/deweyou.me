@@ -1,0 +1,164 @@
+.hero {
+  padding-top: 96px;
+  padding-bottom: 48px;
+}
+
+.hero :global(.eyebrow) {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.eyebrowRule {
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+}
+
+.title {
+  font-family: var(--ui-font-display);
+  font-size: clamp(2.25rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 24px;
+  letter-spacing: 0;
+}
+
+.description {
+  font-size: 17px;
+  color: var(--ui-color-text-muted);
+  max-width: 620px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-top: 28px;
+  font-family: var(--ui-font-mono);
+  font-size: 12px;
+  color: var(--ui-color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.timeline {
+  padding-bottom: 120px;
+}
+
+.empty {
+  color: var(--ui-color-text-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.yearGroup {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 32px;
+  margin-bottom: 72px;
+}
+
+.yearLabel {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+  font-family: var(--ui-font-mono);
+  font-size: 12px;
+  color: var(--ui-color-text-muted);
+  letter-spacing: 0.1em;
+}
+
+.entries {
+  min-width: 0;
+}
+
+.entry {
+  padding: 0 0 44px;
+  margin-bottom: 44px;
+  border-bottom: 1px solid var(--ui-color-border);
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entryHeader {
+  margin-bottom: 22px;
+}
+
+.date {
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--ui-font-mono);
+  font-size: 12px;
+  color: var(--ui-color-brand-text);
+  letter-spacing: 0.08em;
+}
+
+.entryTitle {
+  font-family: var(--ui-font-display);
+  font-size: clamp(1.45rem, 4vw, 2rem);
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 0 0 14px;
+  letter-spacing: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tags :global(.dy-tag) {
+  cursor: default;
+}
+
+.body {
+  min-width: 0;
+}
+
+.body :global(.dy-code) {
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 72px;
+    padding-bottom: 40px;
+  }
+
+  .title {
+    font-size: 2.35rem;
+  }
+
+  .description {
+    font-size: 16px;
+  }
+
+  .timeline {
+    padding-bottom: 88px;
+  }
+
+  .yearGroup {
+    display: block;
+    margin-bottom: 56px;
+  }
+
+  .yearLabel {
+    position: static;
+    margin-bottom: 24px;
+  }
+
+  .entry {
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+  }
+
+  .entryTitle {
+    font-size: 1.55rem;
+  }
+}
