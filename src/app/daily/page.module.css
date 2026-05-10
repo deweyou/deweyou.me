@@ -79,10 +79,15 @@
   padding: 0 0 44px;
   margin-bottom: 44px;
   border-bottom: 1px solid var(--ui-color-border);
+  scroll-margin-top: 112px;
 }
 
 .entry:last-child {
   margin-bottom: 0;
+}
+
+.entry:target {
+  border-bottom-color: var(--ui-color-border-strong);
 }
 
 .entryHeader {
@@ -105,6 +110,15 @@
   font-weight: 700;
   margin: 0 0 14px;
   letter-spacing: 0;
+}
+
+.entryAnchor {
+  color: inherit;
+  text-decoration: none;
+}
+
+.entryAnchor:hover {
+  color: var(--ui-color-brand-text);
 }
 
 .tags {
@@ -156,6 +170,7 @@
   .entry {
     padding-bottom: 36px;
     margin-bottom: 36px;
+    scroll-margin-top: 88px;
   }
 
   .entryTitle {
