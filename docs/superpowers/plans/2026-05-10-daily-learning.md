@@ -1,8 +1,8 @@
-# Daily Learning Page Implementation Plan
+# Knowledge Cards Page Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a `/daily` "每日学习" archive page backed by one MDX file per day.
+**Goal:** Build a `/daily` "知识卡片" archive page backed by one MDX file per day.
 
 **Architecture:** Add a focused daily content reader in `src/lib/daily.ts`, render MDX inline on a Server Component page, and keep page-specific layout in a CSS module. The daily page reuses the blog MDX renderer for reading style and adds only timeline-specific structure around it.
 
@@ -16,7 +16,7 @@
 - Create `src/lib/daily.ts`: read `content/daily/*.mdx`, validate frontmatter, normalize dates/tags, sort descending, and group entries by year.
 - Create `src/app/daily/page.tsx`: Server Component for the daily archive page.
 - Create `src/app/daily/page.module.css`: timeline layout, blog-compatible reading column, H5 responsive behavior.
-- Modify `src/content/common.ts`: add nav item `{ href: '/daily', label: '每日学习' }`.
+- Modify `src/content/common.ts`: add nav item `{ href: '/daily', label: '知识卡片' }`.
 
 ## Task 1: Daily Content Reader
 
@@ -153,8 +153,8 @@ import { getAllDailyEntries, groupDailyEntriesByYear } from '##/lib/daily';
 import styles from './page.module.css';
 
 export const metadata = {
-  title: '每日学习 — Dewey Ou',
-  description: 'Dewey Ou 的 AI 学习笔记归档。',
+  title: '知识卡片 — Dewey Ou',
+  description: 'Dewey Ou 的 AI 知识卡片归档。',
 };
 
 export default function DailyPage() {
@@ -169,17 +169,17 @@ export default function DailyPage() {
           <span className={styles.eyebrowRule} />
           AI DAILY
         </div>
-        <h1 className={styles.title}>每日学习</h1>
-        <p className={styles.description}>每天沉淀一条 AI 相关的概念、方法或观察，适合像信息流一样浏览，也适合长期回看。</p>
+        <h1 className={styles.title}>知识卡片</h1>
+        <p className={styles.description}>把 AI 相关的概念、方法和观察整理成短卡片，适合像信息流一样浏览，也适合长期回看。</p>
         <div className={styles.meta}>
           <span>{entries.length} 条记录</span>
           {latestDate && <span>最近更新 {latestDate}</span>}
         </div>
       </section>
 
-      <section className={`container container-sm ${styles.timeline}`} aria-label="每日学习列表">
+      <section className={`container container-sm ${styles.timeline}`} aria-label="知识卡片列表">
         {entries.length === 0 ? (
-          <p className={styles.empty}>还没有发布每日学习记录。</p>
+          <p className={styles.empty}>还没有发布知识卡片。</p>
         ) : (
           groups.map((group) => (
             <div key={group.year} className={styles.yearGroup}>
@@ -404,7 +404,7 @@ Modify `src/content/common.ts`:
 export const NAV_LINKS = [
   { href: '/',      label: '主页' },
   { href: '/blog',  label: '文章' },
-  { href: '/daily', label: '每日学习' },
+  { href: '/daily', label: '知识卡片' },
   // { href: '/portfolio', label: '作品集' },
   // { href: '/about',     label: '关于' },
 ] as const;
@@ -440,7 +440,7 @@ Expected: Next.js dev server prints a local URL, normally `http://localhost:3000
 
 Open `/daily` in the browser at desktop width. Confirm:
 
-- Nav includes `每日学习`.
+- Nav includes `知识卡片`.
 - Hero metadata shows `1 条记录` and `最近更新 2026-05-10`.
 - Entry body uses the same paragraph rhythm and typography as blog posts.
 - Timeline has year label on the left and entry content on the right.

@@ -1,13 +1,13 @@
-# Daily Learning Page Design
+# Knowledge Cards Page Design
 
 ## Goal
 
-Add a new "每日学习" section for short daily AI learning notes. The experience should feel like a clean long-form timeline: easy to scan like a social feed, but structured enough to become a durable personal knowledge archive.
+Add a new "知识卡片" section for short AI knowledge cards. The experience should feel like a clean long-form timeline: easy to scan like a social feed, but structured enough to become a durable personal knowledge archive.
 
 ## User-Facing Scope
 
 - Add a top-level route at `/daily`.
-- Add a nav item named `每日学习`.
+- Add a nav item named `知识卡片`.
 - Show daily entries in a date-grouped timeline list.
 - Use one MDX file per day for the first version.
 - Preserve a path for future support of multiple entries per day.
@@ -48,7 +48,7 @@ The reading layer should be isolated in `src/lib/daily.ts`, so a future migratio
 `/daily` uses the same root layout as the rest of the site. The page starts with a compact hero:
 
 - Eyebrow: `AI DAILY` or similar.
-- Title: `每日学习`.
+- Title: `知识卡片`.
 - Description: one sentence explaining that this is a daily archive of AI notes.
 - Metadata: total entry count and latest entry date.
 
@@ -101,7 +101,7 @@ The `/daily` page can be a Server Component. If a future expand/collapse control
 
 ## Integration With Existing Site
 
-- Add `每日学习` to `NAV_LINKS` in `src/content/common.ts`.
+- Add `知识卡片` to `NAV_LINKS` in `src/content/common.ts`.
 - Reuse existing shared styles from `src/styles/site.css` where possible.
 - Follow the blog detail reading style as the primary visual baseline:
   - Use the same 720px-centered reading column for MDX body content.
@@ -133,5 +133,5 @@ Implementation should be verified with:
 
 - Content source: one MDX file per day under `content/daily/`.
 - Page style: date-grouped timeline list.
-- Nav: visible top-level nav item named `每日学习`.
+- Nav: visible top-level nav item named `知识卡片`.
 - First version cardinality: one entry per day, with reader boundaries prepared for future multiple entries per day.
