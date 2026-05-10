@@ -2,7 +2,7 @@
 
 ## Goal
 
-Add a new "笔记" section for short AI notes. The experience should feel like a clean long-form timeline: easy to scan like a social feed, but structured enough to become a durable personal knowledge archive.
+Add a new "笔记" section for short notes. The experience should feel like a clean long-form timeline: easy to scan like a social feed, but structured enough to become a durable personal knowledge archive.
 
 ## User-Facing Scope
 

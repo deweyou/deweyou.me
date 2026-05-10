@@ -5,7 +5,7 @@ import styles from './page.module.css';
 
 export const metadata = {
   title: '笔记 — Dewey Ou',
-  description: 'Dewey Ou 的 AI 笔记归档。',
+  description: 'Dewey Ou 的笔记归档。',
 };
 
 export default function DailyPage() {
@@ -22,7 +22,7 @@ export default function DailyPage() {
         </div>
         <h1 className={styles.title}>笔记</h1>
         <p className={styles.description}>
-          随手记录 AI 相关的概念、方法和观察，留给之后的自己回看。
+          随手记录一些概念、方法和观察，留给之后的自己回看。
         </p>
         <div className={styles.meta}>
           <span>{entries.length} 条记录</span>
