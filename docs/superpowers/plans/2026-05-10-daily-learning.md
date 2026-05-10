@@ -167,7 +167,7 @@ export default function DailyPage() {
       <section className={`container container-sm ${styles.hero}`}>
         <div className="eyebrow">
           <span className={styles.eyebrowRule} />
-          AI DAILY
+          NOTE
         </div>
         <h1 className={styles.title}>笔记</h1>
         <p className={styles.description}>随手记录一些概念、方法和观察，留给之后的自己回看。</p>

@@ -47,7 +47,7 @@ The reading layer should be isolated in `src/lib/daily.ts`, so a future migratio
 
 `/daily` uses the same root layout as the rest of the site. The page starts with a compact hero:
 
-- Eyebrow: `AI DAILY` or similar.
+- Eyebrow: `NOTE`.
 - Title: `笔记`.
 - Description: one sentence explaining that this is a daily archive of AI notes.
 - Metadata: total entry count and latest entry date.

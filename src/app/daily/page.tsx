@@ -20,7 +20,7 @@ export default function DailyPage() {
         <div className={styles.readingColumn}>
           <div className="eyebrow">
             <span className={styles.eyebrowRule} />
-            AI DAILY
+            NOTE
           </div>
           <h1 className={styles.title}>笔记</h1>
           <p className={styles.description}>
