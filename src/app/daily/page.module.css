@@ -55,15 +55,16 @@
 }
 
 .yearGroup {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: 32px;
+  position: relative;
   margin-bottom: 72px;
 }
 
 .yearLabel {
   position: sticky;
   top: 96px;
+  left: 0;
+  width: 72px;
+  margin-left: -104px;
   align-self: start;
   font-family: var(--ui-font-mono);
   font-size: 12px;
@@ -164,6 +165,8 @@
 
   .yearLabel {
     position: static;
+    width: auto;
+    margin-left: 0;
     margin-bottom: 24px;
   }
 

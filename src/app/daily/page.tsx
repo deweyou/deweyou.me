@@ -1,5 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { mdxComponents } from '##/components/blog/mdx-components';
+import { DailyHashSync } from '##/components/daily/hash-sync';
 import { getAllDailyEntries, groupDailyEntriesByYear } from '##/lib/daily';
 import styles from './page.module.css';
 
@@ -34,39 +35,42 @@ export default function DailyPage() {
         {entries.length === 0 ? (
           <p className={styles.empty}>还没有发布笔记。</p>
         ) : (
-          groups.map((group) => (
-            <div key={group.year} className={styles.yearGroup}>
-              <div className={styles.yearLabel}>{group.year}</div>
-              <div className={styles.entries}>
-                {group.entries.map((entry) => (
-                  <article key={entry.slug} className={styles.entry} id={entry.slug}>
-                    <header className={styles.entryHeader}>
-                      <time dateTime={entry.date} className={styles.date}>
-                        {entry.date.slice(5)}
-                      </time>
-                      <h2 className={styles.entryTitle}>
-                        <a href={`#${entry.slug}`} className={styles.entryAnchor} aria-label={`定位到 ${entry.title}`}>
-                          {entry.title}
-                        </a>
-                      </h2>
-                      {entry.tags.length > 0 && (
-                        <div className={styles.tags}>
-                          {entry.tags.map((tag) => (
-                            <span key={tag} className="dy-tag">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </header>
-                    <div className={styles.body}>
-                      <MDXRemote source={entry.content} components={mdxComponents} />
-                    </div>
-                  </article>
-                ))}
+          <>
+            <DailyHashSync ids={entries.map((entry) => entry.slug)} />
+            {groups.map((group) => (
+              <div key={group.year} className={styles.yearGroup}>
+                <div className={styles.yearLabel}>{group.year}</div>
+                <div className={styles.entries}>
+                  {group.entries.map((entry) => (
+                    <article key={entry.slug} className={styles.entry} id={entry.slug}>
+                      <header className={styles.entryHeader}>
+                        <time dateTime={entry.date} className={styles.date}>
+                          {entry.date.slice(5)}
+                        </time>
+                        <h2 className={styles.entryTitle}>
+                          <a href={`#${entry.slug}`} className={styles.entryAnchor} aria-label={`定位到 ${entry.title}`}>
+                            {entry.title}
+                          </a>
+                        </h2>
+                        {entry.tags.length > 0 && (
+                          <div className={styles.tags}>
+                            {entry.tags.map((tag) => (
+                              <span key={tag} className="dy-tag">
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </header>
+                      <div className={styles.body}>
+                        <MDXRemote source={entry.content} components={mdxComponents} />
+                      </div>
+                    </article>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+          </>
         )}
       </section>
     </div>
