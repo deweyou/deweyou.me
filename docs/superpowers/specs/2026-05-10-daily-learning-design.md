@@ -91,6 +91,12 @@ The `/daily` page can be a Server Component. If a future expand/collapse control
 
 - Add `每日学习` to `NAV_LINKS` in `src/content/common.ts`.
 - Reuse existing shared styles from `src/styles/site.css` where possible.
+- Follow the blog detail reading style as the primary visual baseline:
+  - Use the same 720px-centered reading column for MDX body content.
+  - Use the existing `.eyebrow` treatment for section and entry metadata.
+  - Render daily MDX bodies through the same `src/components/blog/mdx-components.tsx` mapping unless a smaller card-specific override is explicitly needed.
+  - Preserve the blog MDX heading convention: content `#` maps visually to an h2-scale heading, not a page-level h1.
+  - Keep paragraph size, line height, link styling, inline code, code block, quote, emphasis, and heading rhythm aligned with the blog post renderer.
 - Use CSS modules for page-specific timeline styling if inline styles become hard to maintain.
 - Do not change portfolio/about nav behavior.
 - Do not alter the blog heading slug invariant.
