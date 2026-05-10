@@ -2,7 +2,7 @@
 set -e
 
 FONTS_DIR="src/app/fonts"
-CONTENT_GLOB="src/content/*.ts src/app/**/*.tsx src/components/**/*.tsx src/app/*.tsx content/posts/*.mdx"
+CONTENT_GLOB="src/content/*.ts src/app/**/*.tsx src/components/**/*.tsx src/app/*.tsx content/posts/*.mdx content/daily/*.mdx"
 
 # Collect used characters
 CHARS=$(cat $CONTENT_GLOB 2>/dev/null | python3 -c "

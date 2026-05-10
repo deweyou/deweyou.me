@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+if ! command -v pyftsubset >/dev/null 2>&1; then
+  echo "pre-commit: pyftsubset is required to rebuild subset fonts." >&2
+  echo "Install fonttools locally before committing." >&2
+  exit 1
+fi
+
+echo "pre-commit: rebuilding subset fonts..."
+bash scripts/subset-fonts.sh
+
+git add src/app/fonts/*.woff2
+echo "pre-commit: subset fonts are up to date."
