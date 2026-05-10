@@ -48,7 +48,7 @@ export default function DailyPage() {
                           {entry.date.slice(5)}
                         </time>
                         <h2 className={styles.entryTitle}>
-                          <a href={`#${entry.slug}`} className={styles.entryAnchor} aria-label={`定位到 ${entry.title}`}>
+                          <a href={`#${entry.slug}`} className={styles.entryAnchor}>
                             {entry.title}
                           </a>
                         </h2>
