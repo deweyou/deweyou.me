@@ -62,6 +62,18 @@ Below the hero, entries render as a clean timeline:
 
 The visual reference is the selected "A" direction from brainstorming: date-grouped archive timeline, not a Twitter clone. It should still read smoothly as a feed when scrolling.
 
+## H5 Responsive Behavior
+
+The first version must be designed and verified for H5/mobile screens, not only desktop:
+
+- At widths below the existing site breakpoint of 768px, the page should use the shared mobile container padding from `src/styles/site.css`.
+- The timeline should collapse into a single-column flow: date metadata above each entry, body below it. Do not force a narrow side rail on mobile.
+- Titles, tags, metadata, and MDX body text must wrap naturally without horizontal scrolling.
+- Code blocks may scroll horizontally inside their own block, matching the blog code style; the page itself must not overflow horizontally.
+- Tap targets for links and tags should remain comfortable on touch screens.
+- The hero title should use a mobile-safe size comparable to the blog/photo responsive heading scale.
+- Entry spacing should stay compact enough for feed-style browsing while preserving the blog reading rhythm inside each MDX body.
+
 ## Entry Rendering
 
 Each entry card displays:
@@ -114,6 +126,7 @@ Implementation should be verified with:
 - TypeScript/build check.
 - Lint if available and practical.
 - Browser check of `/daily` on desktop and mobile widths.
+- Explicit H5 viewport check at around 390px width, confirming no horizontal overflow, clipped metadata, or unreadable line lengths.
 - A sample MDX entry matching the provided "长上下文不等于长记忆" content.
 
 ## Open Decisions Resolved
