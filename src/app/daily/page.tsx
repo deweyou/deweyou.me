@@ -16,29 +16,31 @@ export default function DailyPage() {
 
   return (
     <div className="page">
-      <section className={`container container-sm ${styles.hero}`}>
-        <div className="eyebrow">
-          <span className={styles.eyebrowRule} />
-          AI DAILY
-        </div>
-        <h1 className={styles.title}>笔记</h1>
-        <p className={styles.description}>
-          随手记录一些概念、方法和观察，留给之后的自己回看。
-        </p>
-        <div className={styles.meta}>
-          <span>{entries.length} 条记录</span>
-          {latestDate && <span>最近更新 {latestDate}</span>}
+      <section className={`container ${styles.hero}`}>
+        <div className={styles.readingColumn}>
+          <div className="eyebrow">
+            <span className={styles.eyebrowRule} />
+            AI DAILY
+          </div>
+          <h1 className={styles.title}>笔记</h1>
+          <p className={styles.description}>
+            随手记录一些概念、方法和观察，留给之后的自己回看。
+          </p>
+          <div className={styles.meta}>
+            <span>{entries.length} 条记录</span>
+            {latestDate && <span>最近更新 {latestDate}</span>}
+          </div>
         </div>
       </section>
 
-      <section className={`container container-sm ${styles.timeline}`} aria-label="笔记列表">
+      <section className={`container ${styles.timeline}`} aria-label="笔记列表">
         {entries.length === 0 ? (
-          <p className={styles.empty}>还没有发布笔记。</p>
+          <p className={`${styles.readingColumn} ${styles.empty}`}>还没有发布笔记。</p>
         ) : (
           <>
             <DailyHashSync ids={entries.map((entry) => entry.slug)} />
             {groups.map((group) => (
-              <div key={group.year} className={styles.yearGroup}>
+              <div key={group.year} className={`${styles.readingColumn} ${styles.yearGroup}`}>
                 <div className={styles.yearLabel}>{group.year}</div>
                 <div className={styles.entries}>
                   {group.entries.map((entry) => (

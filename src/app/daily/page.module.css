@@ -3,6 +3,11 @@
   padding-bottom: 48px;
 }
 
+.readingColumn {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
 .hero :global(.eyebrow) {
   display: inline-flex;
   align-items: center;
