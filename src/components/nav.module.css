@@ -58,13 +58,13 @@
 .logoDesktop { display: flex; }
 .logoMobile  { display: none; }
 
-.menuBtn { display: none; }
+.menuBtn { display: none !important; }
 
 @media (max-width: 768px) {
   .logoDesktop { display: none; }
   .logoMobile  { display: flex; }
   .links { display: none; }
-  .menuBtn { display: inline-flex; }
+  .menuBtn { display: inline-flex !important; }
 }
 
 .meta {
