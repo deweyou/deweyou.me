@@ -4,8 +4,8 @@ import { getAllDailyEntries, groupDailyEntriesByYear } from '##/lib/daily';
 import styles from './page.module.css';
 
 export const metadata = {
-  title: '知识卡片 — Dewey Ou',
-  description: 'Dewey Ou 的 AI 知识卡片归档。',
+  title: '笔记 — Dewey Ou',
+  description: 'Dewey Ou 的 AI 笔记归档。',
 };
 
 export default function DailyPage() {
@@ -20,9 +20,9 @@ export default function DailyPage() {
           <span className={styles.eyebrowRule} />
           AI DAILY
         </div>
-        <h1 className={styles.title}>知识卡片</h1>
+        <h1 className={styles.title}>笔记</h1>
         <p className={styles.description}>
-          把 AI 相关的概念、方法和观察整理成短卡片，适合像信息流一样浏览，也适合长期回看。
+          随手记录 AI 相关的概念、方法和观察，留给之后的自己回看。
         </p>
         <div className={styles.meta}>
           <span>{entries.length} 条记录</span>
@@ -30,9 +30,9 @@ export default function DailyPage() {
         </div>
       </section>
 
-      <section className={`container container-sm ${styles.timeline}`} aria-label="知识卡片列表">
+      <section className={`container container-sm ${styles.timeline}`} aria-label="笔记列表">
         {entries.length === 0 ? (
-          <p className={styles.empty}>还没有发布知识卡片。</p>
+          <p className={styles.empty}>还没有发布笔记。</p>
         ) : (
           groups.map((group) => (
             <div key={group.year} className={styles.yearGroup}>

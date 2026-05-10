@@ -1,7 +1,7 @@
 export const NAV_LINKS = [
   { href: '/',      label: '主页' },
   { href: '/blog',  label: '文章' },
-  { href: '/daily', label: '知识卡片' },
+  { href: '/daily', label: '笔记' },
   // { href: '/portfolio', label: '作品集' },
   // { href: '/about',     label: '关于' },
 ] as const;
