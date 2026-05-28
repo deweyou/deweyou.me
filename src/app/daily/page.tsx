@@ -1,6 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { mdxComponents } from '##/components/blog/mdx-components';
-import { DailyHashSync } from '##/components/daily/hash-sync';
+import { DailyVirtualTimeline } from '##/components/daily/virtual-timeline';
+import type { DailyEntry } from '##/lib/daily';
 import { getAllDailyEntries, groupDailyEntriesByYear } from '##/lib/daily';
 import styles from './page.module.css';
 
@@ -9,10 +10,15 @@ export const metadata = {
   description: 'Dewey Ou 的笔记归档。',
 };
 
+function estimateDailyEntrySize(entry: DailyEntry) {
+  return Math.min(920, Math.max(360, 260 + Math.ceil(entry.content.length / 3)));
+}
+
 export default function DailyPage() {
   const entries = getAllDailyEntries();
   const groups = groupDailyEntriesByYear(entries);
   const latestDate = entries[0]?.date;
+  const firstSlugByYear = new Map(groups.map((group) => [group.year, group.entries[0]?.slug]));
 
   return (
     <div className="page">
@@ -37,42 +43,45 @@ export default function DailyPage() {
         {entries.length === 0 ? (
           <p className={`${styles.readingColumn} ${styles.empty}`}>还没有发布笔记。</p>
         ) : (
-          <>
-            <DailyHashSync ids={entries.map((entry) => entry.slug)} />
-            {groups.map((group) => (
-              <div key={group.year} className={`${styles.readingColumn} ${styles.yearGroup}`}>
-                <div className={styles.yearLabel}>{group.year}</div>
-                <div className={styles.entries}>
-                  {group.entries.map((entry) => (
-                    <article key={entry.slug} className={styles.entry} id={entry.slug}>
-                      <header className={styles.entryHeader}>
-                        <time dateTime={entry.date} className={styles.date}>
-                          {entry.date.slice(5)}
-                        </time>
-                        <h2 className={styles.entryTitle}>
-                          <a href={`#${entry.slug}`} className={styles.entryAnchor}>
-                            {entry.title}
-                          </a>
-                        </h2>
-                        {entry.tags.length > 0 && (
-                          <div className={styles.tags}>
-                            {entry.tags.map((tag) => (
-                              <span key={tag} className="dy-tag">
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </header>
-                      <div className={styles.body}>
-                        <MDXRemote source={entry.content} components={mdxComponents} />
+          <DailyVirtualTimeline
+            entries={entries.map((entry) => ({
+              estimatedSize: estimateDailyEntrySize(entry),
+              slug: entry.slug,
+            }))}
+          >
+            {entries.map((entry) => {
+              const year = entry.date.slice(0, 4);
+              const shouldShowYear = firstSlugByYear.get(year) === entry.slug;
+
+              return (
+                <article key={entry.slug} className={styles.entry} id={entry.slug}>
+                  {shouldShowYear && <div className={styles.yearLabel}>{year}</div>}
+                  <header className={styles.entryHeader}>
+                    <time dateTime={entry.date} className={styles.date}>
+                      {entry.date.slice(5)}
+                    </time>
+                    <h2 className={styles.entryTitle}>
+                      <a href={`#${entry.slug}`} className={styles.entryAnchor}>
+                        {entry.title}
+                      </a>
+                    </h2>
+                    {entry.tags.length > 0 && (
+                      <div className={styles.tags}>
+                        {entry.tags.map((tag) => (
+                          <span key={tag} className="dy-tag">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
-                    </article>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </>
+                    )}
+                  </header>
+                  <div className={styles.body}>
+                    <MDXRemote source={entry.content} components={mdxComponents} />
+                  </div>
+                </article>
+              );
+            })}
+          </DailyVirtualTimeline>
         )}
       </section>
     </div>
