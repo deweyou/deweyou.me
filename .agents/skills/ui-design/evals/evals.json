@@ -1,0 +1,203 @@
+{
+  "skill_name": "ui-design",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "帮我按我的设计风格做一个 H5 任务管理首页，要适合手机打开。",
+      "expected_output": "The agent should trigger ui-design, classify the surface as H5/mobile web, apply the user's restrained interface style, account for safe areas and touch targets, avoid hover-only interactions, and include responsive/mobile verification checks.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Classified the platform as H5 or mobile web before proposing UI decisions",
+        "Planned to apply personal style tokens or principles such as neutral surfaces, emerald primary emphasis, bordered structure, or Chinese-first compact copy",
+        "Planned mobile-specific checks such as safe areas, tap-first interactions, touch targets, or responsive behavior",
+        "Did not propose generic decorative gradients, glassmorphism, emoji icons, or stock-like atmosphere"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "审一下这个仪表盘界面，看有没有偏离我的风格。",
+      "expected_output": "The agent should trigger ui-design in review mode, lead with concrete findings, prioritize accessibility, interaction states, token drift, layout, visual taste, and component architecture, and cite file/line references when files are available.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Planned to use a UI review posture rather than implement the dashboard immediately",
+        "Planned to check accessibility, interaction states, token drift, layout, visual taste, or component architecture",
+        "Planned to look for style drift such as nested cards, raw colors, arbitrary radii or shadows, generic gradients, or oversized hero treatment in tool UIs"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "生成一个 Sleek prompt，用我的风格设计一个记账 App。",
+      "expected_output": "The agent should trigger ui-design, produce a compact design-generation prompt with user style brief plus the app-specific requirements, and avoid vague instructions such as merely making it beautiful.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Planned to generate a compact Sleek or AI design prompt rather than generic design advice",
+        "Identified the product context as an accounting or bookkeeping app",
+        "Did not use a vague prompt such as only 'make it beautiful'"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "做一个 HarmonyOS 小组件页面，入口是查看今天的健康数据。",
+      "expected_output": "The agent should trigger ui-design, classify the task as HarmonyOS native UI work, translate design tokens into ArkTS/ArkUI or host Harmony components, and avoid forcing web component assumptions.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Classified the platform as HarmonyOS before proposing implementation details",
+        "Planned native HarmonyOS UI work rather than generic web or H5 work",
+        "Did not force @design-system/react or web-only component assumptions onto HarmonyOS"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "帮我修一下登录接口 500 的问题。",
+      "expected_output": "The agent should not trigger ui-design because the request is backend debugging without UI design, implementation, refinement, review, or prompt generation.",
+      "files": [],
+      "expectations": [
+        "Did NOT trigger the ui-design skill",
+        "Treated the request as backend debugging or normal code repair",
+        "Did not introduce DESIGN.md visual style guidance into an unrelated server-side fix"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "这个按钮点击后没反应，帮我查一下。",
+      "expected_output": "The agent should not trigger ui-design by default when the request is an interaction bug investigation rather than a visual design or UI review request, unless local context shows the fix changes interface behavior or states.",
+      "files": [],
+      "expectations": [
+        "Did NOT trigger ui-design solely because a UI element was mentioned",
+        "Planned to debug the interaction failure first"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "给 @design-system/react 加一个 SegmentedControl，保持组件库现在的风格。",
+      "expected_output": "The agent should trigger ui-design, classify the work as web React component-library implementation, prefer existing component-library conventions, keep variant/color/size/shape dimensions orthogonal, use behavior primitives where needed, and plan tests, stories, docs, and browser verification if implementing.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Classified the surface as a web React component-library task",
+        "Planned to keep the new SegmentedControl in the current component-library style",
+        "Did not route this as a generic UI design or external design-system task"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "按我的风格设计一个微信小程序首页，包含登录态、空状态和网络错误状态。",
+      "expected_output": "The agent should trigger ui-design, classify the task as a mini program, respect WeChat mini program platform constraints, use tap-first lightweight interactions, account for capsule/menu safe area and page stack navigation, and explicitly design login, empty, and network-error states.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Classified the platform as a WeChat mini program or mini program",
+        "Planned to account for mini-program constraints such as capsule/menu safe area, page stack navigation, startup performance, or native component availability",
+        "Planned to cover login-required, empty, and network-error states"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "这个仓库有自己的 UI rules，但我也想要 个人界面风格的味道，帮我重做设置页。",
+      "expected_output": "The agent should trigger ui-design, inspect or defer to the host repository's newer local rules, then adapt the bundled style through the host design system rather than overriding local conventions blindly.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Planned to read or follow host repository UI rules before applying personal style guidance",
+        "Treated local repository rules as higher priority when they are newer or more specific",
+        "Planned to reconcile repository UI rules with personal interface style rather than blindly replacing one with the other"
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "帮我做一个产品官网首页，要求年轻、有冲击力、彩色渐变多一点。",
+      "expected_output": "The agent should trigger ui-design for the landing-page design request, treat this as a generic landing-page or visual design task, and avoid imposing a restrained emerald-neutral personal style because the user requested a different visual direction.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Treated the task as a generic landing-page or visual design request",
+        "Did not impose the user's personal style when the user requested a different visual direction",
+        "Did not reject colorful gradients solely because they conflict with ui-design constraints"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "这个交互别人怎么做？我想调研一下几个写作工具的首次创建文档流程，再决定我的版本。",
+      "expected_output": "The agent should trigger ui-design in UX Pattern Research mode, inspect or plan to inspect relevant writing-tool UX references, summarize patterns, separate observations from recommendations, and propose a buildable UX direction without jumping straight to visual styling.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Chose UX Pattern Research mode before designing",
+        "Planned to inspect 3-6 relevant UX references or products",
+        "Separated observed patterns from design recommendations",
+        "Recommended a buildable flow or UX direction",
+        "Did not make visual style or DESIGN.md the main focus"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "审一下这个 onboarding 流程顺不顺，先不要做视觉风格。",
+      "expected_output": "The agent should trigger ui-design in UX review mode, focus on flow clarity rather than visual style, lead with the most important UX issues, cover state/recovery gaps when relevant, and avoid applying DESIGN.md visual style as the main answer.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Treated the request as UX review rather than visual UI styling",
+        "Prioritized flow clarity, uncertainty, state, or recovery issues",
+        "Kept findings concise and concrete",
+        "Did not make visual style or DESIGN.md the main focus"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "帮我设计一个设置页，适合个人产品第一版，不要做太复杂。",
+      "expected_output": "The agent should trigger ui-design in UX Flow / Interaction Design mode, produce a buildable settings-page structure, cover key states or interaction notes, avoid heavy SaaS complexity, and identify what can wait.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Chose UX Flow / Interaction Design mode",
+        "Included structure, interaction notes, or states to cover",
+        "Identified complexity that can wait",
+        "Did not produce an enterprise-level settings system"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "生成一个 Sleek prompt，用我的风格做一个移动端 AI 阅读 App，并告诉我生成后应该怎么验收。",
+      "expected_output": "The agent should trigger ui-design, use the relevant DESIGN.md and AI design tool playbook, produce a prompt grounded in product workflow and required states, and include generated-screen review expectations such as screenshots, safe areas, touch targets, states, typography, color, and implementation handoff.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Used DESIGN.md guidance because the user asked for '我的风格'",
+        "Used AI design tool workflow guidance for Sleek-style generation",
+        "Included workflow and state requirements rather than only visual adjectives",
+        "Planned to inspect screenshots or rendered output after generation",
+        "Mentioned implementation handoff details such as generated source, icons, fonts, navigation, or safe areas"
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "review my UI against web design guidelines: src/app/dashboard/page.tsx",
+      "expected_output": "The agent should trigger ui-design in review mode, treat this as a web UI guidelines review, fetch or plan to fetch the latest Web Interface Guidelines source, read the specified file, and report concrete file/line findings focused on accessibility, interaction states, layout, performance, and implementation risks.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Chose review mode for a specified web UI file",
+        "Planned to use the latest Web Interface Guidelines source for formal compliance review",
+        "Planned to read the specified file before reporting findings",
+        "Prioritized accessibility, interaction states, layout, performance, or implementation risks",
+        "Planned file/line grounded findings rather than generic design advice"
+      ]
+    },
+    {
+      "id": 15,
+      "prompt": "帮我看一下这个设置页的 UX 和视觉层级，顺便给一点移动端适配建议。",
+      "expected_output": "The agent should trigger ui-design from the compact description, classify this as UX/UI review or refinement, inspect flow and visual hierarchy, and include mobile adaptation checks without requiring a long phrase list in the frontmatter.",
+      "files": [],
+      "expectations": [
+        "Triggered the ui-design skill",
+        "Classified the request as UX/UI review or refinement",
+        "Planned to assess flow, hierarchy, states, or interaction quality",
+        "Included mobile adaptation concerns such as safe areas, touch targets, responsive layout, or viewport behavior"
+      ]
+    }
+  ]
+}

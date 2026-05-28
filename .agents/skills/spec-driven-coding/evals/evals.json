@@ -1,0 +1,60 @@
+{
+  "skill_name": "spec-driven-coding",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "我想加一个团队邀请功能，支持邮箱邀请、过期时间和撤销邀请。",
+      "expected_output": "识别为新功能和多步行为变更，进入完整 spec flow；检查 Superpowers 是否可用；在 spec 对齐前不写代码；通过 brainstorming 产出 spec，再进入 plan/task；plan/task 完成后默认选择 subagent-driven-development 执行，而不是把 inline execution 当默认路径。",
+      "files": [],
+      "expectations": [
+        "The run selects the full spec flow for a multi-step feature",
+        "The run checks for required Superpowers skills before implementation",
+        "The run does not write implementation code before spec alignment and approval",
+        "The run defaults to subagent-driven-development after plan/task creation instead of inline execution"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "登录页点提交会 500，帮我修一下。",
+      "expected_output": "识别为简单 bugfix，走 lightweight bugfix flow；先系统化复现和定位；能写回归测试时先写失败测试，再修复，最后跑针对性验证。除非 bug 揭示 durable 约束，否则不强制完整 spec。",
+      "files": [],
+      "expectations": [
+        "The run selects the lightweight bugfix flow rather than full spec flow",
+        "The run investigates and reproduces before proposing a fix",
+        "The run adds or plans a regression test before implementation when practical"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "我们刚才说好的计费规则变了：试用期用户也要进入用量统计。继续改代码吧。",
+      "expected_output": "识别为 coding 中的需求变更；判断该变更影响行为和 spec，因此先更新 spec/plan 或请求对齐，再继续实现；同时保持 TDD 和验证要求。",
+      "files": [],
+      "expectations": [
+        "The run detects that the prompt changes an approved requirement",
+        "The run updates or asks to update the spec before continuing because behavior changed",
+        "The run keeps TDD and verification requirements after the requirement change"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "这个需求很简单，直接改吧：给用户设置页加一个导出数据按钮。",
+      "expected_output": "即使用户说简单，也识别为用户可见新功能；默认进入完整 spec flow 或提出极短 spec 对齐，不直接开始 coding；说明如果用户明确豁免流程才可走例外。",
+      "files": [],
+      "expectations": [
+        "The run does not skip spec flow merely because the user calls a feature simple",
+        "The run asks for or produces concise requirement alignment before coding"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Spec 已经通过了，也已经生成了 implementation plan。继续执行任务，不用再问我走哪种模式。",
+      "expected_output": "识别已有 approved spec 和 implementation plan；默认使用 superpowers:subagent-driven-development 执行任务，不再询问 subagent vs inline；只有 subagent skill 不可用、任务强耦合无法拆分、或用户明确要求 inline 时才改用 executing-plans 或请求确认。",
+      "files": [],
+      "expectations": [
+        "The run defaults to superpowers:subagent-driven-development when an approved plan exists",
+        "The run does not ask the user to choose between subagent-driven and inline execution when subagent-driven is available",
+        "The run treats inline executing-plans as an explicit fallback rather than the default"
+      ]
+    }
+  ]
+}

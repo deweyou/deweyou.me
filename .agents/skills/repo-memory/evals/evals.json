@@ -1,0 +1,74 @@
+{
+  "skill_name": "repo-memory",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "提交前帮我做一次 repo memory 检查。这个 Node.js 后端项目还没有 AGENTS.md 或 docs/，但我刚完成了第一版订单状态机。",
+      "expected_output": "识别这是提交前记忆检查并发现仓库缺少记忆设施；初始化 docs/、AGENTS.md、CLAUDE.md 软链（安全时），创建 project-structure.md、.state.md、.todo.md 和聚焦订单状态机的 topic doc；遵守 repo-memory/rule.md 中的 Mermaid、相对链接和 concise knowledge 标准。",
+      "files": [],
+      "expectations": [
+        "The run treats the request as a pre-commit repository memory check",
+        "Missing AGENTS.md and docs/ memory files are initialized when appropriate",
+        "CLAUDE.md is created as a symlink to AGENTS.md when safe, or the run explains why it was not created",
+        "Created docs follow the rule.md quality bar, including Mermaid and relative source links"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "我刚改了订单状态机，新增 REFUND_PENDING，并且 CANCELLED 不再是终态。提交前看一下有没有需要沉淀的知识。",
+      "expected_output": "读取现有 AGENTS.md/docs，基于 diff 判断订单生命周期知识需要更新，更新相关 topic doc、.state.md 或 .todo.md；对 REFUND_PENDING 的业务语义不擅自发明，必要时提问或标 TODO。",
+      "files": [],
+      "expectations": [
+        "The run recognizes lifecycle semantics as durable memory-worthy knowledge",
+        "The existing relevant order lifecycle doc is updated instead of broad unrelated docs",
+        "Unclear business semantics are asked about or marked TODO rather than invented"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "这次只是改了几个变量名和格式化，提交前帮我沉淀一下。",
+      "expected_output": "检查 diff 后判断没有 durable repo memory 价值，不强行编辑 docs，并简短说明无需更新。",
+      "files": [],
+      "expectations": [
+        "Pure renaming or formatting is filtered out as not memory-worthy",
+        "The run does not create or edit knowledge docs just to satisfy the request"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "我改了仓库自己的 skill 行为，顺便提交前检查一下知识库和 skill 有没有需要一起更新的地方。",
+      "expected_output": "检查 durable docs 和 local skills 的 drift；如果是仓库拥有的 skill，直接更新相关 skill 文档；如果是外部依赖 skill，则记录 TODO 或建议独立 issue/PR，不阻塞主提交。",
+      "files": [],
+      "expectations": [
+        "The run explicitly checks whether local or dependency skills need updates",
+        "Repository-owned skills are updated directly when the current work changes their expected behavior",
+        "External dependency skill changes are deferred as issue/PR/TODO rather than edited in-place"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "刚刚调整了 AGENTS.md 和 docs/asset-workflow.md，帮我更新一下仓库知识库，别漏掉 skill drift。",
+      "expected_output": "识别为仓库记忆更新请求；检查 AGENTS.md、docs 和 local skills；更新相关 durable docs；明确报告 owned_skill_updates 和 dependency_skill_followups。",
+      "files": [],
+      "expectations": [
+        "The run treats AGENTS.md and docs workflow changes as repository memory work",
+        "The run checks local skill drift",
+        "The run updates focused durable docs rather than broad unrelated documentation",
+        "The run reports owned skill updates and dependency skill follow-ups"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "This React app already has a dashboard UI. I changed the navigation density, button radius, and chart color rules. Before commit, update repo memory and make sure future agents keep the design style.",
+      "expected_output": "The run recognizes UI design style as durable memory. It first checks for root DESIGN.md and updates it directly when present. If DESIGN.md is missing, it searches the existing knowledge directory for a relevant design, UI, style, brand, or frontend doc and updates that file in place. If neither exists, it creates root DESIGN.md as the design contract. When root DESIGN.md exists or is created, it checks AGENTS.md and adds a UI/UX/visual-design instruction to read DESIGN.md if that reference is missing.",
+      "files": [],
+      "expectations": [
+        "The run treats changed navigation density, radius, and chart colors as durable UI design memory",
+        "Root DESIGN.md has first priority for design memory reads and updates",
+        "Existing design-related knowledge docs are reused when DESIGN.md is absent",
+        "A new root DESIGN.md is created only when no existing design contract or design-related knowledge doc exists",
+        "AGENTS.md is checked and updated to reference DESIGN.md when a root DESIGN.md exists or is created"
+      ]
+    }
+  ]
+}

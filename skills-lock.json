@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "skills": {
+    "git-delivery": {
+      "source": "deweyou/agents",
+      "sourceType": "github",
+      "skillPath": "skills/git-delivery/SKILL.md",
+      "computedHash": "e06a455e90d7f34072201fbd5a00dbc6f3d2fbce33b9a9726ba4174055b86e04"
+    },
+    "repo-memory": {
+      "source": "deweyou/agents",
+      "sourceType": "github",
+      "skillPath": "skills/repo-memory/SKILL.md",
+      "computedHash": "7527972fb6c42ec901e594d748e325a73c38f9e1768710c23ee127952780d67b"
+    },
+    "spec-driven-coding": {
+      "source": "deweyou/agents",
+      "sourceType": "github",
+      "skillPath": "skills/spec-driven-coding/SKILL.md",
+      "computedHash": "2aba55420bfdfb21130f2df05b283fb4f14f32ffaba250228d244141d4f7e4ca"
+    },
+    "ui-design": {
+      "source": "deweyou/agents",
+      "sourceType": "github",
+      "skillPath": "skills/ui-design/SKILL.md",
+      "computedHash": "e7fe65075f811592059becbedb4a38caf4ff3fa2a4ba47d02bf78a285b75df63"
+    }
+  }
+}

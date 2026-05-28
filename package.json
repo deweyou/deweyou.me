@@ -12,9 +12,9 @@
     "import-post": "node scripts/import-post.mjs"
   },
   "dependencies": {
-    "@deweyou-design/react": "0.0.6",
-    "@deweyou-design/react-icons": "^0.0.5",
-    "@deweyou-design/styles": "^0.0.5",
+    "@deweyou-design/react": "0.3.0",
+    "@deweyou-design/react-icons": "^0.3.0",
+    "@deweyou-design/styles": "^0.3.0",
     "gray-matter": "^4.0.3",
     "next": "16.2.4",
     "next-mdx-remote": "^6.0.0",

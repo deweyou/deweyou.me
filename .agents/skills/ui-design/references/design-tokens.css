@@ -1,0 +1,139 @@
+/* interface design portable token snapshot.
+ * Use this file for standalone prototypes and examples when the host project
+ * does not already provide @design-system/styles.
+ */
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+  --ui-color-black: #000000;
+  --ui-color-white: #ffffff;
+  --ui-color-canvas: #fafafa;
+  --ui-color-surface: #ffffff;
+  --ui-color-surface-raised: #ffffff;
+  --ui-color-text: hsl(28 3.68% 18%);
+  --ui-color-text-muted: hsl(28 7.04% 45%);
+  --ui-color-text-disabled: hsl(28 5.92% 73%);
+  --ui-color-border: hsl(28 3.36% 89%);
+  --ui-color-border-strong: hsl(28 4.64% 82%);
+  --ui-color-brand-bg: hsl(154 37.2% 27%);
+  --ui-color-brand-bg-hover: hsl(154 28.52% 18%);
+  --ui-color-brand-bg-active: hsl(154 28.52% 18%);
+  --ui-color-brand-text: hsl(154 37.2% 27%);
+  --ui-color-text-on-brand: var(--ui-color-white);
+  --ui-color-danger-bg: hsl(8 72.16% 45%);
+  --ui-color-danger-bg-hover: hsl(8 60.68% 36%);
+  --ui-color-danger-bg-active: hsl(8 49.2% 27%);
+  --ui-color-danger-text: hsl(8 72.16% 45%);
+  --ui-color-text-on-danger: var(--ui-color-white);
+  --ui-color-warning-bg: hsl(40 82.72% 55%);
+  --ui-color-warning-text: hsl(40 77.44% 45%);
+  --ui-color-text-on-warning: var(--ui-color-black);
+  --ui-color-focus-ring: hsl(154 58.28% 55%);
+  --ui-radius-rect: 0;
+  --ui-radius-float: 4px;
+  --ui-radius-auto: 0.5rem;
+  --ui-radius-pill: 999px;
+  --ui-space-xs: 0.25rem;
+  --ui-space-sm: 0.5rem;
+  --ui-space-md: 1rem;
+  --ui-space-lg: 1.5rem;
+  --ui-space-xl: 2.5rem;
+  --ui-control-height-xs: 2rem;
+  --ui-control-height-sm: 2.5rem;
+  --ui-control-height-md: 2.75rem;
+  --ui-control-height-lg: 3rem;
+  --ui-control-height-xl: 3.5rem;
+  --ui-touch-target-min: 2.75rem;
+  --ui-motion-duration-fast: 140ms;
+  --ui-motion-duration-base: 160ms;
+  --ui-motion-duration-slow: 260ms;
+  --ui-motion-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ui-motion-ease-exit: ease;
+  --ui-shadow-sm: 0 2px 8px rgba(24, 33, 29, 0.06);
+  --ui-shadow-md: 0 8px 24px rgba(24, 33, 29, 0.1);
+  --ui-shadow-lg: 0 18px 40px rgba(24, 33, 29, 0.12);
+  --ui-font-sans: 'Source Han Sans SC Web', 'PingFang SC', 'Heiti SC',
+    'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  --ui-font-serif: 'Source Han Serif CN Web', 'Songti SC', 'STSong', 'SimSun',
+    'NSimSun', serif;
+  --ui-font-body: var(--ui-font-sans);
+  --ui-font-control: var(--ui-font-sans);
+  --ui-font-content: var(--ui-font-serif);
+  --ui-font-display: var(--ui-font-serif);
+  --ui-font-mono: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace;
+  --ui-font-weight-body: 400;
+  --ui-font-weight-emphasis: 500;
+  --ui-font-weight-title: 600;
+  --ui-font-weight-strong: 700;
+  --ui-text-size-body: 1rem;
+  --ui-text-line-height-body: 1.6;
+  --ui-text-size-caption: 0.875rem;
+  --ui-text-line-height-caption: 1.45;
+  --ui-text-size-h1: clamp(2.8rem, 5vw, 4.6rem);
+  --ui-text-line-height-h1: 1.02;
+  --ui-text-size-h2: 2.3rem;
+  --ui-text-line-height-h2: 1.08;
+  --ui-text-size-h3: 1.85rem;
+  --ui-text-line-height-h3: 1.14;
+  --ui-text-size-h4: 1.45rem;
+  --ui-text-line-height-h4: 1.22;
+  --ui-text-size-h5: 1.15rem;
+  --ui-text-line-height-h5: 1.32;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --ui-color-canvas: hsl(28 3.68% 18%);
+  --ui-color-surface: hsl(28 4.8% 27%);
+  --ui-color-surface-raised: hsl(28 5.92% 36%);
+  --ui-color-text: hsl(28 1.44% 98%);
+  --ui-color-text-muted: hsl(28 5.92% 73%);
+  --ui-color-text-disabled: hsl(28 7.52% 55%);
+  --ui-color-border: hsl(28 7.04% 45%);
+  --ui-color-border-strong: hsl(28 7.52% 55%);
+  --ui-color-brand-bg: hsl(154 37.2% 27%);
+  --ui-color-brand-bg-hover: hsl(154 28.52% 18%);
+  --ui-color-brand-bg-active: hsl(154 28.52% 18%);
+  --ui-color-brand-text: hsl(154 45.88% 73%);
+  --ui-color-danger-bg: hsl(8 72.16% 45%);
+  --ui-color-danger-bg-hover: hsl(8 60.68% 36%);
+  --ui-color-danger-bg-active: hsl(8 49.2% 27%);
+  --ui-color-danger-text: hsl(8 60.68% 73%);
+  --ui-color-warning-bg: hsl(40 88% 64%);
+  --ui-color-warning-text: hsl(40 88% 64%);
+  --ui-color-focus-ring: hsl(154 45.88% 73%);
+  --ui-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --ui-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --ui-shadow-lg: 0 18px 40px rgba(0, 0, 0, 0.34);
+}
+
+html {
+  background: var(--ui-color-canvas);
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-body);
+  font-size: var(--ui-text-size-body);
+  line-height: var(--ui-text-line-height-body);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ui-color-focus-ring) 24%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}
