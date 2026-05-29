@@ -179,8 +179,8 @@
 }
 
 .yearLabel {
-  width: 72px;
-  margin-left: -104px;
+  width: auto;
+  margin-left: 0;
   margin-bottom: 24px;
   font-family: var(--ui-font-mono);
   font-size: 12px;
@@ -426,12 +426,6 @@
   .closeButton {
     top: -8px;
     right: 0;
-  }
-
-  .yearLabel {
-    width: auto;
-    margin-left: 0;
-    margin-bottom: 24px;
   }
 
   .virtualItem {
