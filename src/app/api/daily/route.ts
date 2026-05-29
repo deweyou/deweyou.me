@@ -6,11 +6,13 @@ export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
     const cursor = url.searchParams.get('cursor');
+    const tag = url.searchParams.get('tag');
     const limitValue = url.searchParams.get('limit');
     const limit = limitValue == null ? undefined : Number(limitValue);
     const batch = getDailyFeedBatch({
       cursor,
       limit: Number.isFinite(limit) ? limit : undefined,
+      tag,
     });
 
     return NextResponse.json(await serializeDailyFeedBatch(batch));

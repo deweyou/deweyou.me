@@ -6,11 +6,14 @@ import styles from '##/app/daily/page.module.css';
 
 export function DailyServerFeed({
   activeId,
+  activeTag,
   entries,
 }: {
   activeId?: string;
+  activeTag?: string | null;
   entries: DailyEntry[];
 }) {
+  const tagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
   return entries.map((entry, index) => {
     const year = entry.date.slice(0, 4);
     const previousYear = entries[index - 1]?.date.slice(0, 4);
@@ -22,7 +25,7 @@ export function DailyServerFeed({
         className={`${styles.entry} ${activeId === entry.id ? styles.entryActive : ''}`}
       >
         <Link
-          href={`/daily/${entry.id}`}
+          href={`/daily/${entry.id}${tagQuery}`}
           scroll={false}
           className={styles.entryOverlay}
           aria-label={`打开笔记：${entry.title}`}

@@ -11,7 +11,7 @@ const EDGE_SWIPE_START = 36;
 const SWIPE_DISTANCE = 72;
 const SWIPE_MAX_VERTICAL_DRIFT = 48;
 
-export function DailyDetailShell({ children }: { children: ReactNode }) {
+export function DailyDetailShell({ children, closeHref }: { children: ReactNode; closeHref: string }) {
   const router = useRouter();
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
@@ -41,7 +41,7 @@ export function DailyDetailShell({ children }: { children: ReactNode }) {
     const deltaX = touch.clientX - touchStartX.current;
     const deltaY = Math.abs(touch.clientY - touchStartY.current);
     if (deltaX >= SWIPE_DISTANCE && deltaY <= SWIPE_MAX_VERTICAL_DRIFT) {
-      router.push('/daily', { scroll: false });
+      router.push(closeHref, { scroll: false });
     }
   }
 
@@ -51,7 +51,7 @@ export function DailyDetailShell({ children }: { children: ReactNode }) {
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <Link href="/daily" className={styles.closeButton} scroll={false} aria-label="关闭详情">
+      <Link href={closeHref} className={styles.closeButton} scroll={false} aria-label="关闭详情">
         <XIcon size={20} aria-hidden="true" />
       </Link>
       {children}

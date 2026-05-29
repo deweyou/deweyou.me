@@ -25,6 +25,12 @@ export interface DailyFeedBatch {
   nextCursor: string | null;
 }
 
+export function normalizeDailyTagParam(value: unknown): string | null {
+  if (typeof value === 'string' && value.trim() !== '') return value.trim();
+  if (Array.isArray(value)) return normalizeDailyTagParam(value[0]);
+  return null;
+}
+
 function getSlugFromFile(file: string): string {
   return file.replace(/\.mdx$/, '');
 }
@@ -100,14 +106,25 @@ export function getDailyEntryById(id: string): DailyEntry {
   return entry;
 }
 
+export function getAllDailyTags(entries = getAllDailyEntries()): string[] {
+  return Array.from(new Set(entries.flatMap((entry) => entry.tags))).sort((a, b) => a.localeCompare(b));
+}
+
+export function filterDailyEntriesByTag(entries: DailyEntry[], tag?: string | null): DailyEntry[] {
+  if (!tag) return entries;
+  return entries.filter((entry) => entry.tags.includes(tag));
+}
+
 export function getDailyFeedBatch({
   cursor,
   limit = DEFAULT_DAILY_FEED_LIMIT,
+  tag,
 }: {
   cursor?: string | null;
   limit?: number;
+  tag?: string | null;
 } = {}): DailyFeedBatch {
-  const entries = getAllDailyEntries();
+  const entries = filterDailyEntriesByTag(getAllDailyEntries(), tag);
   const batchLimit = Math.min(MAX_DAILY_FEED_LIMIT, Math.max(1, Math.floor(limit)));
   let startIndex = 0;
 

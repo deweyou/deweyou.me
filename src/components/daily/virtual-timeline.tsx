@@ -11,10 +11,12 @@ const DAILY_BATCH_SIZE = 20;
 
 export function DailyVirtualTimeline({
   activeId,
+  activeTag,
   initialNextCursor,
   initialPreviousYear,
 }: {
   activeId?: string;
+  activeTag?: string | null;
   initialNextCursor: string | null;
   initialPreviousYear: string | null;
 }) {
@@ -34,6 +36,9 @@ export function DailyVirtualTimeline({
         cursor: nextCursor,
         limit: String(DAILY_BATCH_SIZE),
       });
+      if (activeTag) {
+        params.set('tag', activeTag);
+      }
       const response = await fetch(`/api/daily?${params.toString()}`);
       if (!response.ok) {
         throw new Error('加载失败，请稍后重试。');
@@ -46,7 +51,7 @@ export function DailyVirtualTimeline({
     } finally {
       setIsLoading(false);
     }
-  }, [isLoading, nextCursor]);
+  }, [activeTag, isLoading, nextCursor]);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -66,11 +71,12 @@ export function DailyVirtualTimeline({
     const year = entry.date.slice(0, 4);
     const previousYear = entries[index - 1]?.date.slice(0, 4) ?? initialPreviousYear;
     const shouldShowYear = previousYear !== year;
+    const tagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
 
     return (
       <article key={entry.id} className={`${styles.entry} ${activeId === entry.id ? styles.entryActive : ''}`}>
         <Link
-          href={`/daily/${entry.id}`}
+          href={`/daily/${entry.id}${tagQuery}`}
           scroll={false}
           className={styles.entryOverlay}
           aria-label={`打开笔记：${entry.title}`}
