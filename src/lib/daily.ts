@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 const DAILY_DIR = path.join(process.cwd(), 'content', 'daily');
 const DEFAULT_DAILY_FEED_LIMIT = 20;
 const MAX_DAILY_FEED_LIMIT = 50;
+const DAILY_ENTRY_EXTENSIONS = ['.mdx', '.md'];
 
 export interface DailyEntry {
   id: string;
@@ -32,7 +33,12 @@ export function normalizeDailyTagParam(value: unknown): string | null {
 }
 
 function getSlugFromFile(file: string): string {
-  return file.replace(/\.mdx$/, '');
+  return file.replace(/\.(mdx|md)$/, '');
+}
+
+function isDailyEntryFile(file: string): boolean {
+  return /^\d{4}-\d{2}-\d{2}(?:-| - )/.test(getSlugFromFile(file))
+    && DAILY_ENTRY_EXTENSIONS.some((extension) => file.endsWith(extension));
 }
 
 function normalizeDate(value: unknown, file: string): string {
@@ -48,8 +54,8 @@ function normalizeTags(value: unknown, file: string): string[] {
 }
 
 function normalizeId(value: unknown, file: string): string {
-  if (typeof value === 'string' && /^daily-\d{8}-\d{2}$/.test(value)) return value;
-  throw new Error(`Daily entry ${file} must include id as daily-YYYYMMDD-NN`);
+  if (typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9_-]*$/.test(value)) return value;
+  throw new Error(`Daily entry ${file} must include id using letters, numbers, hyphens, or underscores`);
 }
 
 function readEntry(file: string): DailyEntry {
@@ -61,8 +67,8 @@ function readEntry(file: string): DailyEntry {
   const slug = getSlugFromFile(file);
   const date = normalizeDate(data.date, file);
   const id = normalizeId(data.id, file);
-  if (!slug.startsWith(`${date}-`)) {
-    throw new Error(`Daily entry ${file} must be named ${date}-title.mdx`);
+  if (!slug.startsWith(`${date}-`) && !slug.startsWith(`${date} - `)) {
+    throw new Error(`Daily entry ${file} must be named ${date}-title.mdx or ${date} - title.md`);
   }
 
   return {
@@ -78,7 +84,7 @@ function readEntry(file: string): DailyEntry {
 export function getAllDailyEntries(): DailyEntry[] {
   if (!fs.existsSync(DAILY_DIR)) return [];
   const entries = fs.readdirSync(DAILY_DIR)
-    .filter((file) => file.endsWith('.mdx'))
+    .filter(isDailyEntryFile)
     .map(readEntry)
     .sort((a, b) => {
       if (a.date !== b.date) return a.date < b.date ? 1 : -1;
