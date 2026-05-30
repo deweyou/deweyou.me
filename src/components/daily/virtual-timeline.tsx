@@ -1,126 +1,123 @@
 'use client';
 
-import { VirtualList, type VirtualListRange, type VirtualListRef } from '@deweyou-design/react/virtual-list';
-import { Children, type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { MDXRemote } from 'next-mdx-remote';
+import Link from 'next/link';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from '##/app/daily/page.module.css';
+import { mdxComponents } from '##/components/blog/mdx-components';
+import type { DailySerializedFeedBatch, DailySerializedFeedEntry } from '##/lib/daily-feed';
 
-const ACTIVE_TOP_OFFSET = 112;
-
-export interface DailyVirtualTimelineEntry {
-  slug: string;
-  estimatedSize: number;
-}
+const DAILY_BATCH_SIZE = 20;
 
 export function DailyVirtualTimeline({
-  children,
-  entries,
+  activeId,
+  activeTag,
+  initialNextCursor,
+  initialPreviousYear,
 }: {
-  children: ReactNode;
-  entries: DailyVirtualTimelineEntry[];
+  activeId?: string;
+  activeTag?: string | null;
+  initialNextCursor: string | null;
+  initialPreviousYear: string | null;
 }) {
-  const entryNodes = Children.toArray(children);
-  const virtualListRef = useRef<VirtualListRef>(null);
-  const aligningHashRef = useRef(true);
-  const restoreTimerRef = useRef(0);
-  const [hasMounted, setHasMounted] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const [entries, setEntries] = useState<DailySerializedFeedEntry[]>([]);
+  const [nextCursor, setNextCursor] = useState(initialNextCursor);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const indexBySlug = useMemo(() => {
-    return new Map(entries.map((entry, index) => [entry.slug, index]));
-  }, [entries]);
+  const loadMore = useCallback(async () => {
+    if (!nextCursor || isLoading) return;
+    setIsLoading(true);
+    setError(null);
 
-  const scrollToHash = useCallback(() => {
-    const targetSlug = decodeURIComponent(window.location.hash.slice(1));
-    const targetIndex = indexBySlug.get(targetSlug);
-    if (targetIndex == null) return false;
-
-    aligningHashRef.current = true;
-    virtualListRef.current?.scrollToIndex(targetIndex, { align: 'start' });
-    window.clearTimeout(restoreTimerRef.current);
-    restoreTimerRef.current = window.setTimeout(() => {
-      aligningHashRef.current = false;
-    }, 240);
-    return true;
-  }, [indexBySlug]);
-
-  const estimatedTotalSize = useMemo(() => {
-    return entries.reduce((totalSize, entry) => totalSize + entry.estimatedSize, 0);
-  }, [entries]);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  const syncHash = useCallback((range: VirtualListRange) => {
-    if (aligningHashRef.current) return;
-
-    const virtualListRoot = document.querySelector('[data-testid="virtual-list"]');
-    const isBeforeTimeline = virtualListRoot
-      ? virtualListRoot.getBoundingClientRect().top > ACTIVE_TOP_OFFSET
-      : false;
-    const activeSlug = isBeforeTimeline ? null : entries[range.startIndex]?.slug;
-    const nextHash = activeSlug ? `#${activeSlug}` : '';
-    if (window.location.hash === nextHash) return;
-    window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}${nextHash}`);
-  }, [entries]);
-
-  useEffect(() => {
-    if (!hasMounted || entries.length === 0) return;
-
-    let cancelled = false;
-
-    function alignInitialHash() {
-      if (cancelled) return;
-      if (!scrollToHash()) {
-        aligningHashRef.current = false;
-      }
-    }
-
-    if (window.location.hash) {
-      aligningHashRef.current = true;
-      void document.fonts.ready.then(() => {
-        window.requestAnimationFrame(() => {
-          window.requestAnimationFrame(alignInitialHash);
-        });
+    try {
+      const params = new URLSearchParams({
+        cursor: nextCursor,
+        limit: String(DAILY_BATCH_SIZE),
       });
-    } else {
-      aligningHashRef.current = false;
+      if (activeTag) {
+        params.set('tag', activeTag);
+      }
+      const response = await fetch(`/api/daily?${params.toString()}`);
+      if (!response.ok) {
+        throw new Error('加载失败，请稍后重试。');
+      }
+      const batch = await response.json() as DailySerializedFeedBatch;
+      setEntries((currentEntries) => [...currentEntries, ...batch.entries]);
+      setNextCursor(batch.nextCursor);
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : '加载失败，请稍后重试。');
+    } finally {
+      setIsLoading(false);
     }
+  }, [activeTag, isLoading, nextCursor]);
 
-    window.addEventListener('hashchange', scrollToHash);
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel || !nextCursor) return;
 
-    return () => {
-      cancelled = true;
-      window.clearTimeout(restoreTimerRef.current);
-      window.removeEventListener('hashchange', scrollToHash);
-    };
-  }, [entries.length, hasMounted, scrollToHash]);
+    const observer = new IntersectionObserver((items) => {
+      if (items.some((item) => item.isIntersecting)) {
+        void loadMore();
+      }
+    }, { rootMargin: '600px 0px' });
 
-  if (!hasMounted) {
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [loadMore, nextCursor]);
+
+  function renderEntry(entry: DailySerializedFeedEntry, index: number) {
+    const year = entry.date.slice(0, 4);
+    const previousYear = entries[index - 1]?.date.slice(0, 4) ?? initialPreviousYear;
+    const shouldShowYear = previousYear !== year;
+    const tagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
+
     return (
-      <div
-        aria-label="笔记列表"
-        className={`${styles.readingColumn} ${styles.virtualTimeline}`}
-        role="list"
-        style={{ height: estimatedTotalSize }}
-      />
+      <article key={entry.id} className={`${styles.entry} ${activeId === entry.id ? styles.entryActive : ''}`}>
+        <Link
+          href={`/daily/${entry.id}${tagQuery}`}
+          scroll={false}
+          className={styles.entryOverlay}
+          aria-label={`打开笔记：${entry.title}`}
+        />
+        {shouldShowYear && <div className={styles.yearLabel}>{year}</div>}
+        <header className={styles.entryHeader}>
+          <time dateTime={entry.date} className={styles.date}>
+            {entry.date.slice(5)}
+          </time>
+          <h2 className={styles.entryTitle}>{entry.title}</h2>
+          {entry.tags.length > 0 && (
+            <div className={styles.tags}>
+              {entry.tags.map((tag) => (
+                <span key={tag} className="dy-tag">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </header>
+        <div className={styles.body}>
+          <MDXRemote {...entry.mdx} components={mdxComponents} />
+        </div>
+      </article>
     );
   }
 
   return (
-    <VirtualList
-      ref={virtualListRef}
-      aria-label="笔记列表"
-      className={`${styles.readingColumn} ${styles.virtualTimeline}`}
-      count={entries.length}
-      estimateSize={(index) => entries[index]?.estimatedSize ?? 420}
-      getItemKey={(index) => entries[index]?.slug ?? index}
-      height="auto"
-      itemClassName={styles.virtualItem}
-      onRangeChange={syncHash}
-      overscan={3}
-      renderItem={({ index }) => entryNodes[index]}
-      scrollElement="window"
-      scrollMargin={ACTIVE_TOP_OFFSET}
-    />
+    <>
+      {entries.map(renderEntry)}
+      <div ref={sentinelRef} className={styles.feedSentinel} aria-hidden="true" />
+      {isLoading && <p className={styles.feedStatus}>加载中...</p>}
+      {error && (
+        <div className={styles.feedStatus}>
+          <p>{error}</p>
+          <button className={styles.retryButton} type="button" onClick={() => void loadMore()}>
+            重试
+          </button>
+        </div>
+      )}
+      {!nextCursor && <p className={styles.feedStatus}>没有更早的笔记了。</p>}
+    </>
   );
 }
