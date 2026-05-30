@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   width="600"
+   height="600"
+   id="svg2"
+   style="display:inline"
+   sodipodi:docname="Cycling_pictogram_black_(1972_Summer_Olympics_style).svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="677.4083"
+     inkscape:cy="439.82042"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <desc
+     id="desc2">Archery Pictogram -- Based on 1972 Summer Olympics sports pictograms by Otl Aicher -- Grophic created by Detmar Owen</desc>
+  <path
+     id="Frame"
+     d="M 0,0 0,600 600,600 600,0 0,0 0,0 z M 7,7 593,7 593,593 7,593 7,7 z"
+     style="fill:#000000;fill-opacity:1;stroke:none" />
+  <path
+     id="Archer"
+     style="display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.957127"
+     d="M 454.99609,185.41406 337.87891,302.50781 c -7.9279,7.4701 -10.30553,22.81003 -2.88086,30.87891 l 87.08595,88.35628 -2e-5,69.59098 c 0,9.93953 7.38369,17.9961 16.49219,17.9961 9.10852,0 16.41393,-8.05655 16.41983,-17.99608 z m -32.91406,83.78516 v 102.88867 c 1.4e-4,1.46906 -1.19015,2.13109 -2.51172,0.81836 l -51.04883,-50.83008 z"
+     sodipodi:nodetypes="cccccsccccccc" />
+  <path
+     id="path1959"
+     d="m 171.70451,133.62652 c 17.93106,0 32.46707,14.53601 32.46707,32.46707 0,17.93106 -14.53601,32.46707 -32.46707,32.46707 -17.93106,0 -32.46707,-14.53601 -32.46707,-32.46707 0,-17.93106 14.53601,-32.46707 32.46707,-32.46707 z"
+     style="display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.941074"
+     sodipodi:nodetypes="sssss" />
+  <path
+     id="rect7241"
+     style="stroke-width:0.157961;stroke-linecap:square"
+     d="m 250.87305,161.5 c -18.84563,-5e-5 -34.12305,15.12826 -34.12305,33.78516 0,8.34362 3.0711,15.96752 8.13477,21.86132 l 54.16601,54.6543 -64.4414,64.45703 c -6.06552,6.0965 -6.03973,15.95596 0.0566,22.02149 6.09649,6.06551 15.95596,6.03981 22.02148,-0.0566 l 75.38867,-75.40625 c 6.06552,-6.0965 6.03972,-15.95596 -0.0566,-22.02149 L 274.521,222.75 H 372 l 61,-61.25 z"
+     sodipodi:nodetypes="csccccccccccc" />
+  <path
+     d="m 206.17733,276.44868 c 77.95217,0 141.31137,63.45161 141.31137,141.40381 0,77.90597 -63.3592,141.26514 -141.31137,141.26514 -77.95217,0 -141.357579,-63.35917 -141.357579,-141.26514 0,-77.9522 63.405409,-141.40381 141.357579,-141.40381 m 0,265.72074 c 68.53137,0 124.31709,-55.73938 124.31709,-124.31693 0,-68.5776 -55.78572,-124.40951 -124.31709,-124.40951 -68.57758,0 -124.3633,55.83191 -124.3633,124.40951 0,68.57755 55.78572,124.31693 124.3633,124.31693"
+     style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:46.1802"
+     id="path1228" />
+  <path
+     d="m 613.57758,276.44868 c 77.95217,0 141.31137,63.45161 141.31137,141.40381 0,77.90597 -63.3592,141.26514 -141.31137,141.26514 -77.95217,0 -141.35758,-63.35917 -141.35758,-141.26514 0,-77.9522 63.40541,-141.40381 141.35758,-141.40381 m 0,265.72074 c 68.53137,0 124.31709,-55.73938 124.31709,-124.31693 0,-68.5776 -55.78572,-124.40951 -124.31709,-124.40951 -68.57758,0 -124.3633,55.83191 -124.3633,124.40951 0,68.57755 55.78572,124.31693 124.3633,124.31693"
+     style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:46.1802"
+     id="path4030" />
+</svg>

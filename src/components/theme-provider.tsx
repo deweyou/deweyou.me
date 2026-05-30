@@ -14,22 +14,18 @@ function setDocTheme(t: Theme) {
   try { localStorage.setItem('theme', t); } catch { /* ignore */ }
 }
 
+function getInitialTheme(): Theme {
+  if (typeof document === 'undefined') return 'light';
+  const theme = document.documentElement.getAttribute('data-theme');
+  return theme === 'dark' ? 'dark' : 'light';
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
-    let t: Theme = 'light';
-    try {
-      const stored = localStorage.getItem('theme') as Theme | null;
-      if (stored === 'light' || stored === 'dark') {
-        t = stored;
-      } else {
-        t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-    } catch { /* ignore */ }
-    setTheme(t);
-    document.documentElement.setAttribute('data-theme', t);
-  }, []);
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     const next: Theme = theme === 'light' ? 'dark' : 'light';

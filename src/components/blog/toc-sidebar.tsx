@@ -27,7 +27,6 @@ export function TocSidebar({ items }: { items: TocItem[] }) {
       // Wait for layout before scrolling
       requestAnimationFrame(() => scrollToId(hash));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
