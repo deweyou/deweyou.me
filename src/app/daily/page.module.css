@@ -123,39 +123,16 @@
   height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-  scrollbar-color: transparent transparent;
+  scrollbar-width: none;
   padding-top: 72px;
   padding-right: clamp(28px, 4vw, 72px);
   padding-bottom: 80px;
   padding-left: clamp(0px, 2vw, 24px);
 }
 
-.feedPane:hover {
-  scrollbar-color: color-mix(in srgb, var(--ui-color-text) 18%, transparent) transparent;
-}
-
 .feedPane::-webkit-scrollbar,
 .detailPane::-webkit-scrollbar {
-  width: 10px;
-}
-
-.feedPane::-webkit-scrollbar-track,
-.detailPane::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.feedPane::-webkit-scrollbar-thumb,
-.detailPane::-webkit-scrollbar-thumb {
-  border: 3px solid transparent;
-  border-radius: 999px;
-  background-clip: content-box;
-  background-color: transparent;
-}
-
-.feedPane:hover::-webkit-scrollbar-thumb,
-.detailPane:hover::-webkit-scrollbar-thumb {
-  background-color: color-mix(in srgb, var(--ui-color-text) 18%, transparent);
+  display: none;
 }
 
 .feedHero {
@@ -183,17 +160,12 @@
   height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;
-  scrollbar-gutter: stable;
-  scrollbar-color: transparent transparent;
+  scrollbar-width: none;
   padding-left: clamp(24px, 3vw, 48px);
   padding-top: 72px;
   padding-bottom: 80px;
   border-left: 1px solid var(--ui-color-border);
   animation: detail-enter 220ms ease both;
-}
-
-.detailPane:hover {
-  scrollbar-color: color-mix(in srgb, var(--ui-color-text) 18%, transparent) transparent;
 }
 
 :global(body):has(.timelineSplitMode) :global(footer) {
@@ -306,10 +278,28 @@
 }
 
 .entry .body {
-  max-height: 126px;
+  max-height: 157.5px;
   overflow: hidden;
-  mask-image: linear-gradient(to bottom, #000 0, #000 28%, rgb(0 0 0 / 0.72) 58%, rgb(0 0 0 / 0.34) 84%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 28%, rgb(0 0 0 / 0.72) 58%, rgb(0 0 0 / 0.34) 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 36%, rgb(0 0 0 / 0.72) 66%, rgb(0 0 0 / 0.34) 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 36%, rgb(0 0 0 / 0.72) 66%, rgb(0 0 0 / 0.34) 88%, transparent 100%);
+}
+
+.entry .body :global(h1),
+.entry .body :global(h2),
+.entry .body :global(h3),
+.entry .body :global(h4) {
+  margin: 0 0 8px !important;
+  color: color-mix(in srgb, var(--ui-color-text) 72%, transparent) !important;
+  font-size: 17px !important;
+  line-height: 1.85 !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+}
+
+.entry .body :global(div),
+.entry .body :global(p),
+.entry .body :global(li) {
+  color: var(--ui-color-text-muted) !important;
 }
 
 .body :global(.dy-code) {
