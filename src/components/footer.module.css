@@ -36,3 +36,12 @@
   gap: 4px;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 24px;
+    align-items: flex-start;
+    gap: 18px;
+    background: transparent;
+  }
+}
