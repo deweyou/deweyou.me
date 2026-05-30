@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   width="600"
+   height="600"
+   id="svg2"
+   style="display:inline"
+   sodipodi:docname="Athletics pictogram black (1972 Summer Olympics style).svg"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="1"
+     inkscape:cx="330.5"
+     inkscape:cy="373.5"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     inkscape:snap-intersection-paths="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-edge-midpoints="true"
+     inkscape:bbox-nodes="true"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <desc
+     id="desc2">Archery Pictogram -- Based on 1972 Summer Olympics sports pictograms by Otl Aicher -- Grophic created by Detmar Owen</desc>
+  <path
+     id="Frame"
+     d="M 0,0 V 600 H 600 V 0 Z M 7,7 H 593 V 593 H 7 Z"
+     style="display:inline;fill:#000000;fill-opacity:1;stroke:none" />
+  <path
+     id="rect870"
+     style="display:inline;fill:#000000;fill-opacity:1;stroke-width:3.10727;stroke-linecap:round"
+     d="M 260.19727 176.66992 C 255.70991 176.66992 251.22165 178.38968 247.7832 181.82812 L 173.94922 255.66406 L 248.1543 329.86914 L 327.54883 329.86914 L 404.25586 406.57617 C 411.13311 413.45342 422.20673 413.45342 429.08398 406.57617 L 515.13867 320.52148 C 522.01592 313.64423 522.01592 302.57061 515.13867 295.69336 C 508.26142 288.81611 497.18778 288.81609 490.31055 295.69336 L 416.66992 369.33398 L 347.83984 300.50391 L 347.83984 261.9375 C 347.83984 258.80078 347.83983 257.05858 346.44531 255.66406 L 272.60938 181.82812 C 269.17093 178.38969 264.68462 176.66992 260.19727 176.66992 z M 260.19727 219.06836 L 296.79297 255.66406 L 223.59961 255.66406 L 260.19727 219.06836 z M 391.86719 249.19922 C 373.6035 249.19922 358.79883 264.00584 358.79883 282.26953 C 358.79883 291.40137 362.5 299.66796 368.48438 305.65234 C 374.46875 311.63671 382.73535 315.33789 391.86719 315.33789 C 410.13088 315.33789 424.9375 300.53322 424.9375 282.26953 C 424.9375 264.00584 410.13088 249.19922 391.86719 249.19922 z M 150.23633 279.5293 L 150.23633 446.1875 L 44.726562 552.08984 C 41.464051 555.35238 39.445312 559.85936 39.445312 564.83789 C 39.445312 574.79473 47.517758 582.86719 57.474609 582.86719 C 62.453029 582.86719 66.960128 580.85038 70.222656 577.58789 L 171.86523 475.30859 L 286.16016 475.30859 C 298.3485 475.30859 308.23047 463.89368 308.23047 449.8125 C 308.23047 442.77187 305.7593 436.39713 301.76562 431.7832 L 150.23633 279.5293 z M 185.3457 366.36133 L 258.72852 440.19922 L 185.3457 440.19922 L 185.3457 366.36133 z " />
+</svg>
