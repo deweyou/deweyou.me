@@ -29,6 +29,7 @@ export function DailyServerFeed({
           href={`/daily/${entry.id}${tagQuery}`}
           scroll={false}
           className={styles.entryOverlay}
+          data-daily-entry-link="true"
           aria-label={`打开笔记：${entry.title}`}
         />
         {shouldShowYear && <div className={styles.yearLabel}>{year}</div>}

@@ -26,6 +26,7 @@ export function DailyExperience({
   const initialLastYear = initialBatch.entries.at(-1)?.date.slice(0, 4) ?? null;
   const activeTagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
   const filterBaseHref = activeId ? `/daily/${activeId}` : '/daily';
+  const navigationKey = `${activeId ?? 'index'}:${activeTag ?? 'all'}`;
   const filterContent = (
     <nav className={styles.tagFilters} aria-label="笔记标签筛选">
       <Link
@@ -69,7 +70,7 @@ export function DailyExperience({
 
   if (selectedEntry) {
     const feed = (
-      <DailyFeedPane activeTag={activeTag} id={FEED_PANEL_ID}>
+      <DailyFeedPane id={FEED_PANEL_ID} resetKey={navigationKey}>
         <header className={styles.feedHero}>{heroContent}</header>
         <DailyServerFeed
           activeId={activeId}
@@ -92,6 +93,7 @@ export function DailyExperience({
           <DailyDetailLayout
             detail={<DailyDetail closeHref={`/daily${activeTagQuery}`} entry={selectedEntry} />}
             feed={feed}
+            navigationKey={navigationKey}
           />
         </section>
       </div>
@@ -111,7 +113,7 @@ export function DailyExperience({
           </p>
         ) : (
           <div className={styles.experienceFeedOnly}>
-            <DailyFeedPane activeTag={activeTag}>
+            <DailyFeedPane resetKey={navigationKey}>
               <DailyServerFeed
                 activeId={activeId}
                 activeTag={activeTag}
