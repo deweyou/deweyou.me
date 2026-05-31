@@ -59,7 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ThemeProvider>
           <Nav />
-          <main style={{ flex: 1 }}>{children}</main>
+          <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

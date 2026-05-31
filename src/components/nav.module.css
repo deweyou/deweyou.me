@@ -49,7 +49,14 @@
 
 .iconBtn {
   --button-ghost-text-color: var(--ui-color-text-muted) !important;
+  --button-ghost-background-hover: transparent !important;
+  --button-ghost-background-active: transparent !important;
 }
+
+.iconBtn:hover {
+  background: transparent !important;
+}
+
 .iconBtn:focus-visible {
   box-shadow: none !important;
   outline: none !important;

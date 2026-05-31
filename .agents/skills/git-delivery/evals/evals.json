@@ -1,0 +1,187 @@
+{
+  "skill_name": "git-delivery",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "我要开始做一个新需求，先帮我看一下 git 状态。",
+      "expected_output": "识别为新任务开始前的 pre-edit base gate；检查当前 git 状态和分支；识别主分支；fetch 最新远端主分支作为基线；如果工作树干净且没有明确要求继续当前分支，则从最新远端基线创建或更新任务分支后再允许编辑；遇到未提交改动时不丢弃、不覆盖，并报告 dirty-work 保护、prework_base、prework_branch 和 prework_decision 状态。",
+      "files": [],
+      "expectations": [
+        "The run treats the prompt as the start-of-work git workflow",
+        "The run performs the pre-edit base gate before any file edits",
+        "The run fetches or checks the primary branch baseline",
+        "The run starts from the fetched baseline when the worktree is clean and the user did not opt into the current branch",
+        "The run does not discard, overwrite, or stage unrelated dirty files"
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "我们刚刚讨论完方案，现在直接帮我实现。",
+      "expected_output": "即使前面是设计讨论，也识别为开始编辑文件前的新任务；先执行 pre-edit base gate：检查分支和 dirty work、fetch origin/main；如果处在 detached HEAD，先创建 codex/ 前缀任务分支；如果当前分支落后且工作树干净，先 rebase 到最新主分支；如果 dirty work 阻塞，则停止说明 blocker，不能先改文件。",
+      "files": [],
+      "expectations": [
+        "The run does not skip git-delivery just because the request followed a planning discussion",
+        "The run creates or fixes a task branch before editing when HEAD is detached",
+        "The run rebases a clean behind branch before editing when safe",
+        "The run stops before editing if dirty work blocks base sync"
+      ]
+    },
+    {
+      "id": 1,
+      "prompt": "帮我准备一个新分支来改登录 bug。",
+      "expected_output": "识别用户明确要求准备新分支；先检查 git status、识别主分支并 fetch 远端基线；在安全时从最新远端基线创建描述性任务分支；如果未提交改动会阻塞安全创建，则停止并询问如何处理。",
+      "files": [],
+      "expectations": [
+        "The run honors the user's explicit request to prepare a new task branch",
+        "The run fetches or checks the primary branch baseline before creating the branch",
+        "The run does not discard or overwrite dirty work when creating the branch"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "就在当前分支继续，不要切分支。我想改一下登录 bug。",
+      "expected_output": "识别用户明确要求继续当前分支，因此不切主分支、不新建分支；仍检查 git status、fetch 主分支基线，并说明会留在当前分支工作。",
+      "files": [],
+      "expectations": [
+        "The run honors the user's explicit instruction to continue on the current branch",
+        "The run fetches or checks the primary branch baseline without moving the worktree",
+        "The run does not create or switch branches when the user opted out"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "我这边还有另一个需求没做完，帮我开个并行的新需求环境。",
+      "expected_output": "识别为并行开发场景；检查 git 状态和主分支基线；优先建议或创建单独 worktree/明确的新分支，而不是把当前 worktree 从活跃需求上切走；如本地改动阻塞则停止询问。",
+      "files": [],
+      "expectations": [
+        "The run treats the prompt as parallel work setup",
+        "The run prefers a separate worktree or explicit new branch for parallel work",
+        "The run does not move the current worktree away from an active task without user intent"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "提交吧，顺便开个 PR。",
+      "expected_output": "将请求识别为 finish-work delivery；先检查 git status，运行 repo-memory 和相关验证；只 stage 意图内文件；提交后 fetch 目标合入分支并检查是否有冲突；需要时安全 rebase 并重新验证；push，并用仓库常用工具创建 PR；PR 描述包含问题、方案和验证。",
+      "files": [],
+      "expectations": [
+        "The run treats the prompt as commit/push/PR delivery",
+        "The run invokes or accounts for repo-memory before committing",
+        "Relevant verification runs before commit or the blocker is stated",
+        "The run pauses any previous CI polling automation for the same PR or branch before creating a new commit",
+        "Only intended files are staged and unrelated dirty files are left out",
+        "The run checks the branch against the target merge branch before push or PR",
+        "The run rebases onto the target branch when safe, or reports exact conflict files and blocker",
+        "A PR is created, or an exact blocker is reported"
+      ]
+    },
+    {
+      "id": 13,
+      "prompt": "提交吧。",
+      "expected_output": "按照 the user 的默认交付约定，将“提交吧”识别为完整 delivery intent，而不是 commit-only；运行 repo-memory、验证、暂停旧 CI 轮询、只 stage 意图内文件并提交；随后检查目标主分支、必要时安全 rebase 并重新验证；push 当前分支；创建或更新 PR；不要反问是否需要 push 或 PR，除非遇到具体 blocker。",
+      "files": [],
+      "expectations": [
+        "The run treats bare Chinese submit phrasing as full delivery",
+        "The run invokes or accounts for repo-memory and verification before committing",
+        "The run does not stop after creating a local commit",
+        "The run pushes the branch after committing",
+        "The run creates or updates a PR, or reports an exact blocker",
+        "The run does not ask whether to push or open a PR after this clear delivery intent"
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "功能已经改完，测试也过了。",
+      "expected_output": "识别为任务完成但还没有明确 delivery intent；如果当前任务留下本地改动且用户没有说不要提交，应在最终交付前主动询问“要我现在提交、push 并开 PR 吗？”；不能未经确认直接 commit、push 或开 PR；如果用户确认，则继续完整 Finish Work delivery path；如果用户拒绝，则保留改动未提交并报告验证和本地变更状态。",
+      "files": [],
+      "expectations": [
+        "The run asks for submit/push/PR confirmation after completed work with local changes",
+        "The run does not silently commit, push, or create a PR without confirmation",
+        "The run proceeds through the full delivery path if the user confirms",
+        "The run leaves changes uncommitted and reports local status if the user declines"
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "只改代码，先别提交，也不要 push 或开 PR。",
+      "expected_output": "识别用户明确 opt out delivery；不要 commit、不要 push、不要开 PR；继续保护本地改动和无关文件；如果已经完成修改，则最终只报告验证结果和未提交的本地变更状态。",
+      "files": [],
+      "expectations": [
+        "The run treats the prompt as an explicit delivery opt-out, not commit-only delivery",
+        "The run does not commit when the user said not to submit",
+        "The run does not push or create a PR when the user explicitly opted out",
+        "The run leaves local changes uncommitted and reports status",
+        "The run still protects unrelated dirty files"
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "这个 PR 我又修了一点，帮我提交并更新一下。",
+      "expected_output": "识别为已有 PR 分支上的新 commit 交付；在 commit 前查找并暂停同一 PR、分支或当前线程里已有的 CI follow-up automation；如果找到则报告 ci_poll_pause=paused 和 automation id；如果没有则报告 not_needed；然后再执行 repo-memory、验证、stage、commit、base check、push，并为新的 head commit 创建或恢复新的 CI follow-up。",
+      "files": [],
+      "expectations": [
+        "The run treats follow-up PR fixes as delivery work",
+        "The run pauses stale CI polling before creating a new commit",
+        "The run reports the CI polling pause outcome",
+        "The run pushes the follow-up commit and creates or resumes CI follow-up for the new head"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "这个 PR 好像跟 main 有冲突，帮我处理一下。",
+      "expected_output": "识别为 base branch conflict check；fetch main，检查冲突文件；如果意图明确就 rebase 到 origin/main 并解决冲突，继续 rebase、重新跑验证并 force-with-lease 推送；如果冲突不明确，就停止并报告冲突文件和需要用户判断的地方。",
+      "files": [],
+      "expectations": [
+        "The run treats the prompt as a base branch conflict or rebase workflow",
+        "The run fetches or checks the target merge branch before resolving",
+        "The run prefers rebase onto the target branch for a clean task branch",
+        "The run resolves only clear conflicts and otherwise reports exact conflict files",
+        "The run reruns verification after a successful rebase before pushing"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "PR 开好了，帮我盯一下 CI，如果挂了，能明确修的话就直接修完提交。",
+      "expected_output": "只有在 delivery commit 已创建、push 成功并存在 PR/新 head 后，才开始 CI 查询；不能先创建 CI 查询任务再 commit/push。需要 GitHub CLI 时先查 PATH 里的 gh，找不到再试 /opt/homebrew/bin/gh 等常见安装路径，不能因为 PATH 缺失就直接判定 gh 不可用。先做即时 CI 检查：push/PR 后等约 10 秒查一次 PR/check run 状态；如果能看到 workflow、job、step、状态或历史耗时，就报告当前进度并粗略估算剩余时间；随后优先使用轻量会话内轮询或 provider watch 命令，active PR CI 约 1 分钟查一次，而不是默认创建 automation 或使用 15 分钟级延迟；只有当前 session 无法合理继续盯、或用户要求稍后提醒/续跑时，才创建临时 follow-up automation/reminder；轮询任务必须是临时的，CI passed、失败但不明确、blocked、cancelled 或需要用户决策时要报告终态并停止轮询，若创建过 automation 则暂停/删除，不能一直跑；CI 失败时先检查失败 job、step 和日志；如果是明确、低风险的 lint、format、typecheck、单测、snapshot、lockfile 或明显兼容性问题，就自动修复、运行相关验证、提交并推送，然后报告失败原因、修复内容、验证命令、修复 commit 和 push 状态。",
+      "files": [],
+      "expectations": [
+        "The run starts CI follow-up only after commit, push, and PR or new head exist",
+        "The run tries common GitHub CLI fallback paths such as /opt/homebrew/bin/gh before reporting gh unavailable",
+        "The run plans an immediate first CI check about 10 seconds after push or PR creation",
+        "The run prefers lightweight in-session polling or a provider watch command over default automation",
+        "The run uses a short active polling interval such as 1 minute instead of a 15 minute default for fresh PR CI",
+        "The run creates temporary automation or a reminder only when the session cannot reasonably keep watching or the user asks for later follow-up",
+        "The run plans to stop polling once CI reaches a terminal state and pause or delete any temporary automation that was created",
+        "The run reports visible CI workflow/job/step status and gives a rough ETA when possible",
+        "The run inspects failing CI jobs, steps, and logs before deciding what to do",
+        "The run automatically repairs clear low-risk CI failures without asking for extra approval",
+        "The run verifies, commits, and pushes automatic CI repairs",
+        "The run reports the CI failure, repair commit, verification, and push status"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "CI 挂了。日志看起来可能是测试期望不对，也可能是接口行为要改，你自己判断一下吧。",
+      "expected_output": "识别为模棱两可的 CI 修复场景；读取失败 job 和日志后，不应自行选择一个会改变行为或测试期望的方案；需要停止并向用户说明 blocker、相关文件、可选方案以及需要用户决策的问题。",
+      "files": [],
+      "expectations": [
+        "The run treats the CI failure as ambiguous after inspecting the failure context",
+        "The run does not guess between changing product behavior and changing test expectations",
+        "The run stops and asks the user for a concrete decision",
+        "The run reports the failing job or step, relevant files, blocker, and plausible options"
+      ]
+    },
+    {
+      "id": 14,
+      "prompt": "我准备改一个 skill，先检查一下分支和本地改动，别影响其他文件。",
+      "expected_output": "识别为编辑 agent asset 前的新任务准备；触发 git-delivery 的 pre-edit base gate；检查当前分支、dirty work 和远端主分支基线；如果工作树干净且没有明确要求继续当前分支，则从最新基线创建或更新任务分支；明确保护无关本地改动。",
+      "files": [],
+      "expectations": [
+        "The run treats agent asset edits as a coding or asset task that needs the start-of-work git workflow",
+        "The run performs the pre-edit base gate before modifying skill files",
+        "The run checks dirty work and protects unrelated files",
+        "The run checks or fetches the primary branch baseline"
+      ]
+    }
+  ]
+}

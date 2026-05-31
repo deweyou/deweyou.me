@@ -1,23 +1,16 @@
 export const HOME = {
   hero: {
-    location: 'SHENZHEN',
-    timezone: 'CST',
-    figLabel: 'FIG. 01',
-    selfLabel: 'SELF',
     nameEn: 'Dewey Ou',
-    nameSep: '·',
     nameZh: '欧怼怼',
-    pronunciation: '11 / 1997',
-    estLabel: 'HEALTH / HAPPINESS / FREEDOM',
-    headlinePre: '做',
-    headlineHighlight: '有意思',
-    headlinePost: '的产品，',
-    subline: '也过有意思的生活。',
-    bio: [
-      { text: '字节跳动的' },
-      { text: '前端工程师', variant: 'underline' as const },
-      { text: '，住在深圳。喜欢有设计感、人性化、新颖的东西，也想成为做这类产品的人。最近在和 AI 交朋友，让它陪我学习、做有意思的产品。工作之余，看书、玩魔方、变魔术、拍照。' },
+    summaryZh: [
+      '工作上 聚焦、和第一性原理',
+      '生活上 保持好奇、跟随内心',
+      '希望一直能做自己热爱的事',
     ],
-    cta: '读我写的文章',
+    summaryEn: [
+      'Focus and first principles',
+      'Curiosity and heart',
+    ],
+    tags: ['Shenzhen', '1997.11', 'Engineer'],
   },
 } as const;

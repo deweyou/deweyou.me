@@ -2,7 +2,17 @@
 set -e
 
 FONTS_DIR="src/app/fonts"
-CONTENT_GLOB="src/content/*.ts src/app/**/*.tsx src/components/**/*.tsx src/app/*.tsx content/posts/*.mdx content/daily/*.mdx"
+CONTENT_GLOB="src/content/*.ts src/app/**/*.tsx src/components/**/*.tsx src/app/*.tsx content/posts/*.mdx content/daily/*.mdx content/daily/*.md"
+
+if command -v pyftsubset >/dev/null 2>&1; then
+  SUBSET_CMD=(pyftsubset)
+elif python3 -m fontTools.subset --help >/dev/null 2>&1; then
+  SUBSET_CMD=(python3 -m fontTools.subset)
+else
+  echo "fonttools is required to rebuild subset fonts." >&2
+  echo "Install it with: python3 -m pip install --user fonttools brotli zopfli" >&2
+  exit 1
+fi
 
 # Collect used characters
 CHARS=$(cat $CONTENT_GLOB 2>/dev/null | python3 -c "
@@ -26,7 +36,7 @@ for WEIGHT in Regular Medium SemiBold Bold; do
   SRC="$FONTS_DIR/SourceHanSerifCN-${WEIGHT}.otf"
   OUT="$FONTS_DIR/SourceHanSerifCN-${WEIGHT}.woff2"
   if [ -f "$SRC" ]; then
-    pyftsubset "$SRC" \
+    "${SUBSET_CMD[@]}" "$SRC" \
       --text-file="$CHARS_FILE" \
       --flavor=woff2 \
       --output-file="$OUT" \

@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "test": "node --test --experimental-strip-types tests/*.test.mjs",
+    "test": "node --test --experimental-strip-types test/*.test.mjs",
     "start": "next start",
     "lint": "eslint",
     "upload-photos": "for dir in photos-upload/*/; do node scripts/upload-photos.mjs \"$dir\"; done",
@@ -13,9 +13,9 @@
     "import-post": "node scripts/import-post.mjs"
   },
   "dependencies": {
-    "@deweyou-design/react": "0.0.6",
-    "@deweyou-design/react-icons": "^0.0.5",
-    "@deweyou-design/styles": "^0.0.5",
+    "@deweyou-design/react": "0.3.0",
+    "@deweyou-design/react-icons": "^0.3.0",
+    "@deweyou-design/styles": "^0.3.0",
     "@next/third-parties": "16.2.4",
     "gray-matter": "^4.0.3",
     "next": "16.2.4",

@@ -18,6 +18,22 @@ body {
   user-select: none;
 }
 
+[data-logo-auto] > img {
+  grid-area: 1 / 1;
+}
+
+[data-logo-auto] .logo-auto-dark {
+  display: none !important;
+}
+
+html[data-theme='dark'] [data-logo-auto] .logo-auto-light {
+  display: none !important;
+}
+
+html[data-theme='dark'] [data-logo-auto] .logo-auto-dark {
+  display: block !important;
+}
+
 /* Hide scrollbar */
 html { scrollbar-width: none; }
 html::-webkit-scrollbar { display: none; }
