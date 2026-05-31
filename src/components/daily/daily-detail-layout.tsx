@@ -6,22 +6,31 @@ import {
   ChevronRightIcon,
   XIcon,
 } from '@deweyou-design/react-icons';
-import { useEffect, useState, type MouseEvent, type ReactNode } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react';
 import styles from '##/app/daily/page.module.css';
 
 const FEED_PANEL_ID = 'daily-feed-panel';
 const FEED_COLLAPSED_KEY = 'daily-detail-feed-collapsed';
+const DAILY_ENTRY_LINK_SELECTOR = '[data-daily-entry-link="true"]';
 
 export function DailyDetailLayout({
   detail,
   feed,
+  navigationKey,
 }: {
   detail: ReactNode;
   feed: ReactNode;
+  navigationKey: string;
 }) {
+  const detailPaneRef = useRef<HTMLElement>(null);
   const [isFeedCollapsed, setIsFeedCollapsed] = useState(false);
   const [isFeedDrawerOpen, setIsFeedDrawerOpen] = useState(false);
   const [hasLoadedFeedPreference, setHasLoadedFeedPreference] = useState(false);
+
+  useLayoutEffect(() => {
+    detailPaneRef.current?.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  }, [navigationKey]);
 
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
@@ -55,8 +64,8 @@ export function DailyDetailLayout({
     const target = event.target;
     if (!(target instanceof Element)) return;
 
-    const feedLink = target.closest(`.${styles.feedPane} a`);
-    if (feedLink) {
+    const entryLink = target.closest(DAILY_ENTRY_LINK_SELECTOR);
+    if (entryLink) {
       setIsFeedDrawerOpen(false);
     }
   }
@@ -83,7 +92,7 @@ export function DailyDetailLayout({
         {feed}
       </div>
 
-      <aside className={styles.detailPane} aria-label="笔记详情">
+      <aside ref={detailPaneRef} className={styles.detailPane} aria-label="笔记详情">
         {detail}
       </aside>
 
