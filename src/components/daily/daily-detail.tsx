@@ -1,6 +1,7 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Badge } from '@deweyou-design/react/badge';
 import { mdxComponents } from '##/components/blog/mdx-components';
+import { ReadingProgress } from '##/components/blog/reading-progress';
 import type { DailyEntry } from '##/lib/daily';
 import styles from '##/app/daily/page.module.css';
 import { DailyDetailShell } from './daily-detail-shell';
@@ -8,6 +9,12 @@ import { DailyDetailShell } from './daily-detail-shell';
 export function DailyDetail({ closeHref, entry }: { closeHref: string; entry: DailyEntry }) {
   return (
     <DailyDetailShell closeHref={closeHref}>
+      <ReadingProgress
+        contentId={entry.id}
+        contentType="daily"
+        scrollContainerSelector="[aria-label='笔记详情']"
+        showIndicator={false}
+      />
       <header className={styles.detailHeader}>
         <div className={styles.entryMetaLine}>
           <time dateTime={entry.date} className={styles.date}>

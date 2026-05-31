@@ -23,7 +23,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
 
   return (
     <>
-      <ReadingProgress />
+      <ReadingProgress contentType="article" contentId={slug} />
       <TocSidebar items={toc} />
       <div className="container" style={{ paddingTop: 80, paddingBottom: 120 }}>
         <article style={{ maxWidth: 720, margin: '0 auto' }}>
