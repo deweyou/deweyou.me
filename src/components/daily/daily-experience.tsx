@@ -3,6 +3,7 @@ import { DailyVirtualTimeline } from '##/components/daily/virtual-timeline';
 import type { DailyEntry, DailyFeedBatch } from '##/lib/daily';
 import styles from '##/app/daily/page.module.css';
 import { DailyDetail } from './daily-detail';
+import { DailyDetailLayout, FEED_PANEL_ID } from './daily-detail-layout';
 import { DailyFeedPane } from './daily-feed-pane';
 import { DailyServerFeed } from './daily-server-feed';
 
@@ -24,10 +25,11 @@ export function DailyExperience({
   const latestDate = visibleEntries[0]?.date;
   const initialLastYear = initialBatch.entries.at(-1)?.date.slice(0, 4) ?? null;
   const activeTagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
+  const filterBaseHref = activeId ? `/daily/${activeId}` : '/daily';
   const filterContent = (
     <nav className={styles.tagFilters} aria-label="笔记标签筛选">
       <Link
-        href="/daily"
+        href={filterBaseHref}
         scroll={false}
         className={styles.tagFilter}
         data-active={!activeTag}
@@ -37,7 +39,7 @@ export function DailyExperience({
       {availableTags.map((tag) => (
         <Link
           key={tag}
-          href={`/daily?tag=${encodeURIComponent(tag)}`}
+          href={`${filterBaseHref}?tag=${encodeURIComponent(tag)}`}
           scroll={false}
           className={styles.tagFilter}
           data-active={activeTag === tag}
@@ -55,7 +57,7 @@ export function DailyExperience({
       </div>
       <h1 className={styles.title}>笔记</h1>
       <p className={styles.description}>
-        随手记录一些概念、方法和观察，留给之后的自己回看。
+        一些碎片化的小知识点，慢慢拼成对世界的理解。
       </p>
       <div className={styles.meta}>
         <span>{visibleEntries.length} 条记录</span>
@@ -66,29 +68,31 @@ export function DailyExperience({
   );
 
   if (selectedEntry) {
+    const feed = (
+      <DailyFeedPane activeTag={activeTag} id={FEED_PANEL_ID}>
+        <header className={styles.feedHero}>{heroContent}</header>
+        <DailyServerFeed
+          activeId={activeId}
+          activeTag={activeTag}
+          entries={initialBatch.entries}
+        />
+        <DailyVirtualTimeline
+          activeId={activeId}
+          activeTag={activeTag}
+          initialNextCursor={initialBatch.nextCursor}
+          initialPreviousYear={initialLastYear}
+          key={`daily-timeline-${activeTag ?? 'all'}-${initialBatch.nextCursor ?? 'end'}`}
+        />
+      </DailyFeedPane>
+    );
+
     return (
       <div className="page">
         <section className={`${styles.timelineWide} ${styles.timelineSplitMode}`} aria-label="笔记列表">
-          <div className={styles.experienceSplit}>
-            <DailyFeedPane activeTag={activeTag}>
-              <header className={styles.feedHero}>{heroContent}</header>
-              <DailyServerFeed
-                activeId={activeId}
-                activeTag={activeTag}
-                entries={initialBatch.entries}
-              />
-              <DailyVirtualTimeline
-                activeId={activeId}
-                activeTag={activeTag}
-                initialNextCursor={initialBatch.nextCursor}
-                initialPreviousYear={initialLastYear}
-                key={`daily-timeline-${activeTag ?? 'all'}-${initialBatch.nextCursor ?? 'end'}`}
-              />
-            </DailyFeedPane>
-            <aside className={styles.detailPane} aria-label="笔记详情">
-              <DailyDetail closeHref={`/daily${activeTagQuery}`} entry={selectedEntry} />
-            </aside>
-          </div>
+          <DailyDetailLayout
+            detail={<DailyDetail closeHref={`/daily${activeTagQuery}`} entry={selectedEntry} />}
+            feed={feed}
+          />
         </section>
       </div>
     );

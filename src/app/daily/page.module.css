@@ -70,11 +70,16 @@
   transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
 }
 
-.tagFilter:hover,
-.tagFilter[data-active="true"] {
+.tagFilter:hover {
   color: var(--ui-color-text);
   border-color: var(--ui-color-border-strong);
   background: color-mix(in srgb, var(--ui-color-text) 4%, transparent);
+}
+
+.tagFilter[data-active="true"] {
+  color: var(--ui-color-brand-text);
+  border-color: var(--ui-color-brand-text);
+  background: color-mix(in srgb, var(--ui-color-brand-text) 8%, transparent);
 }
 
 .timeline {
@@ -112,10 +117,19 @@
   display: grid;
   grid-template-columns: minmax(360px, 0.82fr) minmax(420px, 1fr);
   gap: 0;
-  align-items: start;
+  align-items: stretch;
   width: min(100%, 1440px);
   height: 100%;
+  min-height: 0;
   margin: 0 auto;
+  transition: grid-template-columns 220ms ease;
+}
+
+.feedSlot {
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  transition: opacity 180ms ease, visibility 180ms ease;
 }
 
 .feedPane {
@@ -133,6 +147,18 @@
 .feedPane::-webkit-scrollbar,
 .detailPane::-webkit-scrollbar {
   display: none;
+}
+
+.feedDrawerHeader,
+.feedDrawerScrim {
+  display: none;
+}
+
+.feedDrawerTitle {
+  font-family: var(--ui-font-mono);
+  font-size: 12px;
+  color: var(--ui-color-text-muted);
+  letter-spacing: 0.08em;
 }
 
 .feedHero {
@@ -157,6 +183,7 @@
 .detailPane {
   position: relative;
   min-width: 0;
+  min-height: 0;
   height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -166,6 +193,41 @@
   padding-bottom: 80px;
   border-left: 1px solid var(--ui-color-border);
   animation: detail-enter 220ms ease both;
+}
+
+.feedToggleButton,
+.feedDrawerCloseButton {
+  --button-ghost-background-hover: transparent;
+  --button-ghost-background-active: transparent;
+  background: transparent;
+  color: var(--ui-color-text-muted);
+}
+
+.feedToggleButton:hover:not(.floatingFeedToggle),
+.feedDrawerCloseButton:hover {
+  background: transparent;
+  color: var(--ui-color-text);
+}
+
+.floatingFeedToggle {
+  --feed-toggle-x: calc(clamp(356px, 45vw, 920px) - 52px);
+  position: fixed;
+  bottom: max(24px, calc(env(safe-area-inset-bottom) + 24px));
+  left: 0;
+  z-index: 12;
+  opacity: 0.5;
+  background: transparent;
+  transform: translate3d(var(--feed-toggle-x), 0, 0);
+  transition: transform 220ms ease, opacity 160ms ease, color 140ms ease, background 140ms ease;
+}
+
+.floatingFeedToggle:hover,
+.floatingFeedToggle:focus-visible {
+  opacity: 0.92;
+}
+
+.mobileFloatingFeedToggle {
+  display: none;
 }
 
 :global(body):has(.timelineSplitMode) :global(footer) {
@@ -221,13 +283,27 @@
   margin-bottom: 22px;
 }
 
+.entryMetaLine {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .date {
   display: block;
-  margin-bottom: 10px;
   font-family: var(--ui-font-mono);
   font-size: 12px;
   color: var(--ui-color-brand-text);
   letter-spacing: 0.08em;
+}
+
+.entryTypeLabel {
+  --badge-color: var(--ui-color-brand-text);
+  padding: 1px 7px;
+  font-size: 11px;
+  line-height: 1.25;
+  cursor: default;
 }
 
 .entryTitle {
@@ -302,8 +378,22 @@
   color: var(--ui-color-text-muted) !important;
 }
 
+.entry .body :global(img),
+.entry .body :global(picture),
+.entry .body :global(figure),
+.entry .body :global(p:has(> img:only-child)),
+.entry .body :global(div:has(> img:only-child)) {
+  display: none !important;
+}
+
 .body :global(.dy-code) {
   max-width: 100%;
+}
+
+.body :global(img) {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .feedStatus {
@@ -341,29 +431,7 @@
   animation: detail-content-enter 180ms ease both;
 }
 
-.closeButton {
-  position: absolute;
-  top: -4px;
-  right: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 0;
-  border-radius: 6px;
-  color: var(--ui-color-text-muted);
-  text-decoration: none;
-  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
-}
-
-.closeButton:hover {
-  color: var(--ui-color-text);
-  background: color-mix(in srgb, var(--ui-color-text) 4%, transparent);
-}
-
 .detailHeader {
-  padding-right: 48px;
   margin-bottom: 56px;
 }
 
@@ -418,6 +486,14 @@
     padding-bottom: 88px;
   }
 
+  .timelineSplitMode {
+    height: auto;
+    min-height: calc(100vh - 72px);
+    min-height: calc(100dvh - 72px);
+    padding-bottom: 88px;
+    overflow: visible;
+  }
+
   .experienceFeedOnly,
   .experienceSplit {
     display: block;
@@ -425,8 +501,69 @@
     margin: 0 auto;
   }
 
+  .feedSlot {
+    position: fixed;
+    top: 72px;
+    bottom: 0;
+    left: 0;
+    z-index: 30;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    width: min(88vw, 420px);
+    max-width: calc(100vw - 32px);
+    height: calc(100vh - 72px);
+    height: calc(100dvh - 72px);
+    border-right: 1px solid var(--ui-color-border);
+    background: var(--ui-color-canvas);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(-104%);
+    transition: opacity 180ms ease, transform 220ms ease, visibility 180ms ease;
+  }
+
+  .experienceSplit[data-feed-drawer-open="true"] .feedSlot {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0);
+  }
+
+  .feedDrawerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    padding: 12px 12px 0 24px;
+  }
+
+  .feedDrawerScrim {
+    position: fixed;
+    top: 72px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 29;
+    display: block;
+    border: 0;
+    background: color-mix(in srgb, var(--ui-color-canvas) 66%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 180ms ease, visibility 180ms ease;
+  }
+
+  .experienceSplit[data-feed-drawer-open="true"] .feedDrawerScrim {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
   .experienceSplit .feedPane {
-    display: none;
+    display: block;
+    height: 100%;
+    padding: 16px 24px 56px;
+    overflow-y: auto;
   }
 
   .detailPane {
@@ -441,9 +578,30 @@
     animation: detail-content-enter 180ms ease both;
   }
 
-  .closeButton {
-    top: -8px;
-    right: 0;
+  .detailTitle {
+    font-size: 2.5rem;
+  }
+
+  .floatingFeedToggle {
+    --feed-toggle-x: 16px;
+    bottom: max(20px, calc(env(safe-area-inset-bottom) + 20px));
+    z-index: 28;
+    opacity: 0.58;
+  }
+
+  .desktopFloatingFeedToggle {
+    display: none;
+  }
+
+  .mobileFloatingFeedToggle {
+    display: inline-flex;
+  }
+
+  .experienceSplit[data-feed-drawer-open="true"] .mobileFloatingFeedToggle {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translate3d(var(--feed-toggle-x), 8px, 0);
   }
 
   .virtualItem {
@@ -469,11 +627,46 @@
   :global(body):has(.timelineSplitMode) {
     overflow: hidden;
   }
+
+  .experienceSplit[data-feed-collapsed="true"] {
+    grid-template-columns: 0 minmax(0, 1fr);
+  }
+
+  .experienceSplit[data-feed-collapsed="true"] .desktopFloatingFeedToggle {
+    --feed-toggle-x: clamp(24px, 4vw, 72px);
+  }
+
+  .experienceSplit[data-feed-collapsed="true"] .feedSlot {
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .experienceSplit[data-feed-collapsed="true"] .feedPane {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .experienceSplit[data-feed-collapsed="true"] .detailPane {
+    border-left-color: transparent;
+  }
+
+  .experienceSplit[data-feed-collapsed="true"] .detailArticle {
+    max-width: 880px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .experienceSplit,
+  .feedSlot,
+  .feedDrawerScrim,
+  .floatingFeedToggle,
   .detailPane,
   .detailArticle {
+    transition: none;
     animation: none;
   }
 }

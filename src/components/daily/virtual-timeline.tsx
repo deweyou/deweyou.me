@@ -1,6 +1,7 @@
 'use client';
 
 import { MDXRemote } from 'next-mdx-remote';
+import { Badge } from '@deweyou-design/react/badge';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from '##/app/daily/page.module.css';
@@ -83,9 +84,21 @@ export function DailyVirtualTimeline({
         />
         {shouldShowYear && <div className={styles.yearLabel}>{year}</div>}
         <header className={styles.entryHeader}>
-          <time dateTime={entry.date} className={styles.date}>
-            {entry.date.slice(5)}
-          </time>
+          <div className={styles.entryMetaLine}>
+            <time dateTime={entry.date} className={styles.date}>
+              {entry.date.slice(5)}
+            </time>
+            {entry.type === 'deep-share' && (
+              <Badge
+                className={styles.entryTypeLabel}
+                color="primary"
+                shape="pill"
+                variant="soft"
+              >
+                深度分享
+              </Badge>
+            )}
+          </div>
           <h2 className={styles.entryTitle}>{entry.title}</h2>
           {entry.tags.length > 0 && (
             <div className={styles.tags}>

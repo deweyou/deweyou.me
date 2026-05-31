@@ -9,9 +9,11 @@ const DAILY_FEED_SCROLL_KEY_PREFIX = 'daily-feed-scroll-top';
 export function DailyFeedPane({
   activeTag,
   children,
+  id,
 }: {
   activeTag?: string | null;
   children: ReactNode;
+  id?: string;
 }) {
   const pathname = usePathname();
   const paneRef = useRef<HTMLDivElement>(null);
@@ -32,7 +34,7 @@ export function DailyFeedPane({
   }
 
   return (
-    <div ref={paneRef} className={styles.feedPane} onScroll={handleScroll}>
+    <div id={id} ref={paneRef} className={styles.feedPane} onScroll={handleScroll}>
       {children}
     </div>
   );
