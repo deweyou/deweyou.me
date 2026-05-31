@@ -27,8 +27,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       }
     } catch { /* ignore */ }
-    setTheme(t);
     document.documentElement.setAttribute('data-theme', t);
+    const themeTimer = window.setTimeout(() => setTheme(t), 0);
+    return () => window.clearTimeout(themeTimer);
   }, []);
 
   const toggleTheme = () => {

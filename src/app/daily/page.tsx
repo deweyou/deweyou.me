@@ -1,5 +1,6 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { mdxComponents } from '##/components/blog/mdx-components';
+import { ReadingProgress } from '##/components/blog/reading-progress';
 import { DailyHashSync } from '##/components/daily/hash-sync';
 import { getAllDailyEntries, groupDailyEntriesByYear } from '##/lib/daily';
 import styles from './page.module.css';
@@ -16,6 +17,9 @@ export default function DailyPage() {
 
   return (
     <div className="page">
+      {entries.length > 0 ? (
+        <ReadingProgress contentType="daily" contentId="daily" showIndicator={false} />
+      ) : null}
       <section className={`container ${styles.hero}`}>
         <div className={styles.readingColumn}>
           <div className="eyebrow">
