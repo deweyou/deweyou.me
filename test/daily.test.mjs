@@ -15,6 +15,7 @@ test('daily reader includes markdown files with spaced date-title names and flex
       'id: ai-share-2026-05-30-agent-session-principal-boundary',
       'title: Agent 会话要绑定主体',
       'date: 2026-05-30',
+      'type: deep-share',
       'tags: [AI]',
       '---',
       '## 一句话结论',
@@ -32,6 +33,7 @@ test('daily reader includes markdown files with spaced date-title names and flex
     assert.equal(entries[0].id, 'ai-share-2026-05-30-agent-session-principal-boundary');
     assert.equal(entries[0].slug, '2026-05-30 - Agent 会话要绑定主体');
     assert.equal(entries[0].title, 'Agent 会话要绑定主体');
+    assert.equal(entries[0].type, 'deep-share');
     assert.deepEqual(entries[0].tags, ['AI']);
   } finally {
     process.chdir(originalCwd);

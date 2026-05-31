@@ -7,6 +7,7 @@ export interface DailySerializedFeedEntry {
   slug: string;
   title: string;
   date: string;
+  type: DailyEntry['type'];
   tags: string[];
   estimatedSize: number;
   mdx: MDXRemoteSerializeResult;
@@ -27,6 +28,7 @@ export async function serializeDailyFeedEntry(entry: DailyEntry): Promise<DailyS
     slug: entry.slug,
     title: entry.title,
     date: entry.date,
+    type: entry.type,
     tags: entry.tags,
     estimatedSize: estimateDailyEntrySize(entry),
     mdx: await serialize(entry.content),

@@ -1,0 +1,53 @@
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import test from 'node:test';
+
+test('daily detail layout exposes desktop collapse and mobile drawer contracts', () => {
+  assert.equal(existsSync('src/components/daily/daily-detail-layout.tsx'), true);
+
+  const layout = readFileSync('src/components/daily/daily-detail-layout.tsx', 'utf8');
+  const detail = readFileSync('src/components/daily/daily-detail.tsx', 'utf8');
+  const detailShell = readFileSync('src/components/daily/daily-detail-shell.tsx', 'utf8');
+  const experience = readFileSync('src/components/daily/daily-experience.tsx', 'utf8');
+  const feedPane = readFileSync('src/components/daily/daily-feed-pane.tsx', 'utf8');
+  const css = readFileSync('src/app/daily/page.module.css', 'utf8');
+  const navCss = readFileSync('src/components/nav.module.css', 'utf8');
+
+  assert.match(layout, /data-feed-collapsed/);
+  assert.match(layout, /data-feed-drawer-open/);
+  assert.match(layout, /daily-feed-panel/);
+  assert.match(layout, /sessionStorage/);
+  assert.match(layout, /floatingFeedToggle/);
+  assert.match(layout, /desktopFloatingFeedToggle/);
+  assert.match(layout, /mobileFloatingFeedToggle/);
+  assert.match(layout, /ChevronLeftIcon/);
+  assert.match(layout, /ChevronRightIcon/);
+  assert.doesNotMatch(layout, /MenuFoldIcon|MenuUnfoldIcon|ViewListIcon|ArrowLeftIcon|ArrowRightIcon/);
+  assert.doesNotMatch(layout, /detailPaneControls/);
+  assert.match(detail, /Badge/);
+  assert.match(detail, /entry\.type === 'deep-share'/);
+  assert.match(detail, /styles\.entryMetaLine/);
+  assert.match(detail, /styles\.entryTypeLabel/);
+  assert.doesNotMatch(detailShell, /XIcon|styles\.closeButton|aria-label="关闭详情"/);
+  assert.match(experience, /DailyDetailLayout/);
+  assert.match(feedPane, /id\?: string/);
+  assert.match(css, /experienceSplit\[data-feed-collapsed="true"\]/);
+  assert.match(css, /experienceSplit\[data-feed-drawer-open="true"\]/);
+  assert.match(css, /align-items:\s*stretch/);
+  assert.match(css, /@media \(max-width: 768px\)[\s\S]*\.timelineSplitMode\s*{[\s\S]*height:\s*auto;[\s\S]*overflow:\s*visible;/);
+  assert.match(css, /@media \(max-width: 768px\)[\s\S]*\.detailTitle\s*{[\s\S]*font-size:\s*2\.5rem;/);
+  assert.doesNotMatch(css, /--button-background:\s*color-mix/);
+  assert.doesNotMatch(css, /--button-border-color:\s*color-mix/);
+  assert.match(css, /\.floatingFeedToggle\s*{[\s\S]*position:\s*fixed;[\s\S]*opacity:\s*0\.5/);
+  assert.match(css, /--feed-toggle-x:\s*calc\(clamp\(356px,\s*45vw,\s*920px\)\s*-\s*52px\)/);
+  assert.match(css, /--button-ghost-background-hover:\s*transparent/);
+  assert.doesNotMatch(css, /\.closeButton/);
+  assert.match(css, /\.tagFilter\[data-active="true"\]\s*{[^}]*color:\s*var\(--ui-color-brand-text\)/);
+  assert.match(css, /\.tagFilter\[data-active="true"\]\s*{[^}]*border-color:\s*var\(--ui-color-brand-text\)/);
+  assert.match(css, /\.tagFilter\[data-active="true"\]\s*{[^}]*background:\s*color-mix\(in srgb,\s*var\(--ui-color-brand-text\)/);
+  assert.match(navCss, /--button-ghost-background-hover:\s*transparent/);
+  assert.match(css, /\.floatingFeedToggle\s*{[\s\S]*transition:[^;]*transform[^;]*opacity/);
+  assert.match(css, /\.floatingFeedToggle:hover,[\s\S]*\.floatingFeedToggle:focus-visible\s*{[\s\S]*opacity:\s*0\.92/);
+  assert.match(css, /experienceSplit\[data-feed-collapsed="true"\]\s+\.desktopFloatingFeedToggle/);
+  assert.match(css, /experienceSplit\[data-feed-drawer-open="true"\]\s+\.mobileFloatingFeedToggle\s*{[\s\S]*visibility:\s*hidden;/);
+});

@@ -1,4 +1,5 @@
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { Badge } from '@deweyou-design/react/badge';
 import { mdxComponents } from '##/components/blog/mdx-components';
 import type { DailyEntry } from '##/lib/daily';
 import styles from '##/app/daily/page.module.css';
@@ -8,9 +9,16 @@ export function DailyDetail({ closeHref, entry }: { closeHref: string; entry: Da
   return (
     <DailyDetailShell closeHref={closeHref}>
       <header className={styles.detailHeader}>
-        <time dateTime={entry.date} className={styles.date}>
-          {entry.date}
-        </time>
+        <div className={styles.entryMetaLine}>
+          <time dateTime={entry.date} className={styles.date}>
+            {entry.date}
+          </time>
+          {entry.type === 'deep-share' && (
+            <Badge className={styles.entryTypeLabel} color="primary" shape="pill" variant="soft">
+              深度分享
+            </Badge>
+          )}
+        </div>
         <h1 className={styles.detailTitle}>{entry.title}</h1>
         {entry.tags.length > 0 && (
           <div className={styles.tags}>

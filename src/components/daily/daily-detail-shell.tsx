@@ -1,7 +1,5 @@
 'use client';
 
-import { XIcon } from '@deweyou-design/react-icons';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
 import type { ReactNode, TouchEvent } from 'react';
@@ -51,9 +49,6 @@ export function DailyDetailShell({ children, closeHref }: { children: ReactNode;
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <Link href={closeHref} className={styles.closeButton} scroll={false} aria-label="关闭详情">
-        <XIcon size={20} aria-hidden="true" />
-      </Link>
       {children}
     </article>
   );

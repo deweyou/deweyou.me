@@ -7,11 +7,14 @@ const DEFAULT_DAILY_FEED_LIMIT = 20;
 const MAX_DAILY_FEED_LIMIT = 50;
 const DAILY_ENTRY_EXTENSIONS = ['.mdx', '.md'];
 
+export type DailyEntryType = 'daily-share' | 'deep-share';
+
 export interface DailyEntry {
   id: string;
   slug: string;
   title: string;
   date: string;
+  type: DailyEntryType;
   tags: string[];
   content: string;
 }
@@ -53,6 +56,11 @@ function normalizeTags(value: unknown, file: string): string[] {
   throw new Error(`Daily entry ${file} tags must be a string array`);
 }
 
+function normalizeType(value: unknown, file: string): DailyEntryType {
+  if (value === 'daily-share' || value === 'deep-share') return value;
+  throw new Error(`Daily entry ${file} type must be daily-share or deep-share`);
+}
+
 function normalizeId(value: unknown, file: string): string {
   if (typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9_-]*$/.test(value)) return value;
   throw new Error(`Daily entry ${file} must include id using letters, numbers, hyphens, or underscores`);
@@ -76,6 +84,7 @@ function readEntry(file: string): DailyEntry {
     slug,
     title: data.title,
     date,
+    type: normalizeType(data.type, file),
     tags: normalizeTags(data.tags, file),
     content,
   };
