@@ -23,9 +23,9 @@ import { Text } from '@deweyou-design/react/text';
 
 ## Server Component Constraint
 
-Components with `onClick` or other event handlers (e.g. `Button variant="link"`) **cannot be used in Server Components or MDX rendered via `next-mdx-remote/rsc`**. This includes `mdx-components.tsx`.
+Components with `onClick` or other event handlers (e.g. `Button variant="link"`) **cannot be used directly in Server Components**.
 
-Use plain `<a>` with inline styles for links in MDX components, not `Button variant="link"`.
+Blog and daily bodies are rendered through the client `src/components/markdown-content.tsx` wrapper around `@deweyou-design/react/markdown-render`, which already owns link, table, code block, and Mermaid rendering. Prefer extending that wrapper over reintroducing ad hoc Markdown or MDX component maps.
 
 ## CSS Variables
 
@@ -43,4 +43,4 @@ Design tokens follow the pattern `--ui-color-*`, `--ui-font-*`, `--ui-text-size-
 
 Icons use the Tabler Icons webfont loaded via CDN in `src/app/layout.tsx`. Usage: `<i className="ti ti-brand-github" />`. No React component wrapper needed.
 
-*Last updated: 2026-05-07 | Reason: design system pitfalls discovered during redesign (Server Component, id forwarding)*
+*Last updated: 2026-06-01 | Reason: Markdown rendering centralized through design-system MarkdownRender*

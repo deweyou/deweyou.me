@@ -13,6 +13,20 @@ function slugify(text: string): string {
     .replace(/^-|-$/g, '');
 }
 
+function getHeadingTextProps(props: Record<string, unknown>): TextProps {
+  return Object.fromEntries(
+    Object.entries(props).filter(([name]) => (
+      name === 'id'
+        || name === 'className'
+        || name === 'title'
+        || name === 'role'
+        || name === 'tabIndex'
+        || name.startsWith('aria-')
+        || name.startsWith('data-')
+    )),
+  ) as TextProps;
+}
+
 const headingComponents: MarkdownRenderComponents = {
   h1: ({ children, ...props }) => (
     <Text
@@ -43,21 +57,7 @@ const headingComponents: MarkdownRenderComponents = {
   ),
 };
 
-function getHeadingTextProps(props: Record<string, unknown>): TextProps {
-  return Object.fromEntries(
-    Object.entries(props).filter(([name]) => (
-      name === 'id'
-        || name === 'className'
-        || name === 'title'
-        || name === 'role'
-        || name === 'tabIndex'
-        || name.startsWith('aria-')
-        || name.startsWith('data-')
-    )),
-  ) as TextProps;
-}
-
-export function ArticleMarkdown({ content }: { content: string }) {
+export function MarkdownContent({ content }: { content: string }) {
   return (
     <MarkdownRender
       components={headingComponents}

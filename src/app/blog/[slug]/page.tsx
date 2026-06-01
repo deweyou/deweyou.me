@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArticleMarkdown } from '##/components/blog/article-markdown';
+import { MarkdownContent } from '##/components/markdown-content';
 import { ReadingProgress } from '##/components/blog/reading-progress';
 import { TocSidebar } from '##/components/blog/toc-sidebar';
 import { getPost, getAllSlugs, extractToc } from '##/lib/posts';
@@ -47,7 +47,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           </header>
 
           {/* Body */}
-          <ArticleMarkdown content={post.content} />
+          <MarkdownContent content={post.content} />
         </article>
       </div>
     </>

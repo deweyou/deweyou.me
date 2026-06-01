@@ -30,7 +30,8 @@ src/
     portfolio/          Portfolio page (hidden from nav, v1)
     about/              About page (hidden from nav, v1)
   components/
-    blog/               Blog-specific: mdx-components, toc-sidebar, reading-progress
+    blog/               Blog-specific: toc-sidebar, reading-progress
+    markdown-content.tsx Shared Markdown/GFM renderer for blog and daily bodies
     home/               Hero section
     photos/             Masonry grid
     portfolio/          Portfolio grid
@@ -56,7 +57,7 @@ scripts/
 
 ## Key Invariants
 
-- **Heading ID slugify lives in two places**: `src/lib/posts.ts:extractToc` and `src/components/blog/mdx-components.tsx:slugify`. They must stay in sync. See `docs/blog-system.md`.
+- **Heading ID slugify lives in two places**: `src/lib/posts.ts:extractToc` and `src/components/markdown-content.tsx:slugify`. They must stay in sync. See `docs/blog-system.md`.
 - **Portfolio is derived**: `src/content/portfolio.ts` builds `PORTFOLIO_ITEMS` by reversing `PHOTO_SERIES` from `photos.ts`. Never add portfolio items manually.
-- **MDX `#` maps to h2 visually**: content `#` headings are NOT page-level h1s. `mdx-components` maps `h1→variant="h2"`, `h2→variant="h3"`, `h3→variant="h4"`.
+- **Content `#` maps to h2 visually**: post and daily content `#` headings are NOT page-level h1s. `MarkdownContent` maps `h1→variant="h2"`, `h2→variant="h3"`, `h3→variant="h4"`.
 - **Nav links are commented out for v1**: uncommenting `portfolio` and `about` in `src/content/common.ts` is all that's needed to re-enable them.

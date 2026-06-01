@@ -1,6 +1,5 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Badge } from '@deweyou-design/react/badge';
-import { mdxComponents } from '##/components/blog/mdx-components';
+import { MarkdownContent } from '##/components/markdown-content';
 import { ReadingProgress } from '##/components/blog/reading-progress';
 import type { DailyEntry } from '##/lib/daily';
 import styles from '##/app/daily/page.module.css';
@@ -38,7 +37,7 @@ export function DailyDetail({ closeHref, entry }: { closeHref: string; entry: Da
         )}
       </header>
       <div className={styles.body}>
-        <MDXRemote source={entry.content} components={mdxComponents} />
+        <MarkdownContent content={entry.content} />
       </div>
     </DailyDetailShell>
   );
