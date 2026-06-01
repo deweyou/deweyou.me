@@ -290,6 +290,28 @@
   margin-bottom: 10px;
 }
 
+.detailBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ui-color-text-muted);
+  font-family: var(--ui-font-body);
+  font-size: 15px;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 140ms ease;
+}
+
+.detailBackLink:hover {
+  color: var(--ui-color-text);
+}
+
+.detailBackLink:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--ui-color-brand-text);
+  outline-offset: 4px;
+}
+
 .date {
   display: block;
   font-family: var(--ui-font-mono);

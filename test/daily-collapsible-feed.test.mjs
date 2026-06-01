@@ -34,6 +34,9 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.doesNotMatch(layout, /MenuFoldIcon|MenuUnfoldIcon|ViewListIcon|ArrowLeftIcon|ArrowRightIcon/);
   assert.doesNotMatch(layout, /detailPaneControls/);
   assert.match(detail, /Badge/);
+  assert.match(detail, /ArrowLeftIcon/);
+  assert.match(detail, /href=\{closeHref\}/);
+  assert.match(detail, /styles\.detailBackLink/);
   assert.match(detail, /entry\.type === 'deep-share'/);
   assert.match(detail, /styles\.entryMetaLine/);
   assert.match(detail, /styles\.entryTypeLabel/);
@@ -77,4 +80,5 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.match(css, /experienceSplit\[data-feed-collapsed="true"\]\s+\.desktopFloatingFeedToggle/);
   assert.match(css, /experienceSplit\[data-feed-drawer-open="true"\]\s+\.mobileFloatingFeedToggle\s*{[\s\S]*visibility:\s*hidden;/);
   assert.match(css, /\.detailLoading\s*{/);
+  assert.match(css, /\.detailBackLink\s*{/);
 });

@@ -1,4 +1,6 @@
 import { Badge } from '@deweyou-design/react/badge';
+import { ArrowLeftIcon } from '@deweyou-design/react-icons';
+import Link from 'next/link';
 import { MarkdownContent } from '##/components/markdown-content';
 import { ReadingProgress } from '##/components/blog/reading-progress';
 import type { DailyEntry } from '##/lib/daily';
@@ -16,6 +18,10 @@ export function DailyDetail({ closeHref, entry }: { closeHref: string; entry: Da
       />
       <header className={styles.detailHeader}>
         <div className={styles.entryMetaLine}>
+          <Link href={closeHref} scroll={false} className={styles.detailBackLink}>
+            <ArrowLeftIcon size={16} aria-hidden="true" />
+            <span>笔记</span>
+          </Link>
           <time dateTime={entry.date} className={styles.date}>
             {entry.date}
           </time>
