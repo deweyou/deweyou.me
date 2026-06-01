@@ -6,6 +6,7 @@ import {
   getReachedReadProgressThresholds,
   type ReadProgressThreshold,
 } from '##/lib/read-progress';
+import { shouldReportAnalytics } from '##/lib/analytics';
 
 type ReadProgressContentType = 'article' | 'daily';
 
@@ -43,7 +44,7 @@ export function ReadingProgress({
     reportedThresholds.current = new Set();
 
     const reportProgress = (progressPercent: number) => {
-      if (!contentId || !contentType || process.env.NODE_ENV !== 'production') return;
+      if (!contentId || !contentType || !shouldReportAnalytics(window.location.hostname)) return;
       if (typeof window.gtag !== 'function') return;
 
       const reachedThresholds = getReachedReadProgressThresholds(

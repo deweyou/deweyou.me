@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { IBM_Plex_Mono } from 'next/font/google';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import { ThemeProvider } from '##/components/theme-provider';
 import { Nav } from '##/components/nav';
 import { Footer } from '##/components/footer';
+import { GoogleAnalytics } from '##/components/google-analytics';
 import '@deweyou-design/styles/theme.css';
 import '@deweyou-design/react/style.css';
 import './globals.css';
@@ -29,7 +29,6 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 const googleAnalyticsId = process.env.NEXT_PUBLIC_GA_ID ?? 'G-M72TH8DYYT';
-const shouldLoadGoogleAnalytics = process.env.NODE_ENV === 'production';
 
 export const metadata: Metadata = {
   title: 'Dewey Ou',
@@ -63,7 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
         </ThemeProvider>
       </body>
-      {shouldLoadGoogleAnalytics ? <GoogleAnalytics gaId={googleAnalyticsId} /> : null}
+      <GoogleAnalytics gaId={googleAnalyticsId} />
     </html>
   );
 }
