@@ -1,9 +1,8 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { ArticleMarkdown } from '##/components/blog/article-markdown';
 import { ReadingProgress } from '##/components/blog/reading-progress';
 import { TocSidebar } from '##/components/blog/toc-sidebar';
-import { mdxComponents } from '##/components/blog/mdx-components';
 import { getPost, getAllSlugs, extractToc } from '##/lib/posts';
 
 export async function generateStaticParams() {
@@ -48,7 +47,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
           </header>
 
           {/* Body */}
-          <MDXRemote source={post.content} components={mdxComponents} />
+          <ArticleMarkdown content={post.content} />
         </article>
       </div>
     </>
