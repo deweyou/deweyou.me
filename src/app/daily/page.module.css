@@ -293,11 +293,13 @@
 .detailBackLink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   color: var(--ui-color-text-muted);
-  font-family: var(--ui-font-body);
-  font-size: 15px;
+  font-family: var(--ui-font-display);
+  font-size: clamp(1.5rem, 4vw, 1.9rem);
+  font-weight: 600;
   line-height: 1;
+  letter-spacing: 0;
   text-decoration: none;
   transition: color 140ms ease;
 }
@@ -490,6 +492,24 @@
 
 .detailHeader {
   margin-bottom: 56px;
+}
+
+.detailHeader .entryMetaLine {
+  align-items: center;
+  gap: clamp(14px, 2vw, 22px);
+  margin-bottom: 20px;
+}
+
+.detailHeader .date {
+  font-size: clamp(1rem, 2.2vw, 1.35rem);
+  line-height: 1;
+  letter-spacing: 0.12em;
+}
+
+.detailHeader .entryTypeLabel {
+  padding: 4px 12px;
+  font-size: clamp(1rem, 2.1vw, 1.25rem);
+  line-height: 1.05;
 }
 
 .detailTitle {
