@@ -1,11 +1,10 @@
 'use client';
 
-import { MDXRemote } from 'next-mdx-remote';
 import { Badge } from '@deweyou-design/react/badge';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from '##/app/daily/page.module.css';
-import { mdxComponents } from '##/components/blog/mdx-components';
+import { MarkdownContent } from '##/components/markdown-content';
 import type { DailySerializedFeedBatch, DailySerializedFeedEntry } from '##/lib/daily-feed';
 
 const DAILY_BATCH_SIZE = 20;
@@ -112,7 +111,7 @@ export function DailyVirtualTimeline({
           )}
         </header>
         <div className={styles.body}>
-          <MDXRemote {...entry.mdx} components={mdxComponents} />
+          <MarkdownContent content={entry.content} />
         </div>
       </article>
     );

@@ -13,6 +13,7 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   const serverFeed = readFileSync('src/components/daily/daily-server-feed.tsx', 'utf8');
   const virtualTimeline = readFileSync('src/components/daily/virtual-timeline.tsx', 'utf8');
   const detailLoading = readFileSync('src/app/daily/[id]/loading.tsx', 'utf8');
+  const markdownContent = readFileSync('src/components/markdown-content.tsx', 'utf8');
   const css = readFileSync('src/app/daily/page.module.css', 'utf8');
   const navCss = readFileSync('src/components/nav.module.css', 'utf8');
 
@@ -33,9 +34,14 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.doesNotMatch(layout, /MenuFoldIcon|MenuUnfoldIcon|ViewListIcon|ArrowLeftIcon|ArrowRightIcon/);
   assert.doesNotMatch(layout, /detailPaneControls/);
   assert.match(detail, /Badge/);
+  assert.match(detail, /ArrowLeftIcon/);
+  assert.match(detail, /href=\{closeHref\}/);
+  assert.match(detail, /styles\.detailBackLink/);
   assert.match(detail, /entry\.type === 'deep-share'/);
   assert.match(detail, /styles\.entryMetaLine/);
   assert.match(detail, /styles\.entryTypeLabel/);
+  assert.match(detail, /MarkdownContent/);
+  assert.doesNotMatch(detail, /MDXRemote|mdxComponents/);
   assert.doesNotMatch(detailShell, /XIcon|styles\.closeButton|aria-label="关闭详情"/);
   assert.match(experience, /DailyDetailLayout/);
   assert.match(experience, /navigationKey/);
@@ -45,7 +51,13 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.match(feedPane, /pane\.scrollTop = 0/);
   assert.doesNotMatch(feedPane, /sessionStorage/);
   assert.match(serverFeed, /data-daily-entry-link="true"/);
+  assert.match(serverFeed, /MarkdownContent/);
+  assert.doesNotMatch(serverFeed, /MDXRemote|mdxComponents/);
   assert.match(virtualTimeline, /data-daily-entry-link="true"/);
+  assert.match(virtualTimeline, /MarkdownContent/);
+  assert.doesNotMatch(virtualTimeline, /MDXRemote|mdxComponents/);
+  assert.match(markdownContent, /MarkdownRender/);
+  assert.match(markdownContent, /variant="h2"/);
   assert.match(detailLoading, /DailyDetailLoading/);
   assert.match(detailLoading, /detailLoading/);
   assert.match(css, /experienceSplit\[data-feed-collapsed="true"\]/);
@@ -68,4 +80,5 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.match(css, /experienceSplit\[data-feed-collapsed="true"\]\s+\.desktopFloatingFeedToggle/);
   assert.match(css, /experienceSplit\[data-feed-drawer-open="true"\]\s+\.mobileFloatingFeedToggle\s*{[\s\S]*visibility:\s*hidden;/);
   assert.match(css, /\.detailLoading\s*{/);
+  assert.match(css, /\.detailBackLink\s*{/);
 });

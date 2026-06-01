@@ -1,7 +1,6 @@
-import { MDXRemote } from 'next-mdx-remote/rsc';
 import { Badge } from '@deweyou-design/react/badge';
 import Link from 'next/link';
-import { mdxComponents } from '##/components/blog/mdx-components';
+import { MarkdownContent } from '##/components/markdown-content';
 import type { DailyEntry } from '##/lib/daily';
 import styles from '##/app/daily/page.module.css';
 
@@ -61,7 +60,7 @@ export function DailyServerFeed({
           )}
         </header>
         <div className={styles.body}>
-          <MDXRemote source={entry.content} components={mdxComponents} />
+          <MarkdownContent content={entry.content} />
         </div>
       </article>
     );

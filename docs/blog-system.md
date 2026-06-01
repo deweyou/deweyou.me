@@ -2,11 +2,13 @@
 
 ## Overview
 
-Blog posts live in `content/posts/*.mdx` and are rendered via Next.js App Router (SSG). The pipeline:
+Blog posts live in `content/posts/*.mdx` and are rendered via Next.js App Router (SSG). The file extension is `.mdx` for historical compatibility, but post bodies are rendered as Markdown/GFM rather than executable MDX. The pipeline:
 
 1. `src/lib/posts.ts` — reads `.mdx` files from disk, parses frontmatter via `gray-matter`
-2. `src/app/blog/[slug]/page.tsx` — renders a post with `next-mdx-remote/rsc`
-3. `src/components/blog/mdx-components.tsx` — maps markdown elements to design system components
+2. `src/app/blog/[slug]/page.tsx` — renders the page shell and passes content to `MarkdownContent`
+3. `src/components/markdown-content.tsx` — renders CommonMark/GFM with `@deweyou-design/react/markdown-render`
+
+Daily note bodies use the same `MarkdownContent` renderer in detail and feed views, so tables, task lists, fenced code, and `mermaid` code fences behave consistently across blog and daily surfaces.
 
 ## Adding a Post
 
@@ -31,7 +33,7 @@ excerpt: '...'
 
 ## Heading Levels in Content
 
-MDX `#` (h1) in post content is **not** the page title — the page title is rendered separately in `page.tsx`. Content headings map down by one:
+Markdown `#` (h1) in post content is **not** the page title — the page title is rendered separately in `page.tsx`. Content headings map down by one:
 
 | Markdown | Renders as |
 |----------|-----------|
@@ -39,14 +41,14 @@ MDX `#` (h1) in post content is **not** the page title — the page title is ren
 | `##`     | `Text variant="h3"` |
 | `###`    | `Text variant="h4"` |
 
-Do not use `Text variant="h1"` in `mdx-components` — it produces oversized section headings.
+Do not use `Text variant="h1"` in `MarkdownContent` for content headings — it produces oversized section headings.
 
 ## Heading IDs and Slugify — CRITICAL
 
 Heading IDs are generated in **two separate places** and must stay in sync:
 
-- `src/lib/posts.ts` → `extractToc()` — generates IDs from raw MDX text (server-side)
-- `src/components/blog/mdx-components.tsx` → `slugify()` — generates IDs from rendered React children (client-side)
+- `src/lib/posts.ts` → `extractToc()` — generates IDs from raw Markdown text (server-side)
+- `src/components/markdown-content.tsx` → `slugify()` — generates IDs for rendered headings (client-side)
 
 **The algorithm** (both use the same logic):
 1. Strip markdown inline syntax (`` `code` ``, `**bold**`, `_italic_`) to get plain text
@@ -79,4 +81,4 @@ bash scripts/subset-fonts.sh
 
 The script scans `content/posts/*.mdx`, `content/daily/*.mdx`, and site UI source files, then rebuilds `src/app/fonts/*.woff2`. A tracked pre-commit hook in `.githooks/pre-commit` runs this script and stages updated woff2 files automatically. **Do not add this to `prebuild`** — `pyftsubset` is not available on Vercel.
 
-*Last updated: 2026-05-07 | Reason: blog system built from scratch during redesign*
+*Last updated: 2026-06-01 | Reason: blog and daily bodies now share the design-system Markdown renderer*

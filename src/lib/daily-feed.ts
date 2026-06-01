@@ -1,5 +1,3 @@
-import { serialize } from 'next-mdx-remote/serialize';
-import type { MDXRemoteSerializeResult } from 'next-mdx-remote';
 import type { DailyEntry, DailyFeedBatch } from './daily';
 
 export interface DailySerializedFeedEntry {
@@ -10,7 +8,7 @@ export interface DailySerializedFeedEntry {
   type: DailyEntry['type'];
   tags: string[];
   estimatedSize: number;
-  mdx: MDXRemoteSerializeResult;
+  content: string;
 }
 
 export interface DailySerializedFeedBatch {
@@ -31,7 +29,7 @@ export async function serializeDailyFeedEntry(entry: DailyEntry): Promise<DailyS
     type: entry.type,
     tags: entry.tags,
     estimatedSize: estimateDailyEntrySize(entry),
-    mdx: await serialize(entry.content),
+    content: entry.content,
   };
 }
 
