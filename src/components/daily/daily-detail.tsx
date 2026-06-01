@@ -19,7 +19,7 @@ export function DailyDetail({ closeHref, entry }: { closeHref: string; entry: Da
       <header className={styles.detailHeader}>
         <div className={styles.entryMetaLine}>
           <Link href={closeHref} scroll={false} className={styles.detailBackLink}>
-            <ArrowLeftIcon size={16} aria-hidden="true" />
+            <ArrowLeftIcon size={14} aria-hidden="true" />
             <span>笔记</span>
           </Link>
           <time dateTime={entry.date} className={styles.date}>

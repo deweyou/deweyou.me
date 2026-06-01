@@ -293,10 +293,10 @@
 .detailBackLink {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   color: var(--ui-color-text-muted);
   font-family: var(--ui-font-body);
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1;
   text-decoration: none;
   transition: color 140ms ease;
