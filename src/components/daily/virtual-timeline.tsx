@@ -111,7 +111,7 @@ export function DailyVirtualTimeline({
           )}
         </header>
         <div className={styles.body}>
-          <MarkdownContent content={entry.content} />
+          <MarkdownContent assetBasePath="/daily/" content={entry.content} />
         </div>
       </article>
     );

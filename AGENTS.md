@@ -20,6 +20,8 @@ If you are **using `@deweyou-design` components**, read [`docs/design-system.md`
 
 If you are **modifying nav, layout, or adding pages**, read [`docs/nav-and-layout.md`](docs/nav-and-layout.md) — portfolio and about tabs are intentionally hidden for v1.
 
+If you are **adding, syncing, or rendering daily shares**, read [`docs/daily-system.md`](docs/daily-system.md) — daily entries have required frontmatter invariants and mirrored image-path rules.
+
 ## Repository Structure
 
 ```

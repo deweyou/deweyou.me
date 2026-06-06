@@ -3,6 +3,21 @@
 import { MarkdownRender, type MarkdownRenderComponents } from '@deweyou-design/react/markdown-render';
 import { Text, type TextProps } from '@deweyou-design/react/text';
 
+function normalizeAssetUrl(url: string, assetBasePath?: string): string {
+  if (!assetBasePath) return url;
+  if (
+    url.startsWith('http://')
+    || url.startsWith('https://')
+    || url.startsWith('//')
+    || url.startsWith('/')
+    || url.startsWith('#')
+    || url.startsWith('data:')
+  ) {
+    return url;
+  }
+  return `${assetBasePath}${url}`.replace(/(?<!:)\/{2,}/g, '/');
+}
+
 function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -57,10 +72,29 @@ const headingComponents: MarkdownRenderComponents = {
   ),
 };
 
-export function MarkdownContent({ content }: { content: string }) {
+export function MarkdownContent({
+  assetBasePath,
+  content,
+}: {
+  assetBasePath?: string;
+  content: string;
+}) {
+  const components: MarkdownRenderComponents = {
+    ...headingComponents,
+    img: ({ src, ...props }) => (
+      // Daily shares keep relative asset refs in markdown; normalize them to the public base path at render time.
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        {...props}
+        alt={typeof props.alt === 'string' ? props.alt : ''}
+        src={typeof src === 'string' ? normalizeAssetUrl(src, assetBasePath) : src}
+      />
+    ),
+  };
+
   return (
     <MarkdownRender
-      components={headingComponents}
+      components={components}
       resolveNodeAttributes={({ node, text }) => {
         if (node !== 'h1' && node !== 'h2' && node !== 'h3') return undefined;
         return { id: slugify(text) };
