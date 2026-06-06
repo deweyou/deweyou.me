@@ -75,6 +75,8 @@ The build step should generate or expose:
 
 The document store keeps enough text to generate snippets. Body text should be Markdown-cleaned before indexing and snippet generation.
 
+Implementation detail: expose the payload through a `force-static` route handler at `/search-index.json`, so the modal can load it on first open as a static asset instead of bundling it into every page or serving runtime search results.
+
 ## Size Budget
 
 Current local Markdown/MDX content is about 208 KB across 71 files, so body search is safe for the current site.

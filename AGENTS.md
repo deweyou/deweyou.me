@@ -18,6 +18,8 @@ If you are **working with photos or portfolio**, read [`docs/photo-system.md`](d
 
 If you are **using `@deweyou-design` components**, read [`docs/design-system.md`](docs/design-system.md) — there are Server Component constraints and the library is not third-party.
 
+If you are **modifying search, adding searchable content types, or changing post/daily content readers**, read [`docs/search-system.md`](docs/search-system.md) first — the static search index must include every local data source intentionally.
+
 If you are **modifying nav, layout, or adding pages**, read [`docs/nav-and-layout.md`](docs/nav-and-layout.md) — portfolio and about tabs are intentionally hidden for v1.
 
 If you are **adding, syncing, or rendering daily shares**, read [`docs/daily-system.md`](docs/daily-system.md) — daily entries have required frontmatter invariants and mirrored image-path rules.

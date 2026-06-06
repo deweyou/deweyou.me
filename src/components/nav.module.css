@@ -51,6 +51,10 @@
   --button-ghost-text-color: var(--ui-color-text-muted) !important;
   --button-ghost-background-hover: transparent !important;
   --button-ghost-background-active: transparent !important;
+  width: 32px !important;
+  min-width: 32px !important;
+  height: 32px !important;
+  padding: 0 !important;
 }
 
 .iconBtn:hover {
@@ -72,12 +76,17 @@
   .logoMobile  { display: flex; }
   .links { display: none; }
   .menuBtn { display: inline-flex !important; }
+  .iconBtn {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+  }
 }
 
 .meta {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 4px;
 }
 
 /* ── Mobile overlay ──────────────────────────────────────── */

@@ -7,12 +7,14 @@ import { Button } from '@deweyou-design/react/button';
 import { Logo, LogoAnimated } from './logo';
 import { useTheme } from './theme-provider';
 import { NAV_LINKS } from '##/content/common';
+import { SearchModal } from './search/search-modal';
 import styles from './nav.module.css';
 
 export function Nav() {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   return (
     <nav className={styles.nav}>
@@ -38,9 +40,12 @@ export function Nav() {
 
       {/* Right controls */}
       <div className={styles.meta}>
+        <Button.Icon variant="ghost" className={styles.iconBtn} aria-label="Search" icon={<i className="ti ti-search" style={{ fontSize: 18 }} />} onClick={() => setSearchOpen(true)} />
         <Button.Icon variant="ghost" className={styles.iconBtn} aria-label="Toggle theme" icon={<i className={`ti ${theme === 'dark' ? 'ti-sun' : 'ti-moon'}`} style={{ fontSize: 18 }} />} onClick={toggleTheme} />
         <Button.Icon variant="ghost" className={`${styles.iconBtn} ${styles.menuBtn}`} aria-label="Menu" icon={<i className={`ti ${menuOpen ? 'ti-x' : 'ti-menu-2'}`} style={{ fontSize: 18 }} />} onClick={() => setMenuOpen((o) => !o)} />
       </div>
+
+      <SearchModal open={searchOpen} onOpenChange={setSearchOpen} />
 
       {/* Mobile overlay */}
       {menuOpen && (
