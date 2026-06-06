@@ -41,6 +41,7 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.match(detail, /styles\.entryMetaLine/);
   assert.match(detail, /styles\.entryTypeLabel/);
   assert.match(detail, /MarkdownContent/);
+  assert.match(detail, /assetBasePath="\/daily\/"/);
   assert.doesNotMatch(detail, /MDXRemote|mdxComponents/);
   assert.doesNotMatch(detailShell, /XIcon|styles\.closeButton|aria-label="关闭详情"/);
   assert.match(experience, /DailyDetailLayout/);
@@ -52,11 +53,16 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.doesNotMatch(feedPane, /sessionStorage/);
   assert.match(serverFeed, /data-daily-entry-link="true"/);
   assert.match(serverFeed, /MarkdownContent/);
+  assert.match(serverFeed, /assetBasePath="\/daily\/"/);
   assert.doesNotMatch(serverFeed, /MDXRemote|mdxComponents/);
   assert.match(virtualTimeline, /data-daily-entry-link="true"/);
   assert.match(virtualTimeline, /MarkdownContent/);
+  assert.match(virtualTimeline, /assetBasePath="\/daily\/"/);
   assert.doesNotMatch(virtualTimeline, /MDXRemote|mdxComponents/);
   assert.match(markdownContent, /MarkdownRender/);
+  assert.match(markdownContent, /function normalizeAssetUrl/);
+  assert.match(markdownContent, /img: \(\{ src, \.\.\.props \}\)/);
+  assert.match(markdownContent, /normalizeAssetUrl\(src, assetBasePath\)/);
   assert.match(markdownContent, /variant="h2"/);
   assert.match(detailLoading, /DailyDetailLoading/);
   assert.match(detailLoading, /detailLoading/);

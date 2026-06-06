@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760" role="img" aria-labelledby="title desc">
+  <title id="title">错误状态不能只依赖红色</title>
+  <desc id="desc">左侧示意仅把输入框标红，右侧示意把问题、说明、边框和保留的输入值联系起来。</desc>
+  <rect width="1280" height="760" fill="#f6f7f8"/>
+  <text x="80" y="90" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="34" font-weight="700" fill="#111827">反面案例：把“错误”只交给颜色</text>
+  <text x="80" y="135" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="20" fill="#4b5563">颜色可以提醒，但不能独自承担说明、定位和修复路径。</text>
+
+  <g transform="translate(80 190)">
+    <rect width="520" height="420" rx="24" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="36" y="58" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="24" font-weight="700" fill="#111827">只标红</text>
+    <text x="36" y="98" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="18" fill="#6b7280">用户知道“这里不对”，但不知道为什么不对。</text>
+    <text x="36" y="172" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="23" font-weight="700" fill="#111827">护照签发日期</text>
+    <text x="36" y="211" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="16" fill="#6b7280">例如：27 3 2007</text>
+    <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="15" fill="#111827">
+      <text x="36" y="263">日</text><text x="126" y="263">月</text><text x="216" y="263">年</text>
+    </g>
+    <rect x="36" y="278" width="64" height="56" fill="#fff" stroke="#dc2626" stroke-width="3"/>
+    <rect x="126" y="278" width="64" height="56" fill="#fff" stroke="#dc2626" stroke-width="3"/>
+    <rect x="216" y="278" width="92" height="56" fill="#fff" stroke="#dc2626" stroke-width="3"/>
+    <text x="55" y="314" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="20" fill="#111827">6</text>
+    <text x="145" y="314" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="20" fill="#111827">3</text>
+    <text x="235" y="314" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="20" fill="#111827">2076</text>
+    <text x="36" y="380" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="18" fill="#dc2626">问题被显示出来，但修复路径仍然缺席。</text>
+  </g>
+
+  <g transform="translate(680 190)">
+    <rect width="520" height="420" rx="24" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="36" y="58" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="24" font-weight="700" fill="#111827">把关系说清楚</text>
+    <text x="36" y="98" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="18" fill="#6b7280">错误说明、字段、边界和原输入共同工作。</text>
+    <line x1="36" y1="139" x2="36" y2="354" stroke="#d4351c" stroke-width="6"/>
+    <text x="58" y="172" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="23" font-weight="700" fill="#111827">护照签发日期</text>
+    <text x="58" y="211" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="16" fill="#6b7280">例如：27 3 2007</text>
+    <text x="58" y="250" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="18" font-weight="700" fill="#d4351c">日期必须早于今天</text>
+    <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="15" fill="#111827">
+      <text x="58" y="300">日</text><text x="148" y="300">月</text><text x="238" y="300">年</text>
+    </g>
+    <rect x="58" y="315" width="64" height="56" fill="#fff" stroke="#d4351c" stroke-width="2"/>
+    <rect x="148" y="315" width="64" height="56" fill="#fff" stroke="#d4351c" stroke-width="2"/>
+    <rect x="238" y="315" width="92" height="56" fill="#fff" stroke="#d4351c" stroke-width="2"/>
+    <text x="77" y="351" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="20" fill="#111827">6</text>
+    <text x="167" y="351" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="20" fill="#111827">3</text>
+    <text x="257" y="351" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="20" fill="#111827">2076</text>
+  </g>
+
+  <text x="80" y="690" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif" font-size="17" fill="#6b7280">参考：GOV.UK Design System 的 Error message / Error summary 指南，以及 WCAG 2.2 SC 1.4.1 Use of Color。</text>
+</svg>
