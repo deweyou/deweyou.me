@@ -13,7 +13,7 @@ export const PROFILE = {
   location: '深圳',
   socials: [
     { label: 'GitHub',  handle: '@deweyou',      href: 'https://github.com/deweyou',  icon: 'ti-brand-github' },
-    { label: 'Email',   handle: 'hi@deweyou.me', href: 'oushihao97@gmail.com',        icon: 'ti-mail' },
+    { label: 'Email',   handle: 'hi@deweyou.me', href: 'mailto:oushihao97@gmail.com', icon: 'ti-mail' },
     { label: '小红书',  handle: '欧怼怼',         href: 'https://www.xiaohongshu.com/user/profile/5c99a44d000000001600c92d',                           iconSrc: '/icons/xiaohongshu.svg' },
   ],
 } as const;

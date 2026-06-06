@@ -66,6 +66,10 @@ function normalizeId(value: unknown, file: string): string {
   throw new Error(`Daily entry ${file} must include id using letters, numbers, hyphens, or underscores`);
 }
 
+function cleanDailyContent(content: string): string {
+  return content.replace(/^\s*<!--\s*source:\s*.*?-->\s*\n?/gim, '').trimStart();
+}
+
 function readEntry(file: string): DailyEntry {
   const raw = fs.readFileSync(path.join(DAILY_DIR, file), 'utf8');
   const { data, content } = matter(raw);
@@ -86,7 +90,7 @@ function readEntry(file: string): DailyEntry {
     date,
     type: normalizeType(data.type, file),
     tags: normalizeTags(data.tags, file),
-    content,
+    content: cleanDailyContent(content),
   };
 }
 
