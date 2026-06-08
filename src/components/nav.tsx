@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@deweyou-design/react/button';
-import { Logo, LogoAnimated, LogoStaticGreenCrisp } from './logo';
+import { LogoAnimated, LogoAutoCrisp, LogoStaticGreenCrisp } from './logo';
 import { useTheme } from './theme-provider';
 import { NAV_LINKS } from '##/content/common';
 import { SearchModal } from './search/search-modal';
@@ -15,6 +15,14 @@ export function Nav() {
   const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.toggleAttribute('data-menu-open', menuOpen);
+
+    return () => {
+      document.body.removeAttribute('data-menu-open');
+    };
+  }, [menuOpen]);
 
   return (
     <nav className={styles.nav}>
@@ -51,7 +59,7 @@ export function Nav() {
       {menuOpen && (
         <div className={styles.overlay} onClick={() => setMenuOpen(false)}>
           <div className={styles.overlayTop}>
-            <Logo height={16} />
+            <LogoAutoCrisp height={20} className={styles.overlayLogo} />
             <span className={styles.overlayCount}>MENU · {NAV_LINKS.length.toString().padStart(2, '0')}</span>
           </div>
           <ul className={styles.overlayList} onClick={(e) => e.stopPropagation()}>

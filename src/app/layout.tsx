@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { IBM_Plex_Mono } from 'next/font/google';
 import { ThemeProvider } from '##/components/theme-provider';
+import { ViewportHeightSync } from '##/components/viewport-height-sync';
 import { Nav } from '##/components/nav';
 import { Footer } from '##/components/footer';
 import { GoogleAnalytics } from '##/components/google-analytics';
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
+          <ViewportHeightSync />
           <Nav />
           <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
           <Footer />

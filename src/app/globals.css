@@ -15,12 +15,18 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  min-height: var(--visual-viewport-height, 100dvh);
   user-select: none;
 }
 
 [data-logo-auto] > img,
 [data-logo-auto] > svg {
   grid-area: 1 / 1;
+}
+
+body[data-menu-open] {
+  overflow: hidden;
+  touch-action: none;
 }
 
 [data-logo-auto] .logo-auto-dark {
