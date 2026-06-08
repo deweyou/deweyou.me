@@ -18,7 +18,8 @@ body {
   user-select: none;
 }
 
-[data-logo-auto] > img {
+[data-logo-auto] > img,
+[data-logo-auto] > svg {
   grid-area: 1 / 1;
 }
 

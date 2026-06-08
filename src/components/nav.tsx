@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Button } from '@deweyou-design/react/button';
-import { Logo, LogoAnimated } from './logo';
+import { Logo, LogoAnimated, LogoStaticGreenCrisp } from './logo';
 import { useTheme } from './theme-provider';
 import { NAV_LINKS } from '##/content/common';
 import { SearchModal } from './search/search-modal';
@@ -21,7 +21,7 @@ export function Nav() {
       {/* Brand */}
       <Link href="/" className={styles.brand}>
         <span className={styles.logoDesktop}><LogoAnimated height={18} /></span>
-        <span className={styles.logoMobile}><LogoAnimated height={16} /></span>
+        <span className={styles.logoMobile}><LogoStaticGreenCrisp height={24} /></span>
       </Link>
 
       {/* Desktop links */}
