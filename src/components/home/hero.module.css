@@ -213,11 +213,13 @@
   .hero {
     display: flex;
     width: min(100%, 640px);
-    min-height: calc(100dvh - 194px);
+    min-height: calc(100svh - 137px);
+    min-height: calc(100dvh - 137px);
+    min-height: calc(var(--visual-viewport-height, 100dvh) - 137px);
     flex-direction: column;
     justify-content: flex-start;
     margin: 0 auto;
-    padding: clamp(44px, 7dvh, 72px) clamp(28px, 8vw, 72px) clamp(52px, 9dvh, 88px);
+    padding: clamp(22px, 4dvh, 40px) clamp(28px, 8vw, 72px) clamp(32px, 6dvh, 56px);
     text-align: center;
   }
 
@@ -362,6 +364,20 @@
     min-height: 0;
     padding-top: 0;
     padding-bottom: 24px;
+    border-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  :global(body):has(.hero) {
+    overflow: hidden;
+  }
+
+  :global(body):has(.hero) :global(footer) {
+    background: transparent;
+    min-height: 0;
+    padding-top: 0;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
     border-top: 0;
   }
 }

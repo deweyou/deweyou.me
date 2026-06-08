@@ -94,6 +94,9 @@
   position: fixed;
   inset: 0;
   z-index: 50;
+  height: 100dvh;
+  height: var(--visual-viewport-height, 100dvh);
+  overflow: hidden;
   background: color-mix(in srgb, var(--ui-color-canvas) 92%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -111,13 +114,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 24px;
+  min-height: 68px;
+  padding: max(18px, env(safe-area-inset-top)) 24px 18px;
   border-bottom: 1px solid var(--ui-color-border);
+}
+
+.overlayLogo {
+  display: inline-grid;
+  transform: translateZ(0);
 }
 
 .overlayCount {
   font-family: var(--ui-font-mono);
-  font-size: 10px;
+  font-size: 9px;
   color: var(--ui-color-text-muted);
   letter-spacing: 0.16em;
 }
@@ -141,9 +150,9 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding: 22px 4px;
+  padding: 18px 4px;
   font-family: var(--ui-font-display);
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 500;
   color: var(--ui-color-text);
   text-decoration: none;
@@ -166,20 +175,20 @@
 
 .overlayIndex {
   font-family: var(--ui-font-mono);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--ui-color-text-muted);
   letter-spacing: 0.1em;
 }
 
 .overlayBottom {
-  padding: 24px 24px 36px;
+  padding: 20px 24px max(28px, calc(env(safe-area-inset-bottom) + 20px));
   display: flex;
   justify-content: center;
   border-top: 1px solid var(--ui-color-border);
 }
 
 .closeBtn {
-  width: 56px; height: 56px;
+  width: 52px; height: 52px;
   border-radius: 50%;
   border: 1px solid var(--ui-color-border-strong);
   background: var(--ui-color-surface);
