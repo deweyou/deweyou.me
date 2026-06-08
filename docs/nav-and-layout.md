@@ -32,6 +32,10 @@ To re-enable, uncomment these lines. The pages (`src/app/portfolio/page.tsx`, `s
 
 Body is `display: flex; flex-direction: column; min-height: 100dvh`. Nav is sticky; Footer scrolls (not fixed). Pages that need the full-bleed layout should use `.page` class.
 
+## Logo Rendering
+
+Desktop navigation keeps the animated SVG asset (`/logo-animated.svg`) unchanged. Mobile navigation and footer use crisp inline SVG variants from `src/components/logo.tsx`; the static logo assets use mask-based SVGs that can look blurry at small mobile sizes.
+
 ## Content Data Files
 
 Static content data lives in `src/content/`:
@@ -51,4 +55,4 @@ Static content data lives in `src/content/`:
 
 `src/app/globals.css` overrides design system CSS variables with Next.js `localFont` variables, and sets global body/article styles.
 
-*Last updated: 2026-05-07 | Reason: layout refactored during redesign; nav state documented to avoid confusion*
+*Last updated: 2026-06-08 | Reason: mobile logo rendering note added after small-size mask SVG blur fix*

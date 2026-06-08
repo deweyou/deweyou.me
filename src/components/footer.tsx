@@ -1,4 +1,4 @@
-import { LogoAuto } from './logo';
+import { LogoAutoCrisp } from './logo';
 import { SocialIcon } from './social-icon';
 import { PROFILE, FOOTER } from '##/content/common';
 import styles from './footer.module.css';
@@ -11,7 +11,7 @@ export function Footer({ compact = false }: FooterProps) {
   return (
     <footer className={`${styles.footer} ${compact ? styles.footerMobile : ''}`}>
       <div className={styles.brand}>
-        <LogoAuto height={14} />
+        <LogoAutoCrisp height={20} />
         <span className={styles.copyright}>{FOOTER.copyright}</span>
       </div>
       <div className={styles.socials}>

@@ -215,11 +215,10 @@
     width: min(100%, 640px);
     min-height: calc(100dvh - 194px);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0 auto;
-    padding: clamp(26px, 5dvh, 48px) clamp(28px, 8vw, 72px) clamp(52px, 9dvh, 88px);
+    padding: clamp(44px, 7dvh, 72px) clamp(28px, 8vw, 72px) clamp(52px, 9dvh, 88px);
     text-align: center;
-    transform: translateY(clamp(-40px, -4dvh, -22px));
   }
 
   .backgroundLogo {
