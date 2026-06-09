@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { DailyVirtualTimeline } from '##/components/daily/virtual-timeline';
 import type { DailyEntry, DailyFeedBatch } from '##/lib/daily';
 import styles from '##/app/daily/page.module.css';
@@ -6,11 +6,13 @@ import { DailyDetail } from './daily-detail';
 import { DailyDetailLayout, FEED_PANEL_ID } from './daily-detail-layout';
 import { DailyFeedPane } from './daily-feed-pane';
 import { DailyServerFeed } from './daily-server-feed';
+import { DailyTagFilters } from './daily-tag-filters';
 
 export function DailyExperience({
   activeId,
   activeTag,
   availableTags,
+  detailFallback,
   initialBatch,
   selectedEntry,
   visibleEntries,
@@ -18,6 +20,7 @@ export function DailyExperience({
   activeId?: string;
   activeTag?: string | null;
   availableTags: string[];
+  detailFallback?: ReactNode;
   initialBatch: DailyFeedBatch;
   selectedEntry?: DailyEntry;
   visibleEntries: DailyEntry[];
@@ -28,27 +31,11 @@ export function DailyExperience({
   const filterBaseHref = activeId ? `/daily/${activeId}` : '/daily';
   const navigationKey = `${activeId ?? 'index'}:${activeTag ?? 'all'}`;
   const filterContent = (
-    <nav className={styles.tagFilters} aria-label="笔记标签筛选">
-      <Link
-        href={filterBaseHref}
-        scroll={false}
-        className={styles.tagFilter}
-        data-active={!activeTag}
-      >
-        全部
-      </Link>
-      {availableTags.map((tag) => (
-        <Link
-          key={tag}
-          href={`${filterBaseHref}?tag=${encodeURIComponent(tag)}`}
-          scroll={false}
-          className={styles.tagFilter}
-          data-active={activeTag === tag}
-        >
-          {tag}
-        </Link>
-      ))}
-    </nav>
+    <DailyTagFilters
+      activeTag={activeTag}
+      availableTags={availableTags}
+      baseHref={filterBaseHref}
+    />
   );
   const heroContent = (
     <>
@@ -68,7 +55,11 @@ export function DailyExperience({
     </>
   );
 
-  if (selectedEntry) {
+  const detail = selectedEntry
+    ? <DailyDetail closeHref={`/daily${activeTagQuery}`} entry={selectedEntry} />
+    : detailFallback;
+
+  if (detail) {
     const feed = (
       <DailyFeedPane id={FEED_PANEL_ID} resetKey={navigationKey}>
         <header className={styles.feedHero}>{heroContent}</header>
@@ -91,7 +82,7 @@ export function DailyExperience({
       <div className="page">
         <section className={`${styles.timelineWide} ${styles.timelineSplitMode}`} aria-label="笔记列表">
           <DailyDetailLayout
-            detail={<DailyDetail closeHref={`/daily${activeTagQuery}`} entry={selectedEntry} />}
+            detail={detail}
             feed={feed}
             navigationKey={navigationKey}
           />
