@@ -48,3 +48,25 @@ export function DailyDetail({ closeHref, entry }: { closeHref: string; entry: Da
     </DailyDetailShell>
   );
 }
+
+export function DailyDetailLoading({ closeHref }: { closeHref: string }) {
+  return (
+    <DailyDetailShell closeHref={closeHref}>
+      <article className={`${styles.detailArticle} ${styles.detailArticleLoading}`} aria-busy="true">
+        <header className={styles.detailHeader}>
+          <div className={`${styles.loadingLine} ${styles.loadingDate}`} />
+          <div className={`${styles.loadingLine} ${styles.loadingTitle}`} />
+          <div className={styles.tags}>
+            <span className={`${styles.loadingPill} ${styles.loadingLine}`} />
+            <span className={`${styles.loadingPill} ${styles.loadingLine}`} />
+          </div>
+        </header>
+        <div className={styles.detailLoadingBody}>
+          <div className={`${styles.loadingLine} ${styles.loadingParagraph}`} />
+          <div className={`${styles.loadingLine} ${styles.loadingParagraph}`} />
+          <div className={`${styles.loadingLine} ${styles.loadingParagraphShort}`} />
+        </div>
+      </article>
+    </DailyDetailShell>
+  );
+}

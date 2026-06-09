@@ -1,17 +1,21 @@
-import styles from '##/app/daily/page.module.css';
+import { DailyDetailLoading } from '##/components/daily/daily-detail';
+import { DailyExperience } from '##/components/daily/daily-experience';
+import {
+  getAllDailyEntries,
+  getAllDailyTags,
+  getDailyFeedBatch,
+} from '##/lib/daily';
 
-export default function DailyDetailLoading() {
+export default function Loading() {
+  const entries = getAllDailyEntries();
+  const initialBatch = getDailyFeedBatch();
+
   return (
-    <div className="page">
-      <section className={`${styles.timelineWide} ${styles.timelineSplitMode}`} aria-label="正在加载笔记">
-        <div className={styles.detailLoading}>
-          <div className={styles.detailLoadingMeta} />
-          <div className={styles.detailLoadingTitle} />
-          <div className={styles.detailLoadingLine} />
-          <div className={styles.detailLoadingLine} />
-          <div className={`${styles.detailLoadingLine} ${styles.detailLoadingLineShort}`} />
-        </div>
-      </section>
-    </div>
+    <DailyExperience
+      availableTags={getAllDailyTags(entries)}
+      detailFallback={<DailyDetailLoading closeHref="/daily" />}
+      initialBatch={initialBatch}
+      visibleEntries={entries}
+    />
   );
 }
