@@ -25,9 +25,11 @@ Current sources:
 - `content/posts/*.mdx` through `src/lib/posts.ts`
 - `content/daily/*.{md,mdx}` through `src/lib/daily.ts`
 
-Daily entries may include Obsidian sync comments such as
-`<!-- source: ... -->`; `src/lib/daily.ts` strips those before rendering or
-indexing so local filesystem paths never appear on the site.
+Daily entries may include a private frontmatter field such as `source_path` for
+Obsidian sync provenance. That field is not part of the search document mapping,
+and legacy `<!-- source: ... -->` comments are still stripped by
+`src/lib/daily.ts` before rendering or indexing so local filesystem paths never
+appear on the site.
 
 ## Build Behavior
 

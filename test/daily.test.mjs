@@ -57,7 +57,7 @@ test('daily reader ignores non-entry markdown files', async () => {
   }
 });
 
-test('daily reader removes source comments from rendered content', async () => {
+test('daily reader keeps source_path in frontmatter without leaking it into rendered content', async () => {
   const originalCwd = process.cwd();
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'daily-source-'));
   fs.mkdirSync(path.join(tmp, 'content', 'daily'), { recursive: true });
@@ -70,9 +70,8 @@ test('daily reader removes source comments from rendered content', async () => {
       'date: 2026-06-05',
       'type: daily-share',
       'tags: [设计]',
+      'source_path: "/Users/deweyou/Library/Mobile Documents/iCloud~md~obsidian/Documents/Dewey Ou/学习/每日分享/设计/2026-06-05 - 把复杂留到第二步.md"',
       '---',
-      '<!-- source: /Users/deweyou/Library/Mobile Documents/iCloud~md~obsidian/Documents/Dewey Ou/学习/每日分享/设计/2026-06-05 - 把复杂留到第二步.md -->',
-      '',
       '先让用户看到主要路径。',
     ].join('\n'),
   );
@@ -82,9 +81,43 @@ test('daily reader removes source comments from rendered content', async () => {
     const daily = await import(`../src/lib/daily.ts?daily-source-${Date.now()}`);
     const [entry] = daily.getAllDailyEntries();
 
+    assert.equal(entry.sourcePath, '/Users/deweyou/Library/Mobile Documents/iCloud~md~obsidian/Documents/Dewey Ou/学习/每日分享/设计/2026-06-05 - 把复杂留到第二步.md');
+    assert.equal(entry.content.trim(), '先让用户看到主要路径。');
+  } finally {
+    process.chdir(originalCwd);
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+test('daily reader still strips legacy source comments from rendered content', async () => {
+  const originalCwd = process.cwd();
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'daily-source-comment-'));
+  fs.mkdirSync(path.join(tmp, 'content', 'daily'), { recursive: true });
+  fs.writeFileSync(
+    path.join(tmp, 'content', 'daily', '2026-06-05 - 旧同步格式兼容.md'),
+    [
+      '---',
+      'id: daily-share-2026-06-05-legacy-source-comment',
+      'title: 旧同步格式兼容',
+      'date: 2026-06-05',
+      'type: daily-share',
+      'tags: [工程]',
+      '---',
+      '<!-- source: /Users/example/legacy.md -->',
+      '',
+      '兼容旧格式，避免注释被正文渲染出来。',
+    ].join('\n'),
+  );
+
+  try {
+    process.chdir(tmp);
+    const daily = await import(`../src/lib/daily.ts?daily-source-comment-${Date.now()}`);
+    const [entry] = daily.getAllDailyEntries();
+
+    assert.equal(entry.sourcePath, undefined);
     assert.ok(!entry.content.includes('source:'));
     assert.ok(!entry.content.includes('<!--'));
-    assert.equal(entry.content.trim(), '先让用户看到主要路径。');
+    assert.equal(entry.content.trim(), '兼容旧格式，避免注释被正文渲染出来。');
   } finally {
     process.chdir(originalCwd);
     fs.rmSync(tmp, { recursive: true, force: true });
