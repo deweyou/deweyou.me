@@ -217,7 +217,7 @@
     min-height: calc(100dvh - 137px);
     min-height: calc(var(--visual-viewport-height, 100dvh) - 137px);
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     margin: 0 auto;
     padding: clamp(22px, 4dvh, 40px) clamp(28px, 8vw, 72px) clamp(32px, 6dvh, 56px);
     text-align: center;

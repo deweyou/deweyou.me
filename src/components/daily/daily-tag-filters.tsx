@@ -1,17 +1,12 @@
 'use client';
 
-import Link, { useLinkStatus } from 'next/link';
+import Link from 'next/link';
 import { useState } from 'react';
 import styles from '##/app/daily/page.module.css';
 
 interface PendingTag {
   from: string | null;
   to: string | null;
-}
-
-function TagFilterPendingHint() {
-  const { pending } = useLinkStatus();
-  return <span aria-hidden="true" className={styles.tagFilterPendingHint} data-link-pending={pending} />;
 }
 
 function getTagFilterHref(baseHref: string, tag: string | null) {
@@ -34,7 +29,6 @@ export function DailyTagFilters({
 
   function renderFilter(tag: string | null, label: string) {
     const isActive = optimisticActiveTag === tag;
-    const isPending = hasActivePendingTag && pendingTag.to === tag;
 
     return (
       <Link
@@ -45,13 +39,11 @@ export function DailyTagFilters({
         className={styles.tagFilter}
         aria-current={isActive ? 'page' : undefined}
         data-active={isActive}
-        data-pending={isPending}
         onNavigate={() => {
           if (currentTag !== tag) setPendingTag({ from: currentTag, to: tag });
         }}
       >
         <span>{label}</span>
-        <TagFilterPendingHint />
       </Link>
     );
   }
