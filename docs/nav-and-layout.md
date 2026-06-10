@@ -32,6 +32,12 @@ To re-enable, uncomment these lines. The pages (`src/app/portfolio/page.tsx`, `s
 
 Body is `display: flex; flex-direction: column; min-height: 100dvh`. Nav is sticky; Footer scrolls (not fixed). Pages that need the full-bleed layout should use `.page` class.
 
+### Font Loading Constraint
+
+`src/app/layout.tsx` uses `next/font/local` for both serif content fonts and the mono UI variable. The mono slot (`--font-ibm-plex-mono`) is currently backed by local [`src/app/fonts/GeistMonoLatin-Regular.woff2`](../src/app/fonts/GeistMonoLatin-Regular.woff2) rather than `next/font/google`.
+
+Treat this as a build reliability invariant: in restricted or offline environments, `next/font/google` can fail the production build while fetching Google Fonts at build time. If you change the root mono font again, keep it self-hosted or verify that every build environment has outbound access.
+
 ## Logo Rendering
 
 Desktop navigation keeps the animated SVG asset (`/logo-animated.svg`) unchanged. Mobile navigation and footer use crisp inline SVG variants from `src/components/logo.tsx`; the static logo assets use mask-based SVGs that can look blurry at small mobile sizes.
@@ -55,4 +61,4 @@ Static content data lives in `src/content/`:
 
 `src/app/globals.css` overrides design system CSS variables with Next.js `localFont` variables, and sets global body/article styles.
 
-*Last updated: 2026-06-08 | Reason: mobile logo rendering note added after small-size mask SVG blur fix*
+*Last updated: 2026-06-10 | Reason: document root layout local-font requirement for build reliability*

@@ -16,6 +16,7 @@ export interface DailyEntry {
   date: string;
   type: DailyEntryType;
   tags: string[];
+  sourcePath?: string;
   content: string;
 }
 
@@ -66,6 +67,12 @@ function normalizeId(value: unknown, file: string): string {
   throw new Error(`Daily entry ${file} must include id using letters, numbers, hyphens, or underscores`);
 }
 
+function normalizeOptionalSourcePath(value: unknown, file: string): string | undefined {
+  if (value == null) return undefined;
+  if (typeof value === 'string' && value.trim() !== '') return value;
+  throw new Error(`Daily entry ${file} source_path must be a non-empty string when provided`);
+}
+
 function cleanDailyContent(content: string): string {
   return content.replace(/^\s*<!--\s*source:\s*.*?-->\s*\n?/gim, '').trimStart();
 }
@@ -90,6 +97,7 @@ function readEntry(file: string): DailyEntry {
     date,
     type: normalizeType(data.type, file),
     tags: normalizeTags(data.tags, file),
+    sourcePath: normalizeOptionalSourcePath(data.source_path, file),
     content: cleanDailyContent(content),
   };
 }

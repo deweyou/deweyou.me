@@ -44,7 +44,8 @@ daily 页面渲染时会通过 [`src/components/markdown-content.tsx`](../src/co
 
 - 从 Obsidian 同步 daily 时，先以最新 `origin/main` 为基线比较新增，不要拿过期 worktree 或其他本地副本当基准
 - Obsidian 源文件可能缺少站点所需的 `id`、`title`、`date`；复制后要先补齐 frontmatter，再跑 build
+- 复制自 Obsidian 的真实源路径应写进私有 frontmatter 字段 `source_path`；它只用于同步追溯，不属于页面内容 schema，也不会出现在正文渲染里
 - 新增 daily 或 daily 正文字符集变化后，要运行 [`scripts/subset-fonts.sh`](../scripts/subset-fonts.sh)
 
 ---
-*Last updated: 2026-06-09 | Reason: document daily tag navigation and detail loading interaction invariants*
+*Last updated: 2026-06-10 | Reason: move daily sync source tracking into private frontmatter*
