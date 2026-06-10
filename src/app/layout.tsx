@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { IBM_Plex_Mono } from 'next/font/google';
 import { ThemeProvider } from '##/components/theme-provider';
 import { ViewportHeightSync } from '##/components/viewport-height-sync';
 import { Nav } from '##/components/nav';
@@ -22,9 +21,11 @@ const sourceHanSerif = localFont({
   display: 'swap',
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  weight: ['400', '500'],
-  subsets: ['latin'],
+const monoUiFont = localFont({
+  src: [
+    { path: './fonts/GeistMonoLatin-Regular.woff2', weight: '400', style: 'normal' },
+    { path: './fonts/GeistMonoLatin-Regular.woff2', weight: '500', style: 'normal' },
+  ],
   variable: '--font-ibm-plex-mono',
   display: 'swap',
 });
@@ -40,7 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="zh-CN"
-      className={`${sourceHanSerif.variable} ${ibmPlexMono.variable}`}
+      className={`${sourceHanSerif.variable} ${monoUiFont.variable}`}
       suppressHydrationWarning
     >
       <head>
