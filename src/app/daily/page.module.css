@@ -59,7 +59,6 @@
 .tagFilter {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
   min-height: 28px;
   padding: 0 12px;
   border: 1px solid var(--ui-color-border);
@@ -81,24 +80,6 @@
   color: var(--ui-color-brand-text);
   border-color: var(--ui-color-brand-text);
   background: color-mix(in srgb, var(--ui-color-brand-text) 8%, transparent);
-}
-
-.tagFilterPendingHint {
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 999px;
-  background: currentColor;
-  opacity: 0;
-  transform: scale(0.68);
-  transition: opacity 120ms ease, transform 120ms ease;
-}
-
-.tagFilterPendingHint[data-link-pending="true"],
-.tagFilter[data-pending="true"] .tagFilterPendingHint {
-  opacity: 0.72;
-  transform: scale(1);
-  animation: tag-filter-pulse 820ms ease-in-out infinite;
 }
 
 .timeline {
@@ -551,17 +532,6 @@
   }
 }
 
-@keyframes tag-filter-pulse {
-  0%,
-  100% {
-    opacity: 0.38;
-  }
-
-  50% {
-    opacity: 0.86;
-  }
-}
-
 @keyframes detail-enter {
   from {
     opacity: 0;
@@ -698,6 +668,10 @@
 
   .detailTitle {
     font-size: 2.5rem;
+  }
+
+  .detailHeader {
+    margin-bottom: 32px;
   }
 
   .floatingFeedToggle {

@@ -35,15 +35,15 @@ export function BlogList({ posts }: { posts: PostMeta[] }) {
         pointerEvents: 'none',
       }} />
 
-      <section className="container" style={{ paddingTop: 120, paddingBottom: 48, position: 'relative', zIndex: 2 }}>
+      <section className="container" style={{ paddingTop: 'clamp(72px, 12vw, 120px)', paddingBottom: 48, position: 'relative', zIndex: 2 }}>
         <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 10 }}>
           <span style={{ width: 24, height: 1, background: 'currentColor' }} />
           {BLOG.eyebrow} · {posts.length} {BLOG.entriesLabel}
         </div>
-        <h1 style={{ fontSize: '4rem', fontWeight: 700, lineHeight: 1.05, marginBottom: 24, letterSpacing: '-0.015em' }}>
+        <h1 style={{ fontSize: 'clamp(2.35rem, 6vw, 4rem)', fontWeight: 700, lineHeight: 1.05, marginBottom: 24, letterSpacing: 0 }}>
           {BLOG.heading}
         </h1>
-        <p style={{ fontSize: 17, color: 'var(--ui-color-text-muted)', maxWidth: 540, lineHeight: 1.7 }}>
+        <p style={{ fontSize: 'clamp(16px, 1.7vw, 17px)', color: 'var(--ui-color-text-muted)', maxWidth: 540, lineHeight: 1.7 }}>
           {BLOG.description}
         </p>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 44 }}>

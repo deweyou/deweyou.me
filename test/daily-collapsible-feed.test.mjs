@@ -50,10 +50,11 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.match(experience, /navigationKey/);
   assert.match(experience, /resetKey=\{navigationKey\}/);
   assert.match(tagFilters, /'use client'/);
-  assert.match(tagFilters, /useLinkStatus/);
   assert.match(tagFilters, /prefetch=\{true\}/);
   assert.match(tagFilters, /optimisticActiveTag/);
-  assert.match(tagFilters, /data-pending/);
+  assert.doesNotMatch(tagFilters, /useLinkStatus/);
+  assert.doesNotMatch(tagFilters, /data-pending/);
+  assert.doesNotMatch(tagFilters, /TagFilterPendingHint/);
   assert.match(feedPane, /id\?: string/);
   assert.match(feedPane, /resetKey: string/);
   assert.match(feedPane, /pane\.scrollTop = 0/);
@@ -88,8 +89,8 @@ test('daily detail layout exposes desktop collapse and mobile drawer contracts',
   assert.match(css, /\.tagFilter\[data-active="true"\]\s*{[^}]*color:\s*var\(--ui-color-brand-text\)/);
   assert.match(css, /\.tagFilter\[data-active="true"\]\s*{[^}]*border-color:\s*var\(--ui-color-brand-text\)/);
   assert.match(css, /\.tagFilter\[data-active="true"\]\s*{[^}]*background:\s*color-mix\(in srgb,\s*var\(--ui-color-brand-text\)/);
-  assert.match(css, /\.tagFilterPendingHint\s*{/);
-  assert.match(css, /\.tagFilter\[data-pending="true"\]\s+\.tagFilterPendingHint/);
+  assert.doesNotMatch(css, /\.tagFilterPendingHint\s*{/);
+  assert.doesNotMatch(css, /\.tagFilter\[data-pending="true"\]\s+\.tagFilterPendingHint/);
   assert.match(navCss, /--button-ghost-background-hover:\s*transparent/);
   assert.match(css, /\.floatingFeedToggle\s*{[\s\S]*transition:[^;]*transform[^;]*opacity/);
   assert.match(css, /\.floatingFeedToggle:hover,[\s\S]*\.floatingFeedToggle:focus-visible\s*{[\s\S]*opacity:\s*0\.92/);
