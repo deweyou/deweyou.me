@@ -49,39 +49,6 @@
   letter-spacing: 0.05em;
 }
 
-.tagFilters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 22px;
-}
-
-.tagFilter {
-  display: inline-flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 12px;
-  border: 1px solid var(--ui-color-border);
-  border-radius: 999px;
-  color: var(--ui-color-text-muted);
-  font-size: 13px;
-  line-height: 1;
-  text-decoration: none;
-  transition: color 140ms ease, border-color 140ms ease, background 140ms ease;
-}
-
-.tagFilter:hover {
-  color: var(--ui-color-text);
-  border-color: var(--ui-color-border-strong);
-  background: color-mix(in srgb, var(--ui-color-text) 4%, transparent);
-}
-
-.tagFilter[data-active="true"] {
-  color: var(--ui-color-brand-text);
-  border-color: var(--ui-color-brand-text);
-  background: color-mix(in srgb, var(--ui-color-brand-text) 8%, transparent);
-}
-
 .timeline {
   padding-bottom: 120px;
 }
@@ -189,10 +156,15 @@
   overscroll-behavior: contain;
   scrollbar-width: none;
   padding-left: clamp(24px, 3vw, 48px);
+  padding-right: clamp(24px, 3vw, 48px);
   padding-top: 72px;
   padding-bottom: 80px;
   border-left: 1px solid var(--ui-color-border);
   animation: detail-enter 220ms ease both;
+}
+
+.detailContentHeader {
+  margin-bottom: 28px;
 }
 
 .feedToggleButton,
@@ -414,8 +386,18 @@
 
 .body :global(img) {
   display: block;
+  width: 100%;
   max-width: 100%;
   height: auto;
+  box-sizing: border-box;
+}
+
+.detailArticle .body > :global(:first-child) {
+  margin-top: 0 !important;
+}
+
+.detailArticle .body > :global(:first-child > :first-child) {
+  margin-top: 0 !important;
 }
 
 .feedStatus {

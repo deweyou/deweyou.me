@@ -30,6 +30,7 @@ export function DailyExperience({
   const activeTagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
   const filterBaseHref = activeId ? `/daily/${activeId}` : '/daily';
   const navigationKey = `${activeId ?? 'index'}:${activeTag ?? 'all'}`;
+  const feedResetKey = activeTag ?? 'all';
   const filterContent = (
     <DailyTagFilters
       activeTag={activeTag}
@@ -61,7 +62,7 @@ export function DailyExperience({
 
   if (detail) {
     const feed = (
-      <DailyFeedPane id={FEED_PANEL_ID} resetKey={navigationKey}>
+      <DailyFeedPane id={FEED_PANEL_ID} resetKey={feedResetKey}>
         <header className={styles.feedHero}>{heroContent}</header>
         <DailyServerFeed
           activeId={activeId}
@@ -104,7 +105,7 @@ export function DailyExperience({
           </p>
         ) : (
           <div className={styles.experienceFeedOnly}>
-            <DailyFeedPane resetKey={navigationKey}>
+            <DailyFeedPane resetKey={feedResetKey}>
               <DailyServerFeed
                 activeId={activeId}
                 activeTag={activeTag}

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import Link from 'next/link';
+import { ContentHeader } from '##/components/content/content-header';
 import { MarkdownContent } from '##/components/markdown-content';
 import { ReadingProgress } from '##/components/blog/reading-progress';
 import { TocSidebar } from '##/components/blog/toc-sidebar';
@@ -26,27 +26,17 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
       <TocSidebar items={toc} />
       <div className="container" style={{ paddingTop: 80, paddingBottom: 120 }}>
         <article style={{ maxWidth: 720, margin: '0 auto' }}>
-          {/* Header */}
-          <header style={{ marginBottom: 56 }}>
-            <div className="eyebrow" style={{ marginBottom: 20, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-              <Link href="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>
-                ← 文章
-              </Link>
-              <span>·</span>
-              <span>{post.tag}</span>
-            </div>
-            <h1 style={{ fontFamily: 'var(--ui-font-display)', fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-              fontWeight: 700, lineHeight: 1.08, marginBottom: 24, letterSpacing: '-0.02em' }}>
-              {post.title}
-            </h1>
-            <div style={{ display: 'flex', gap: 20, fontFamily: 'var(--ui-font-mono)', fontSize: 12,
-              color: 'var(--ui-color-text-muted)', letterSpacing: '0.05em' }}>
-              <span>{post.date}</span>
-              <span>{post.readTime}</span>
-            </div>
-          </header>
+          <ContentHeader
+            backHref="/blog"
+            backLabel="文章"
+            metadata={[
+              { key: 'tag', label: post.tag },
+              { key: 'date', label: post.date, dateTime: post.date },
+              { key: 'readTime', label: post.readTime },
+            ]}
+            title={post.title}
+          />
 
-          {/* Body */}
           <MarkdownContent content={post.content} />
         </article>
       </div>
