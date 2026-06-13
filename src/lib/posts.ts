@@ -4,6 +4,14 @@ import matter from 'gray-matter';
 
 const POSTS_DIR = path.join(process.cwd(), 'content', 'posts');
 
+function normalizeDate(value: unknown): string {
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10);
+  }
+
+  return String(value).slice(0, 10);
+}
+
 export interface PostMeta {
   slug: string;
   title: string;
@@ -25,7 +33,7 @@ export function getAllPosts(): PostMeta[] {
       const slug = file.replace(/\.mdx$/, '');
       const raw = fs.readFileSync(path.join(POSTS_DIR, file), 'utf8');
       const { data } = matter(raw);
-      return { slug, ...data, date: String(data.date).slice(0, 10) } as PostMeta;
+      return { slug, ...data, date: normalizeDate(data.date) } as PostMeta;
     })
     .sort((a, b) => (a.date < b.date ? 1 : -1));
 }
@@ -34,7 +42,7 @@ export function getPost(slug: string): Post {
   const file = path.join(POSTS_DIR, `${slug}.mdx`);
   const raw = fs.readFileSync(file, 'utf8');
   const { data, content } = matter(raw);
-  return { slug, ...data, date: String(data.date).slice(0, 10), content } as Post;
+  return { slug, ...data, date: normalizeDate(data.date), content } as Post;
 }
 
 export interface TocItem {

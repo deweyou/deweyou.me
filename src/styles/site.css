@@ -188,13 +188,28 @@
 /* ── TOC fixed sidebar ─────────────────────────────────────── */
 .toc-fixed {
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 112px;
+  bottom: 32px;
   right: 32px;
   width: 180px;
-  max-height: calc(100vh - 80px);
+  max-height: none;
   overflow-y: auto;
+  scrollbar-color: var(--ui-color-border-strong) transparent;
+  scrollbar-width: thin;
   text-align: left;
+}
+
+.toc-fixed::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toc-fixed::-webkit-scrollbar-thumb {
+  background: var(--ui-color-border-strong);
+  border-radius: 999px;
+}
+
+.toc-fixed::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 @media (max-width: 1199px) {
