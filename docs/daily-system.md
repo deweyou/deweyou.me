@@ -38,7 +38,7 @@ daily 页面渲染时会通过 [`src/components/markdown-content.tsx`](../src/co
 
 - `/daily` 和 `/daily/[id]` 的 tag filter 必须保持 URL-addressable：`?tag=` 是 canonical 状态，服务端仍负责最终筛选和首批 feed 渲染。
 - tag filter 的点击反馈必须在客户端即时发生。当前由 [`src/components/daily/daily-tag-filters.tsx`](../src/components/daily/daily-tag-filters.tsx#L1) 做乐观高亮和 pending hint，避免线上等待服务端响应时像“卡住”。
-- `/daily/[id]/loading.tsx` 应复用 [`DailyExperience`](../src/components/daily/daily-experience.tsx#L11) 的 feed/detail shell，只让详情区域显示 loading 骨架，不要退回全页 loading。
+- `/daily/(detail)/layout.tsx` 持久化详情页的 feed/detail shell；`/daily/(detail)/[id]/loading.tsx` 只渲染右侧详情骨架，不要重建左侧 feed，也不要退回全页 loading。
 
 ## Sync Workflow Notes
 

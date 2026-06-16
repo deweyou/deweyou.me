@@ -1,11 +1,8 @@
 import { notFound } from 'next/navigation';
-import { DailyExperience } from '##/components/daily/daily-experience';
+import { DailyDetail } from '##/components/daily/daily-detail';
 import {
-  filterDailyEntriesByTag,
   getAllDailyEntries,
-  getAllDailyTags,
   getDailyEntryById,
-  getDailyFeedBatch,
   normalizeDailyTagParam,
 } from '##/lib/daily';
 
@@ -41,16 +38,7 @@ export default async function DailyDetailPage({
   } catch {
     notFound();
   }
-  const entries = getAllDailyEntries();
+  const activeTagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
 
-  return (
-    <DailyExperience
-      activeId={entry.id}
-      activeTag={activeTag}
-      availableTags={getAllDailyTags(entries)}
-      initialBatch={getDailyFeedBatch({ tag: activeTag })}
-      selectedEntry={entry}
-      visibleEntries={filterDailyEntriesByTag(entries, activeTag)}
-    />
-  );
+  return <DailyDetail closeHref={`/daily${activeTagQuery}`} entry={entry} />;
 }

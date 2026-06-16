@@ -89,14 +89,18 @@
   height: 100%;
   min-height: 0;
   margin: 0 auto;
-  transition: grid-template-columns 220ms ease;
+  transition: grid-template-columns 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .feedSlot {
   min-width: 0;
   min-height: 0;
   height: 100%;
-  transition: opacity 180ms ease, visibility 180ms ease;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 220ms ease,
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 220ms ease;
 }
 
 .feedPane {
@@ -167,35 +171,50 @@
   margin-bottom: 28px;
 }
 
-.feedToggleButton,
-.feedDrawerCloseButton {
-  --button-ghost-background-hover: transparent;
+.feedToggleButton {
+  --button-ghost-background-hover: color-mix(in srgb, var(--ui-color-canvas) 96%, var(--ui-color-text) 4%);
   --button-ghost-background-active: transparent;
   background: transparent;
   color: var(--ui-color-text-muted);
 }
 
-.feedToggleButton:hover:not(.floatingFeedToggle),
-.feedDrawerCloseButton:hover {
+.feedToggleButton:hover:not(.floatingFeedToggle) {
   background: transparent;
   color: var(--ui-color-text);
 }
 
 .floatingFeedToggle {
   --feed-toggle-x: calc(clamp(356px, 45vw, 920px) - 52px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
   position: fixed;
   bottom: max(24px, calc(env(safe-area-inset-bottom) + 24px));
   left: 0;
   z-index: 12;
-  opacity: 0.5;
-  background: transparent;
+  opacity: 0.78;
+  border: 1px solid var(--ui-color-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ui-color-canvas) 92%, transparent);
   transform: translate3d(var(--feed-toggle-x), 0, 0);
-  transition: transform 220ms ease, opacity 160ms ease, color 140ms ease, background 140ms ease;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 160ms ease,
+    color 140ms ease,
+    border-color 140ms ease,
+    background 140ms ease;
 }
 
 .floatingFeedToggle:hover,
 .floatingFeedToggle:focus-visible {
-  opacity: 0.92;
+  opacity: 1;
+  border-color: var(--ui-color-border-strong);
+  color: var(--ui-color-text);
 }
 
 .mobileFloatingFeedToggle {
@@ -566,6 +585,7 @@
 
   .experienceFeedOnly,
   .experienceSplit {
+    --feed-drawer-width: min(88vw, 420px, calc(100vw - 32px));
     display: block;
     max-width: 720px;
     margin: 0 auto;
@@ -579,8 +599,7 @@
     z-index: 30;
     display: grid;
     grid-template-rows: auto minmax(0, 1fr);
-    width: min(88vw, 420px);
-    max-width: calc(100vw - 32px);
+    width: var(--feed-drawer-width);
     height: calc(100vh - 72px);
     height: calc(100dvh - 72px);
     border-right: 1px solid var(--ui-color-border);
@@ -602,9 +621,8 @@
   .feedDrawerHeader {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     min-height: 56px;
-    padding: 12px 12px 0 24px;
+    padding: 12px 24px 0;
   }
 
   .feedDrawerScrim {
@@ -658,8 +676,12 @@
 
   .floatingFeedToggle {
     --feed-toggle-x: 16px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     bottom: max(20px, calc(env(safe-area-inset-bottom) + 20px));
-    z-index: 28;
+    z-index: 31;
     opacity: 0.58;
   }
 
@@ -672,10 +694,8 @@
   }
 
   .experienceSplit[data-feed-drawer-open="true"] .mobileFloatingFeedToggle {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translate3d(var(--feed-toggle-x), 8px, 0);
+    --feed-toggle-x: calc(var(--feed-drawer-width) - 56px);
+    opacity: 0.9;
   }
 
   .virtualItem {
@@ -703,11 +723,21 @@
   }
 
   .experienceSplit[data-feed-collapsed="true"] {
-    grid-template-columns: 0 minmax(0, 1fr);
+    grid-template-columns: minmax(56px, 0.08fr) minmax(0, 1fr);
   }
 
   .experienceSplit[data-feed-collapsed="true"] .desktopFloatingFeedToggle {
     --feed-toggle-x: clamp(24px, 4vw, 72px);
+  }
+
+  .experienceSplit[data-feed-transition-state="collapsing"] .feedSlot {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate3d(-24px, 0, 0);
+  }
+
+  .experienceSplit[data-feed-transition-state="expanding"] .feedSlot {
+    animation: feed-enter-after-layout 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .experienceSplit[data-feed-collapsed="true"] .feedSlot {
@@ -715,6 +745,7 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    transform: translate3d(-24px, 0, 0);
   }
 
   .experienceSplit[data-feed-collapsed="true"] .feedPane {
@@ -730,6 +761,19 @@
     max-width: 880px;
     margin-right: auto;
     margin-left: auto;
+  }
+}
+
+@keyframes feed-enter-after-layout {
+  0%,
+  58% {
+    opacity: 0;
+    transform: translate3d(-24px, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 }
 

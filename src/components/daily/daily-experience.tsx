@@ -29,7 +29,6 @@ export function DailyExperience({
   const initialLastYear = initialBatch.entries.at(-1)?.date.slice(0, 4) ?? null;
   const activeTagQuery = activeTag ? `?tag=${encodeURIComponent(activeTag)}` : '';
   const filterBaseHref = activeId ? `/daily/${activeId}` : '/daily';
-  const navigationKey = `${activeId ?? 'index'}:${activeTag ?? 'all'}`;
   const feedResetKey = activeTag ?? 'all';
   const filterContent = (
     <DailyTagFilters
@@ -85,7 +84,6 @@ export function DailyExperience({
           <DailyDetailLayout
             detail={detail}
             feed={feed}
-            navigationKey={navigationKey}
           />
         </section>
       </div>
