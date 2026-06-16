@@ -43,12 +43,9 @@ daily 页面渲染时会通过 [`src/components/markdown-content.tsx`](../src/co
 ## Sync Workflow Notes
 
 - 从 Obsidian 同步 daily 时，先以最新 `origin/main` 为基线比较新增，不要拿过期 worktree 或其他本地副本当基准
-- 全量同步使用 [`scripts/sync-daily-from-obsidian.mjs`](../scripts/sync-daily-from-obsidian.mjs)；它会按 basename 匹配现有 daily，保留已有 frontmatter 键顺序，只覆盖正文/字段差异，并补齐 `source_path`
 - Obsidian 源文件可能缺少站点所需的 `id`、`title`、`date`；复制后要先补齐 frontmatter，再跑 build
-- 现有 daily 若历史上插入过“YYYY年MM月DD日 - 小分享/深度分享”这类生成标题行，全量同步会以 Obsidian 正文为准删除它们
-- 脚本会扫描正文里的相对本地资源引用，并把资源同时同步到 [`content/daily/images`](../content/daily/images) 和 [`public/daily/images`](../public/daily/images)；缺失资源应视为同步失败而不是静默跳过
 - 复制自 Obsidian 的真实源路径应写进私有 frontmatter 字段 `source_path`；它只用于同步追溯，不属于页面内容 schema，也不会出现在正文渲染里
 - 新增 daily 或 daily 正文字符集变化后，要运行 [`scripts/subset-fonts.sh`](../scripts/subset-fonts.sh)
 
 ---
-*Last updated: 2026-06-16 | Reason: document full Obsidian daily sync script and overwrite rules*
+*Last updated: 2026-06-10 | Reason: move daily sync source tracking into private frontmatter*
