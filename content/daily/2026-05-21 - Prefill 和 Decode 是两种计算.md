@@ -1,10 +1,12 @@
 ---
 id: ai-share-2026-05-21
-title: Prefill 和 Decode 是两种计算
+title: "Prefill 和 Decode 是两种计算"
 date: 2026-05-21
 type: daily-share
 tags: [AI]
+source_path: "/Users/deweyou/Library/Mobile Documents/iCloud~md~obsidian/Documents/Dewey Ou/学习/每日分享/AI/2026-05-21 - Prefill 和 Decode 是两种计算.md"
 ---
+
 LLM 推理的 prefill 和 decode 计算模式完全不同，混为一谈会导致延迟估算与容量规划出错。
 
 一次推理分两阶段——prefill 一次性并行处理全部输入 token，算力密集；decode 逐个生成 token，每次只处理一个新 token 却要反复读整个 KV cache，变成内存带宽瓶颈。
