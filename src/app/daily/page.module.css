@@ -89,6 +89,7 @@
   height: 100%;
   min-height: 0;
   margin: 0 auto;
+  position: relative;
   transition: grid-template-columns 280ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -183,8 +184,11 @@
   color: var(--ui-color-text);
 }
 
-.floatingFeedToggle {
-  --feed-toggle-x: calc(clamp(356px, 45vw, 920px) - 52px);
+.feedToggleButton.floatingFeedToggle {
+  --split-width: min(calc(100% - (clamp(16px, 2.5vw, 40px) * 2)), 1440px);
+  --feed-toggle-ratio: 0.4505494505;
+  --feed-toggle-x: -100%;
+  --feed-toggle-inset: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -194,8 +198,9 @@
   min-height: 40px;
   padding: 0;
   position: fixed;
+  top: auto;
   bottom: max(24px, calc(env(safe-area-inset-bottom) + 24px));
-  left: 0;
+  left: calc(((100% - var(--split-width)) / 2) + (var(--split-width) * var(--feed-toggle-ratio)) - var(--feed-toggle-inset));
   z-index: 12;
   opacity: 0.78;
   border: 1px solid var(--ui-color-border);
@@ -210,14 +215,14 @@
     background 140ms ease;
 }
 
-.floatingFeedToggle:hover,
-.floatingFeedToggle:focus-visible {
+.feedToggleButton.floatingFeedToggle:hover,
+.feedToggleButton.floatingFeedToggle:focus-visible {
   opacity: 1;
   border-color: var(--ui-color-border-strong);
   color: var(--ui-color-text);
 }
 
-.mobileFloatingFeedToggle {
+.feedToggleButton.mobileFloatingFeedToggle {
   display: none;
 }
 
@@ -674,22 +679,26 @@
     margin-bottom: 32px;
   }
 
-  .floatingFeedToggle {
+  .feedToggleButton.floatingFeedToggle {
     --feed-toggle-x: 16px;
+    --feed-toggle-inset: 0px;
     width: 44px;
     height: 44px;
     min-width: 44px;
     min-height: 44px;
+    position: fixed;
+    left: 0;
+    top: auto;
     bottom: max(20px, calc(env(safe-area-inset-bottom) + 20px));
     z-index: 31;
     opacity: 0.58;
   }
 
-  .desktopFloatingFeedToggle {
+  .feedToggleButton.desktopFloatingFeedToggle {
     display: none;
   }
 
-  .mobileFloatingFeedToggle {
+  .feedToggleButton.mobileFloatingFeedToggle {
     display: inline-flex;
   }
 
@@ -727,7 +736,9 @@
   }
 
   .experienceSplit[data-feed-collapsed="true"] .desktopFloatingFeedToggle {
-    --feed-toggle-x: clamp(24px, 4vw, 72px);
+    --feed-toggle-ratio: 0.0740740741;
+    --feed-toggle-x: 0;
+    --feed-toggle-inset: 0px;
   }
 
   .experienceSplit[data-feed-transition-state="collapsing"] .feedSlot {
@@ -781,7 +792,7 @@
   .experienceSplit,
   .feedSlot,
   .feedDrawerScrim,
-  .floatingFeedToggle,
+  .feedToggleButton.floatingFeedToggle,
   .detailPane,
   .detailArticle {
     transition: none;
