@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">图标按钮是否需要文字线索的解释图</title>
+  <desc id="desc">左侧显示单独图标造成含义不确定，右侧显示图标加文字标签让动作含义稳定。</desc>
+  <rect width="1200" height="720" fill="#f7f4ee"/>
+  <text x="80" y="86" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="34" font-weight="700" fill="#25231f">不要让图标独自承担说明</text>
+  <text x="80" y="128" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="20" fill="#6f6a61">图标可以加速识别，但不应替代关键动作的稳定命名。</text>
+
+  <g transform="translate(80 190)">
+    <rect x="0" y="0" width="470" height="360" rx="28" fill="#ffffff" stroke="#ddd6cb"/>
+    <text x="34" y="52" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="24" font-weight="650" fill="#2f2b26">常见误区：只剩一个符号</text>
+    <text x="34" y="88" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#777064">界面看起来更轻，但判断被推给用户。</text>
+    <g transform="translate(42 145)">
+      <rect x="0" y="0" width="96" height="96" rx="22" fill="#f2efe9" stroke="#d8d0c3"/>
+      <text x="48" y="60" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI Symbol',sans-serif" font-size="42" fill="#3d3932">↗</text>
+      <text x="48" y="138" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="16" fill="#8a8276">分享？打开？跳转？</text>
+    </g>
+    <g transform="translate(187 145)">
+      <rect x="0" y="0" width="96" height="96" rx="22" fill="#f2efe9" stroke="#d8d0c3"/>
+      <text x="48" y="62" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI Symbol',sans-serif" font-size="42" fill="#3d3932">☆</text>
+      <text x="48" y="138" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="16" fill="#8a8276">收藏？评分？推荐？</text>
+    </g>
+    <g transform="translate(332 145)">
+      <rect x="0" y="0" width="96" height="96" rx="22" fill="#f2efe9" stroke="#d8d0c3"/>
+      <text x="48" y="62" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI Symbol',sans-serif" font-size="42" fill="#3d3932">⋯</text>
+      <text x="48" y="138" text-anchor="middle" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="16" fill="#8a8276">更多什么？</text>
+    </g>
+    <path d="M34 304 H436" stroke="#e7e0d6"/>
+    <text x="34" y="333" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#5f584f">问题不在图标本身，而在动作语义没有落地。</text>
+  </g>
+
+  <g transform="translate(650 190)">
+    <rect x="0" y="0" width="470" height="360" rx="28" fill="#ffffff" stroke="#ddd6cb"/>
+    <text x="34" y="52" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="24" font-weight="650" fill="#2f2b26">更稳的做法：符号 + 名称</text>
+    <text x="34" y="88" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#777064">文字不是装饰，是动作的边界和承诺。</text>
+    <g transform="translate(42 132)">
+      <rect x="0" y="0" width="386" height="62" rx="18" fill="#f2efe9" stroke="#d8d0c3"/>
+      <text x="34" y="40" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI Symbol',sans-serif" font-size="28" fill="#3d3932">↗</text>
+      <text x="82" y="39" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="20" font-weight="600" fill="#2f2b26">分享链接</text>
+      <text x="288" y="39" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="15" fill="#8a8276">动词清楚</text>
+    </g>
+    <g transform="translate(42 212)">
+      <rect x="0" y="0" width="386" height="62" rx="18" fill="#f2efe9" stroke="#d8d0c3"/>
+      <text x="34" y="40" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI Symbol',sans-serif" font-size="28" fill="#3d3932">☆</text>
+      <text x="82" y="39" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="20" font-weight="600" fill="#2f2b26">加入收藏</text>
+      <text x="288" y="39" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="15" fill="#8a8276">结果明确</text>
+    </g>
+    <path d="M34 304 H436" stroke="#e7e0d6"/>
+    <text x="34" y="333" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#5f584f">熟悉后可收起文字，但可访问名称仍要保留。</text>
+  </g>
+
+  <text x="80" y="633" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" fill="#6f6a61">判断顺序：动作是否高风险 / 是否低频 / 是否跨文化 / 是否影响恢复。越不确定，越需要可见文字。</text>
+</svg>
