@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">默认值把第一步从犹豫变成可修改的起点</title>
+  <desc id="desc">左侧是空白表单，右侧是带有可解释默认值和可修改入口的表单。</desc>
+  <rect width="1200" height="720" fill="#f7f5ef"/>
+  <text x="90" y="86" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="34" fill="#1f1f1f" font-weight="650">默认值不是替用户决定，而是给出可回退的第一步</text>
+  <text x="90" y="128" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="18" fill="#67645e">好的默认值 = 合理预设 + 可见依据 + 易修改入口</text>
+
+  <g transform="translate(90 185)">
+    <rect x="0" y="0" width="470" height="410" rx="24" fill="#ffffff" stroke="#d8d3c9"/>
+    <text x="36" y="58" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="24" fill="#2b2b2b" font-weight="600">空白起点</text>
+    <text x="36" y="91" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="16" fill="#77736a">用户必须先理解规则，再做选择</text>
+
+    <text x="38" y="152" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#5e5a52">通知频率</text>
+    <rect x="36" y="168" width="398" height="48" rx="8" fill="#fbfaf7" stroke="#d9d5ce"/>
+    <text x="56" y="198" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#aaa49a">请选择</text>
+
+    <text x="38" y="252" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#5e5a52">隐私范围</text>
+    <rect x="36" y="268" width="398" height="48" rx="8" fill="#fbfaf7" stroke="#d9d5ce"/>
+    <text x="56" y="298" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#aaa49a">请选择</text>
+
+    <path d="M36 352H434" stroke="#ebe7df"/>
+    <text x="36" y="382" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="16" fill="#9a4d3c">结果：第一步变成认知负担</text>
+  </g>
+
+  <g transform="translate(640 185)">
+    <rect x="0" y="0" width="470" height="410" rx="24" fill="#ffffff" stroke="#bfc9b8"/>
+    <text x="36" y="58" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="24" fill="#2b2b2b" font-weight="600">有立场的默认值</text>
+    <text x="36" y="91" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="16" fill="#77736a">先给出安全、常见、可解释的起点</text>
+
+    <text x="38" y="152" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#5e5a52">通知频率</text>
+    <rect x="36" y="168" width="398" height="48" rx="8" fill="#fbfaf7" stroke="#d9d5ce"/>
+    <text x="56" y="198" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#252525">重要更新</text>
+    <text x="342" y="198" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#35624a">更改</text>
+    <text x="56" y="237" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="14" fill="#77736a">默认避免打扰；可随时调成全部通知。</text>
+
+    <text x="38" y="292" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#5e5a52">隐私范围</text>
+    <rect x="36" y="308" width="398" height="48" rx="8" fill="#fbfaf7" stroke="#d9d5ce"/>
+    <text x="56" y="338" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#252525">仅自己可见</text>
+    <text x="342" y="338" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="15" fill="#35624a">更改</text>
+
+    <path d="M36 376H434" stroke="#ebe7df"/>
+    <text x="36" y="406" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',Arial,sans-serif" font-size="16" fill="#35624a">结果：用户先前进，再校正</text>
+  </g>
+
+  <path d="M572 386 C594 386, 612 386, 630 386" stroke="#8a867c" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a867c"/>
+    </marker>
+  </defs>
+</svg>
