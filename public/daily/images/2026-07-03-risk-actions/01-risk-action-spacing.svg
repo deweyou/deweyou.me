@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">危险动作与常规动作的路径分离示意</title>
+  <desc id="desc">左侧展示删除按钮紧贴保存按钮，容易被惯性点击；右侧展示危险动作被放到独立区域，并通过文案和确认状态降低误触。</desc>
+  <rect width="1200" height="720" fill="#f7f5f0"/>
+  <text x="80" y="88" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="34" font-weight="650" fill="#222">让危险动作离开惯性路径</text>
+  <text x="80" y="130" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" fill="#666">危险操作不应只是换成红色，而要在位置、节奏和确认成本上与常规操作分开。</text>
+
+  <g transform="translate(80 190)">
+    <rect x="0" y="0" width="485" height="390" rx="28" fill="#fff" stroke="#dedbd2"/>
+    <text x="34" y="58" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="23" font-weight="650" fill="#333">误区：只靠颜色区分</text>
+    <rect x="34" y="94" width="417" height="136" rx="18" fill="#f5f6f7" stroke="#e1e2e4"/>
+    <text x="62" y="136" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20" fill="#333">账户设置</text>
+    <text x="62" y="171" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" fill="#777">两个按钮都在同一条动作路径上。</text>
+    <rect x="62" y="266" width="142" height="52" rx="14" fill="#2f6fed"/>
+    <text x="101" y="299" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#fff">保存</text>
+    <rect x="220" y="266" width="142" height="52" rx="14" fill="#d92d20"/>
+    <text x="259" y="299" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#fff">删除</text>
+    <path d="M110 338 C170 370, 250 370, 300 338" fill="none" stroke="#d92d20" stroke-width="4" stroke-dasharray="8 9"/>
+    <text x="63" y="365" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" fill="#9a3412">位置过近，惯性点击容易越界</text>
+  </g>
+
+  <g transform="translate(635 190)">
+    <rect x="0" y="0" width="485" height="390" rx="28" fill="#fff" stroke="#dedbd2"/>
+    <text x="34" y="58" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="23" font-weight="650" fill="#333">原则：把风险放慢</text>
+    <rect x="34" y="94" width="417" height="136" rx="18" fill="#f5f6f7" stroke="#e1e2e4"/>
+    <text x="62" y="136" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20" fill="#333">账户设置</text>
+    <text x="62" y="171" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" fill="#777">主路径保持顺手，危险路径需要重新确认。</text>
+    <rect x="62" y="266" width="142" height="52" rx="14" fill="#2f6fed"/>
+    <text x="101" y="299" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="18" font-weight="600" fill="#fff">保存</text>
+    <line x1="62" y1="344" x2="422" y2="344" stroke="#dedbd2" stroke-width="2"/>
+    <rect x="262" y="264" width="160" height="56" rx="14" fill="#fff7ed" stroke="#f2b8a2"/>
+    <text x="293" y="298" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" font-weight="650" fill="#b42318">删除账户…</text>
+    <text x="62" y="374" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" fill="#7a4b27">距离、分区、省略号、确认文案一起降低误触</text>
+  </g>
+
+  <g transform="translate(80 625)">
+    <circle cx="10" cy="-6" r="5" fill="#2f6fed"/>
+    <text x="28" y="0" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" fill="#555">常规动作：可预测、可快速完成</text>
+    <circle cx="335" cy="-6" r="5" fill="#d92d20"/>
+    <text x="353" y="0" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="17" fill="#555">危险动作：可见、可理解、可停顿</text>
+  </g>
+</svg>
