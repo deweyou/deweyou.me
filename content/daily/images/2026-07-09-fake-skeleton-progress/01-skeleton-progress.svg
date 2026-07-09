@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-labelledby="title desc">
+  <title id="title">骨架屏与真实进度的区别</title>
+  <desc id="desc">一张解释性图示，比较只有灰色占位的假骨架屏和包含范围、状态、退路的加载反馈。</desc>
+  <rect width="1400" height="820" fill="#f7f6f2"/>
+  <text x="80" y="86" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="34" font-weight="650" fill="#202124">加载反馈不是让界面看起来有东西，而是让等待变得可判断</text>
+  <text x="80" y="128" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="19" fill="#62615c">反面：骨架屏长期闪烁，却不说明范围、原因和下一步。更好：占位只保留布局，同时给出状态、可估时间或退出路径。</text>
+
+  <g transform="translate(80 188)">
+    <rect x="0" y="0" width="580" height="500" rx="24" fill="#ffffff" stroke="#ddd9cf"/>
+    <text x="34" y="54" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="24" font-weight="650" fill="#262626">误区：假装有进度</text>
+    <text x="34" y="88" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="17" fill="#77736a">视觉在动，但用户无法判断要等多久、卡在哪里。</text>
+    <rect x="34" y="130" width="512" height="310" rx="18" fill="#f1f1ed"/>
+    <rect x="64" y="165" width="150" height="150" rx="16" fill="#d8d8d2"/>
+    <rect x="240" y="172" width="245" height="22" rx="11" fill="#d8d8d2"/>
+    <rect x="240" y="214" width="195" height="18" rx="9" fill="#deded8"/>
+    <rect x="64" y="352" width="430" height="18" rx="9" fill="#deded8"/>
+    <rect x="64" y="386" width="350" height="18" rx="9" fill="#deded8"/>
+    <path d="M64 462 H498" stroke="#cbc7bd" stroke-width="2" stroke-dasharray="8 12"/>
+    <text x="34" y="474" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="16" fill="#a14b3f">问题：没有状态词、没有范围、没有退路。</text>
+  </g>
+
+  <g transform="translate(740 188)">
+    <rect x="0" y="0" width="580" height="500" rx="24" fill="#ffffff" stroke="#ddd9cf"/>
+    <text x="34" y="54" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="24" font-weight="650" fill="#262626">改法：让等待可判断</text>
+    <text x="34" y="88" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="17" fill="#77736a">占位说明布局，文案说明状态，必要时提供取消或稍后再试。</text>
+    <rect x="34" y="130" width="512" height="310" rx="18" fill="#f1f1ed"/>
+    <rect x="64" y="165" width="150" height="150" rx="16" fill="#d8d8d2"/>
+    <rect x="240" y="172" width="245" height="22" rx="11" fill="#d8d8d2"/>
+    <rect x="240" y="214" width="195" height="18" rx="9" fill="#deded8"/>
+    <rect x="64" y="352" width="430" height="18" rx="9" fill="#deded8"/>
+    <rect x="64" y="386" width="350" height="18" rx="9" fill="#deded8"/>
+    <rect x="64" y="462" width="360" height="10" rx="5" fill="#deded8"/>
+    <rect x="64" y="462" width="210" height="10" rx="5" fill="#4f6f52"/>
+    <text x="64" y="500" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="17" fill="#30312e">正在载入 12 条记录，通常少于 10 秒</text>
+    <text x="64" y="532" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="16" fill="#6c6a64">网络较慢时可先返回列表，结果会自动保存。</text>
+  </g>
+
+  <g transform="translate(80 735)">
+    <circle cx="10" cy="-4" r="5" fill="#4f6f52"/>
+    <text x="28" y="2" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans CJK SC','PingFang SC',sans-serif" font-size="18" fill="#4d4b45">检查顺序：是否保留布局关系 → 是否说明当前状态 → 是否给出时间/范围 → 是否允许恢复或退出。</text>
+  </g>
+</svg>
