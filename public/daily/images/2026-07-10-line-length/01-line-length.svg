@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">行宽对阅读节奏的影响</title>
+  <desc id="desc">对比过长行宽与适中行宽：过长的文本行让视线回行困难，适中行宽更容易保持阅读位置。</desc>
+  <rect width="1200" height="720" fill="#f7f5ef"/>
+  <text x="80" y="92" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="34" font-weight="650" fill="#24211d">让行宽保护阅读</text>
+  <text x="80" y="136" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="18" fill="#6a6258">同样的字号与内容，行宽会改变视线回行、停顿与理解成本。</text>
+
+  <g transform="translate(80,190)">
+    <rect x="0" y="0" width="500" height="360" rx="24" fill="#fffdf8" stroke="#d8d0c3"/>
+    <text x="34" y="54" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="22" font-weight="620" fill="#2f2a24">过长：眼睛要走太远</text>
+    <text x="34" y="96" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="17" fill="#81776b">回到下一行时，更容易丢失位置。</text>
+    <g stroke="#3f3a33" stroke-width="10" stroke-linecap="round" opacity="0.72">
+      <line x1="34" y1="145" x2="454" y2="145"/>
+      <line x1="34" y1="183" x2="448" y2="183"/>
+      <line x1="34" y1="221" x2="464" y2="221"/>
+      <line x1="34" y1="259" x2="438" y2="259"/>
+    </g>
+    <path d="M 424 122 C 492 154, 494 232, 426 276" fill="none" stroke="#b75d4a" stroke-width="4" stroke-dasharray="8 8"/>
+    <text x="286" y="318" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="16" fill="#b75d4a">长距离扫视 + 回行压力</text>
+  </g>
+
+  <g transform="translate(620,190)">
+    <rect x="0" y="0" width="500" height="360" rx="24" fill="#fffdf8" stroke="#d8d0c3"/>
+    <text x="34" y="54" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="22" font-weight="620" fill="#2f2a24">适中：阅读有节拍</text>
+    <text x="34" y="96" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="17" fill="#81776b">行宽像呼吸的尺度，帮助保持位置。</text>
+    <g stroke="#3f3a33" stroke-width="10" stroke-linecap="round" opacity="0.72">
+      <line x1="34" y1="145" x2="312" y2="145"/>
+      <line x1="34" y1="183" x2="286" y2="183"/>
+      <line x1="34" y1="221" x2="326" y2="221"/>
+      <line x1="34" y1="259" x2="252" y2="259"/>
+    </g>
+    <path d="M 300 124 C 346 154, 346 232, 302 276" fill="none" stroke="#4f7f6a" stroke-width="4" stroke-dasharray="8 8"/>
+    <text x="238" y="318" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="16" fill="#4f7f6a">短一些的回行距离</text>
+  </g>
+
+  <text x="80" y="620" font-family="-apple-system,BlinkMacSystemFont,'Noto Sans SC','PingFang SC',sans-serif" font-size="18" fill="#5d554c">原则：正文容器不要只追求填满屏幕；让行宽、行距、段距共同保护阅读路径。</text>
+</svg>
