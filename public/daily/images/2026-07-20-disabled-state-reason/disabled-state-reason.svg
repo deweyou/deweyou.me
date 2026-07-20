@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">禁用状态需要说明条件</title>
+  <desc id="desc">对比一个只变灰的禁用按钮，和一个把不可用原因、修复路径、条件进度放在按钮附近的界面结构。</desc>
+  <rect width="1200" height="760" fill="#f7f5ef"/>
+  <text x="80" y="82" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="34" font-weight="650" fill="#222">不可用状态不是“变灰”，而是说明进入条件</text>
+  <text x="80" y="124" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="18" fill="#666">同样是暂时不能提交，右侧把原因和下一步放回任务现场，判断成本更低。</text>
+
+  <rect x="80" y="180" width="480" height="440" rx="28" fill="#fff" stroke="#ded9ce"/>
+  <text x="120" y="235" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="24" font-weight="650" fill="#222">常见误区</text>
+  <text x="120" y="273" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#777">只把主按钮变灰，原因消失在界面外。</text>
+  <rect x="120" y="330" width="360" height="58" rx="12" fill="#e6e6e6"/>
+  <text x="250" y="366" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="19" font-weight="600" fill="#aaa">提交申请</text>
+  <text x="120" y="455" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#555">用户要自己猜：</text>
+  <text x="144" y="494" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#777">• 是网络问题？</text>
+  <text x="144" y="528" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#777">• 是权限不够？</text>
+  <text x="144" y="562" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#777">• 还是表单没填完？</text>
+
+  <rect x="640" y="180" width="480" height="440" rx="28" fill="#fff" stroke="#ded9ce"/>
+  <text x="680" y="235" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="24" font-weight="650" fill="#222">更好的处理</text>
+  <text x="680" y="273" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#777">把不可用条件放在动作附近。</text>
+  <rect x="680" y="320" width="360" height="58" rx="12" fill="#d9d9d9"/>
+  <text x="810" y="356" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="19" font-weight="600" fill="#888">提交申请</text>
+  <circle cx="694" cy="420" r="7" fill="#1d70b8"/>
+  <text x="716" y="427" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#333">还需填写“发票抬头”和“联系电话”</text>
+  <circle cx="694" cy="462" r="7" fill="#1d70b8"/>
+  <text x="716" y="469" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="17" fill="#333">完成后按钮会自动可用</text>
+  <rect x="716" y="505" width="174" height="44" rx="10" fill="#1d70b8"/>
+  <text x="754" y="533" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="16" font-weight="650" fill="#fff">去补全信息</text>
+
+  <text x="80" y="690" font-family="-apple-system,BlinkMacSystemFont,'PingFang SC','Noto Sans CJK SC',sans-serif" font-size="16" fill="#777">原则：禁用态应降低误操作，而不是制造沉默；如果用户能修复，就把修复路径放在同一处。</text>
+</svg>
