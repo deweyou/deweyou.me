@@ -188,31 +188,107 @@
 /* ── TOC fixed sidebar ─────────────────────────────────────── */
 .toc-fixed {
   position: fixed;
-  top: 112px;
-  bottom: 32px;
+  top: 50%;
   right: 32px;
-  width: 180px;
-  max-height: none;
-  overflow-y: auto;
-  scrollbar-color: var(--ui-color-border-strong) transparent;
-  scrollbar-width: thin;
+  width: 52px;
+  max-height: calc(100vh - 160px);
+  z-index: 30;
   text-align: left;
+  transform: translateY(-50%);
 }
 
-.toc-fixed::-webkit-scrollbar {
-  width: 6px;
+.toc-panel {
+  width: 52px;
+  max-height: inherit;
+  overflow-y: auto;
+  padding-block: 6px;
+  scrollbar-color: var(--ui-color-border-strong) transparent;
+  scrollbar-width: none;
 }
 
-.toc-fixed::-webkit-scrollbar-thumb {
+.toc-panel::-webkit-scrollbar {
+  width: 0;
+}
+
+.toc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc-link {
+  position: relative;
+  display: block;
+  width: calc(100% - 8px);
+  margin-left: auto;
+  min-height: 13px;
+  text-decoration: none;
+  border-radius: var(--ui-radius-float);
+}
+
+.toc-marker {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: var(--toc-marker-width);
+  height: 2px;
   background: var(--ui-color-border-strong);
-  border-radius: 999px;
+  opacity: 0.55;
+  transform: translateY(-50%);
+  transition:
+    width 80ms linear,
+    background-color 140ms ease,
+    opacity 140ms ease;
 }
 
-.toc-fixed::-webkit-scrollbar-track {
-  background: transparent;
+.toc-item[data-tier='2'] {
+  --toc-marker-width: 68%;
 }
 
-@media (max-width: 1199px) {
+.toc-item[data-tier='1'] {
+  --toc-marker-width: 46%;
+}
+
+.toc-item[data-tier='0'] {
+  --toc-marker-width: 28%;
+}
+
+.toc-link:is(:hover, :focus-visible) .toc-marker {
+  opacity: 0.85;
+}
+
+.toc-link[aria-current='location'] .toc-marker {
+  background: var(--ui-color-text);
+  opacity: 1;
+}
+
+.toc-link:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--ui-color-brand-bg);
+}
+
+.toc-tooltip {
+  position: absolute;
+  right: 52px;
+  width: max-content;
+  max-width: 280px;
+  padding: 6px 10px;
+  border: 1px solid var(--ui-color-border);
+  border-radius: var(--ui-radius-float);
+  background: var(--ui-color-surface);
+  box-shadow: var(--ui-shadow-sm);
+  color: var(--ui-color-text);
+  font-family: var(--ui-font-mono);
+  font-size: 12px;
+  line-height: 1.45;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 1343px) {
   .toc-fixed { display: none; }
 }
 

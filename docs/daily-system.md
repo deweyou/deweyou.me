@@ -2,13 +2,19 @@
 
 ```mermaid
 flowchart TD
-    A["Obsidian daily source (.md)"] --> B["content/daily/<date> - <title>.md"]
+    A["Obsidian daily source (.md)"] -. "no synced articles" .-> B["content/daily"]
     B --> C["src/lib/daily.ts validation"]
     B --> D["MarkdownContent assetBasePath='/daily/'"]
     E["content/daily/images/..."] --> D
     F["public/daily/images/..."] --> D
-    C --> G["/daily and /daily/[id] render"]
+    C --> G["Retained Daily implementation"]
+    G -. "page and API route files removed" .-> H["No public Daily routes"]
 ```
+
+> Status: disabled on 2026-08-20. The navigation item and search adapter are
+> inactive, and the page/API entry files are deleted so Next.js does not expose
+> Daily routes. Shared components and the reader are retained, while all 265 Daily
+> article files were removed on the same date.
 
 每日分享内容先以 Markdown 文件落到 [`content/daily`](../content/daily/)，再由 [`src/lib/daily.ts`](../src/lib/daily.ts) 在构建时做 frontmatter 校验，并通过 daily 页面渲染链路输出。
 
@@ -48,4 +54,4 @@ daily 页面渲染时会通过 [`src/components/markdown-content.tsx`](../src/co
 - 新增 daily 或 daily 正文字符集变化后，要运行 [`scripts/subset-fonts.sh`](../scripts/subset-fonts.sh)
 
 ---
-*Last updated: 2026-06-10 | Reason: move daily sync source tracking into private frontmatter*
+*Last updated: 2026-08-20 | Reason: record the disabled Daily public surface*

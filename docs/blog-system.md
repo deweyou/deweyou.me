@@ -1,5 +1,14 @@
 # Blog System
 
+```mermaid
+flowchart TD
+    Post[content/posts/*.mdx] --> Reader[src/lib/posts.ts]
+    Reader --> Page[src/app/blog/[slug]/page.tsx]
+    Reader --> Toc[Compact TOC marker rail]
+    Page --> Markdown[src/components/markdown-content.tsx]
+    Toc --> Hover[Hovered marker shows its custom tooltip]
+```
+
 ## Overview
 
 Blog posts live in `content/posts/*.mdx` and are rendered via Next.js App Router (SSG). The file extension is `.mdx` for historical compatibility, but post bodies are rendered as Markdown/GFM rather than executable MDX. The pipeline:
@@ -66,10 +75,13 @@ If you change the slugify logic in one place, change it in both.
 
 - Component: `src/components/blog/toc-sidebar.tsx` (`'use client'`)
 - CSS: `.toc-fixed` in `src/styles/site.css`
-- Position: `position: fixed; right: 32px; top: 50%; transform: translateY(-50%)`
-- Visibility: hidden via `@media (max-width: 1199px)` — only shown when there's room beside the 720px article
+- Position: fixed at the viewport's vertical center, `right: 32px`; long rails scroll independently
+- Collapsed state: a 52px marker rail; observed heading depths are normalized to relative visual tiers. One depth uses only the shortest marker, two depths use middle/short, and three depths use long/middle/short.
+- Proximity hover: nearby markers expand toward tier-specific percentage widths, so the magnetic bulge keeps its relative hierarchy instead of flattening into equal lines.
+- Hover state: each marker shows one custom tooltip beside the rail; the full directory never expands
+- Visibility: hidden via `@media (max-width: 1343px)` — only shown when there is room beside the 720px article
 - Active state: scroll listener, sets `activeId` to the last heading whose `getBoundingClientRect().top ≤ NAV_HEIGHT + 16`
-- Hash routing: clicking a TOC item calls `history.pushState` to update URL; on mount, reads `window.location.hash` and scrolls to it via `requestAnimationFrame`
+- Hash routing: clicking a TOC item calls `history.pushState` to update URL; on mount, reads `window.location.hash` and scrolls to it via `requestAnimationFrame`. Click and native hash positioning share a 104px offset: 80px fixed navigation plus a 24px reading buffer.
 
 ## Font Subsetting
 
@@ -81,4 +93,4 @@ bash scripts/subset-fonts.sh
 
 The script scans `content/posts/*.mdx`, `content/daily/*.mdx`, and site UI source files, then rebuilds `src/app/fonts/*.woff2`. A tracked pre-commit hook in `.githooks/pre-commit` runs this script and stages updated woff2 files automatically. **Do not add this to `prebuild`** — `pyftsubset` is not available on Vercel.
 
-*Last updated: 2026-06-01 | Reason: blog and daily bodies now share the design-system Markdown renderer*
+*Last updated: 2026-08-20 | Reason: document relative TOC tiers, proximity hover, and anchor offset*

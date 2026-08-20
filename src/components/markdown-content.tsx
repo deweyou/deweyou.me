@@ -3,6 +3,8 @@
 import { MarkdownRender, type MarkdownRenderComponents } from '@deweyou-design/react/markdown-render';
 import { Text, type TextProps } from '@deweyou-design/react/text';
 
+import { BLOG_ANCHOR_OFFSET } from '../lib/toc';
+
 function normalizeAssetUrl(url: string, assetBasePath?: string): string {
   if (!assetBasePath) return url;
   if (
@@ -47,7 +49,7 @@ const headingComponents: MarkdownRenderComponents = {
     <Text
       {...getHeadingTextProps(props)}
       variant="h2"
-      style={{ margin: '3.5rem 0 1.25rem', lineHeight: 1.2, letterSpacing: '-0.02em', scrollMarginTop: 88 }}
+      style={{ margin: '3.5rem 0 1.25rem', lineHeight: 1.2, letterSpacing: '-0.02em', scrollMarginTop: BLOG_ANCHOR_OFFSET }}
     >
       {children}
     </Text>
@@ -56,7 +58,7 @@ const headingComponents: MarkdownRenderComponents = {
     <Text
       {...getHeadingTextProps(props)}
       variant="h3"
-      style={{ margin: '3rem 0 1rem', lineHeight: 1.3, letterSpacing: '-0.01em', scrollMarginTop: 88 }}
+      style={{ margin: '3rem 0 1rem', lineHeight: 1.3, letterSpacing: '-0.01em', scrollMarginTop: BLOG_ANCHOR_OFFSET }}
     >
       {children}
     </Text>
@@ -65,7 +67,7 @@ const headingComponents: MarkdownRenderComponents = {
     <Text
       {...getHeadingTextProps(props)}
       variant="h4"
-      style={{ margin: '2.5rem 0 0.875rem', lineHeight: 1.4, scrollMarginTop: 88 }}
+      style={{ margin: '2.5rem 0 0.875rem', lineHeight: 1.4, scrollMarginTop: BLOG_ANCHOR_OFFSET }}
     >
       {children}
     </Text>

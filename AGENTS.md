@@ -20,7 +20,7 @@ If you are **using `@deweyou-design` components**, read [`docs/design-system.md`
 
 If you are **modifying search, adding searchable content types, or changing post/daily content readers**, read [`docs/search-system.md`](docs/search-system.md) first — the static search index must include every local data source intentionally.
 
-If you are **modifying nav, layout, or adding pages**, read [`docs/nav-and-layout.md`](docs/nav-and-layout.md) — portfolio and about tabs are intentionally hidden for v1.
+If you are **modifying nav, layout, or adding pages**, read [`docs/nav-and-layout.md`](docs/nav-and-layout.md) — Daily is disabled, while portfolio and about are hidden from navigation.
 
 If you are **adding, syncing, or rendering daily shares**, read [`docs/daily-system.md`](docs/daily-system.md) — daily entries have required frontmatter invariants and mirrored image-path rules.
 
@@ -64,4 +64,4 @@ scripts/
 - **Heading ID slugify lives in two places**: `src/lib/posts.ts:extractToc` and `src/components/markdown-content.tsx:slugify`. They must stay in sync. See `docs/blog-system.md`.
 - **Portfolio is derived**: `src/content/portfolio.ts` builds `PORTFOLIO_ITEMS` by reversing `PHOTO_SERIES` from `photos.ts`. Never add portfolio items manually.
 - **Content `#` maps to h2 visually**: post and daily content `#` headings are NOT page-level h1s. `MarkdownContent` maps `h1→variant="h2"`, `h2→variant="h3"`, `h3→variant="h4"`.
-- **Nav links are commented out for v1**: uncommenting `portfolio` and `about` in `src/content/common.ts` is all that's needed to re-enable them.
+- **Daily's public surface is removed**: its nav item and search adapter are inactive, its page/API entry files are deleted, and its article directory is empty. Restore all three surfaces together. Portfolio and About only need their nav items uncommented.
