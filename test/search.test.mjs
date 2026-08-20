@@ -10,10 +10,10 @@ import {
   splitHighlightText,
 } from '../src/lib/search.ts';
 
-test('search documents include posts and daily entries with hrefs', () => {
+test('search documents include posts without disabled daily routes', () => {
   const documents = getSearchDocuments();
   assert.ok(documents.some((doc) => doc.source === 'post' && doc.href.startsWith('/blog/')));
-  assert.ok(documents.some((doc) => doc.source === 'daily' && doc.href.startsWith('/daily/')));
+  assert.equal(documents.some((doc) => doc.source === 'daily' || doc.href.startsWith('/daily/')), false);
 });
 
 test('cleanMarkdownForSearch removes common markdown syntax noise', () => {

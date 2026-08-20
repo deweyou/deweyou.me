@@ -1,20 +1,34 @@
 # Nav, Layout, and Content Structure
 
+```mermaid
+flowchart TD
+    Links[src/content/common.ts] --> Nav[src/components/nav.tsx]
+    Nav --> Active[Home and Blog]
+    Disabled[Daily, Portfolio, About] -. commented out .-> Links
+    DailyFiles[Daily page and API files removed] --> NoRoute[No public route]
+```
+
 ## Navigation State (v1)
 
-Portfolio and About tabs are **intentionally commented out** for v1 launch. Pages and components exist but are hidden from nav:
+Daily, Portfolio, and About tabs are **intentionally commented out**. Daily's
+page and API route files are deleted, so Next.js does not expose `/daily`,
+`/daily/[id]`, or `/api/daily`. Its shared components and reader remain, but the
+Daily article files were removed on 2026-08-20.
 
 ```ts
 // src/content/common.ts
 export const NAV_LINKS = [
   { href: '/',     label: '主页' },
   { href: '/blog', label: '文章' },
+  // { href: '/daily',     label: '笔记' },
   // { href: '/portfolio', label: '作品集' },  ← hidden for v1
   // { href: '/about',     label: '关于' },     ← hidden for v1
 ];
 ```
 
-To re-enable, uncomment these lines. The pages (`src/app/portfolio/page.tsx`, `src/app/about/page.tsx`) are complete.
+To re-enable Daily, recreate its page and API route files, uncomment its nav item,
+and restore its search adapter. Portfolio and About only require their nav items
+to be uncommented; their pages remain complete.
 
 ## Root Layout
 
@@ -61,4 +75,4 @@ Static content data lives in `src/content/`:
 
 `src/app/globals.css` overrides design system CSS variables with Next.js `localFont` variables, and sets global body/article styles.
 
-*Last updated: 2026-06-10 | Reason: document root layout local-font requirement for build reliability*
+*Last updated: 2026-08-20 | Reason: document the disabled Daily entry and routes*

@@ -61,7 +61,7 @@ export function getDailySearchDocuments(): SearchDocument[] {
 
 export const SEARCH_SOURCE_ADAPTERS: SearchSourceAdapter[] = [
   getPostSearchDocuments,
-  getDailySearchDocuments,
+  // getDailySearchDocuments,
 ];
 
 export function getSearchDocuments(): SearchDocument[] {

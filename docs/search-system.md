@@ -3,16 +3,15 @@
 ```mermaid
 flowchart TD
     Posts[content/posts MDX] --> SearchDocs[src/lib/search.ts]
-    Daily[content/daily Markdown] --> DailyReader[src/lib/daily.ts]
-    DailyReader --> SearchDocs
     SearchDocs --> Payload[src/lib/search-core.ts]
     Payload --> Route[src/app/search-index.json/route.ts]
     Route --> Modal[src/components/search/search-modal.tsx]
 ```
 
-Site search is a static, local-content index. Blog posts and daily entries are
-read on the server, normalized into search documents, serialized by MiniSearch,
-and served from `/search-index.json` as a static App Router route.
+Site search is a static, local-content index. Blog posts are read on the server,
+normalized into search documents, serialized by MiniSearch, and served from
+`/search-index.json` as a static App Router route. Daily entries are excluded
+while the Daily routes are disabled so search never links to unavailable pages.
 
 ## Data Sources
 
@@ -23,19 +22,15 @@ mapping each item into `SearchDocument` fields: `id`, `source`, `title`, `href`,
 Current sources:
 
 - `content/posts/*.mdx` through `src/lib/posts.ts`
-- `content/daily/*.{md,mdx}` through `src/lib/daily.ts`
 
-Daily entries may include a private frontmatter field such as `source_path` for
-Obsidian sync provenance. That field is not part of the search document mapping,
-and legacy `<!-- source: ... -->` comments are still stripped by
-`src/lib/daily.ts` before rendering or indexing so local filesystem paths never
-appear on the site.
+Daily search documents must only be restored together with the Daily page routes.
+Their private `source_path` frontmatter remains outside the public content model.
 
 ## Build Behavior
 
 `src/app/search-index.json/route.ts` uses `dynamic = 'force-static'`, so the
-index is generated at build time. Adding normal posts or daily entries does not
-require search config changes because those readers already feed the index.
+index is generated at build time. Adding normal posts does not require search
+config changes because the post reader already feeds the index.
 
 Adding a new section such as `notes` needs three deliberate updates:
 
@@ -48,4 +43,4 @@ Keep `getSearchPayloadStats()` warnings aligned with Vercel bundle expectations
 when the index grows.
 
 ---
-*Last updated: 2026-06-06 | Reason: documented static local search index and future content-source onboarding*
+*Last updated: 2026-08-20 | Reason: exclude disabled Daily routes from site search*
